@@ -1,0 +1,11 @@
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\bin\Debug\Gerenciamento-de-Supermercado.exe.config
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\bin\Debug\Gerenciamento-de-Supermercado.exe
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\bin\Debug\Gerenciamento-de-Supermercado.pdb
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.csproj.AssemblyReference.cache
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.csproj.SuggestedBindingRedirects.cache
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento_de_Supermercado.Form1.resources
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento_de_Supermercado.Properties.Resources.resources
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.csproj.GenerateResource.cache
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.csproj.CoreCompileInputs.cache
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.exe
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.pdb
