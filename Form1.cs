@@ -29,19 +29,51 @@ namespace Gerenciamento_de_Supermercado
 
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
+        { 
 
-            tabPage2.Width = 0;
         }
 
         private void dashboardButton_click(object sender, EventArgs e)
         {
             telaAtual = (sender as Button).Text;
-            MessageBox.Show(telaAtual);
-            if (telaAtual == "🚪 Sair")
+            if (telaAtual == "🛒 Compras")
+                tabControl1.SelectedIndex = 0;
+            else if (telaAtual == "📖 Histórico ")
+                tabControl1.SelectedIndex = 1;
+            else if (telaAtual == "📦 Estoque")
+                tabControl1.SelectedIndex = 2;
+            else if (telaAtual == "🚪 Sair")
                 this.Close();
-            tabControl1.SelectedIndex = 1;
         }
 
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

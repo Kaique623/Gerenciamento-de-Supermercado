@@ -9,3 +9,5 @@ C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamen
 C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.csproj.CoreCompileInputs.cache
 C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.exe
 C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\obj\Debug\Gerenciamento-de-Supermercado.pdb
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\bin\Debug\Arquivo1.mdf
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento-de-Supermercado\bin\Debug\Arquivo1_log.ldf
