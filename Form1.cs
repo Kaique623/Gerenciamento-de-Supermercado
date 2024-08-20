@@ -14,7 +14,7 @@ namespace Gerenciamento_de_Supermercado
     public partial class Form1 : Form
     {
         string telaAtual = "🛒 Compras";
-
+        
 
         public Form1()
         {
@@ -42,6 +42,8 @@ namespace Gerenciamento_de_Supermercado
                 tabControl1.SelectedIndex = 1;
             else if (telaAtual == "📦 Estoque")
                 tabControl1.SelectedIndex = 2;
+            else if (telaAtual == "Alertas")
+                tabControl1.SelectedIndex = 3;
             else if (telaAtual == "🚪 Sair")
                 this.Close();
         }
@@ -63,17 +65,28 @@ namespace Gerenciamento_de_Supermercado
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show(textBox1.Text);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+        
+        private void button7_Click(object sender, EventArgs e){
+            label_alerta.Visible = true;
+            var aux = label_alerta.Text;
+            label_alerta.Text = Convert.ToString(Convert.ToInt16(aux) + 1);
+        }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(textBox2.Text);
         }
     }
 }
