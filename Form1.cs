@@ -65,7 +65,7 @@ namespace Gerenciamento_de_Supermercado
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(textBox1.Text);
+            MessageBox.Show(EstoqueTextbox.Text);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -87,6 +87,24 @@ namespace Gerenciamento_de_Supermercado
         private void button8_Click(object sender, EventArgs e)
         {
             MessageBox.Show(textBox2.Text);
+        }
+
+        private void EstoqueButton_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 7)
+                {
+                    EstoqueDataGrid.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Unable to delete row");
+            }
+        }
+        private void EstoqueAddButon(object sender, EventArgs e){
+            EstoqueDataGrid.Rows.Add();
         }
     }
 }
