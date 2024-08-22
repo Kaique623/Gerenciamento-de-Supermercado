@@ -73,10 +73,19 @@ namespace Gerenciamento_de_Supermercado
 
         }
         
-        private void button7_Click(object sender, EventArgs e){
-            label_alerta.Visible = true;
-            var aux = label_alerta.Text;
-            label_alerta.Text = Convert.ToString(Convert.ToInt16(aux) + 1);
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (compra_comboBox.Text == "") 
+            {
+                MessageBox.Show("Digite um ID");
+            }
+            else
+            {
+                compra_dataView.Rows.Add();
+                compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value = "1";
+                compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[0].Value = compra_comboBox.Text;
+                compra_comboBox.Text = "";
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -114,6 +123,35 @@ namespace Gerenciamento_de_Supermercado
         }
         private void EstoqueAddButon(object sender, EventArgs e){
             EstoqueDataGrid.Rows.Add();
+        }
+
+        private void compra_dataView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 8) 
+                {
+                    compra_dataView.Rows.RemoveAt(e.RowIndex);
+                }
+                else if (e.ColumnIndex == 7) 
+                {
+                    int rowValue = Convert.ToInt16(compra_dataView.Rows[e.RowIndex].Cells[4].Value.ToString());
+                    if (rowValue == 1)
+                    {
+                        compra_dataView.Rows.RemoveAt(e.RowIndex);
+                    }
+                    else if (rowValue > 1)
+                    {
+                        rowValue--;
+                        compra_dataView.Rows[e.RowIndex].Cells[4].Value = rowValue.ToString();
+
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Deu ruim");
+            }
         }
     }
 }
