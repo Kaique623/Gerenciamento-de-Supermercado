@@ -1,2 +1,0 @@
-<?xml version="1.0" standalone="yes"?>
-<Arquivo1DataSet xmlns="http://tempuri.org/Arquivo1DataSet.xsd" />
