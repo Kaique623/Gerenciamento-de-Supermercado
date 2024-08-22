@@ -54,27 +54,6 @@
             this.compra_button_cancelbuy = new System.Windows.Forms.Button();
             this.compra_label_idDesc = new System.Windows.Forms.Label();
             this.compra_dataView = new System.Windows.Forms.DataGridView();
-            this.compra_button_additem = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.EstoqueAddButton = new System.Windows.Forms.Button();
-            this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
-            this.EstoqueSaveButton = new System.Windows.Forms.Button();
-            this.EstoqueAddButton = new System.Windows.Forms.Button();
-            this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
-
-            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
-            this.EstoqueSearchButton = new System.Windows.Forms.Button();
-            this.EstoqueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SetorEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstoqueQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstoquePrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstoqueDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstoqueRemoveButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,6 +63,23 @@
             this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.minusButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.removeButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.compra_button_additem = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.EstoqueSaveButton = new System.Windows.Forms.Button();
+            this.EstoqueAddButton = new System.Windows.Forms.Button();
+            this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
+            this.EstoqueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SetorEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstoqueQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstoquePrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstoqueDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstoqueRemoveButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
+            this.EstoqueSearchButton = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -124,13 +120,15 @@
             this.splitContainer1.Panel2.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(1315, 728);
-            this.splitContainer1.SplitterDistance = 160;
+            this.splitContainer1.SplitterDistance = 136;
             this.splitContainer1.TabIndex = 0;
             // 
             // label_alerta
             // 
             this.label_alerta.AutoSize = true;
-            this.label_alerta.Location = new System.Drawing.Point(86, 232);
+            this.label_alerta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label_alerta.ForeColor = System.Drawing.Color.Yellow;
+            this.label_alerta.Location = new System.Drawing.Point(77, 232);
             this.label_alerta.Name = "label_alerta";
             this.label_alerta.Size = new System.Drawing.Size(13, 13);
             this.label_alerta.TabIndex = 8;
@@ -234,7 +232,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1151, 728);
+            this.tabControl1.Size = new System.Drawing.Size(1175, 728);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -250,7 +248,7 @@
             this.tabPage1.Controls.Add(this.compra_button_additem);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1143, 702);
+            this.tabPage1.Size = new System.Drawing.Size(1167, 702);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Compras";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -444,6 +442,65 @@
             this.compra_dataView.TabIndex = 3;
             this.compra_dataView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.compra_dataView_CellContentClick);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Nome
+            // 
+            this.Nome.HeaderText = "Nome";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            // 
+            // Categoria
+            // 
+            this.Categoria.HeaderText = "Categoria";
+            this.Categoria.Name = "Categoria";
+            this.Categoria.ReadOnly = true;
+            // 
+            // Setor
+            // 
+            this.Setor.HeaderText = "Setor";
+            this.Setor.Name = "Setor";
+            this.Setor.ReadOnly = true;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.HeaderText = "Quantidade";
+            this.Quantidade.Name = "Quantidade";
+            this.Quantidade.ReadOnly = true;
+            // 
+            // PrecoUni
+            // 
+            this.PrecoUni.HeaderText = "Preço Uni.";
+            this.PrecoUni.Name = "PrecoUni";
+            this.PrecoUni.ReadOnly = true;
+            // 
+            // Desc
+            // 
+            this.Desc.HeaderText = "Descrição";
+            this.Desc.Name = "Desc";
+            this.Desc.ReadOnly = true;
+            // 
+            // minusButton
+            // 
+            this.minusButton.HeaderText = "";
+            this.minusButton.Name = "minusButton";
+            this.minusButton.ReadOnly = true;
+            this.minusButton.Text = "-1";
+            this.minusButton.UseColumnTextForButtonValue = true;
+            // 
+            // removeButton
+            // 
+            this.removeButton.HeaderText = "";
+            this.removeButton.Name = "removeButton";
+            this.removeButton.ReadOnly = true;
+            this.removeButton.Text = "Remover";
+            this.removeButton.UseColumnTextForButtonValue = true;
+            // 
             // compra_button_additem
             // 
             this.compra_button_additem.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -596,65 +653,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Alerta";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Nome
-            // 
-            this.Nome.HeaderText = "Nome";
-            this.Nome.Name = "Nome";
-            this.Nome.ReadOnly = true;
-            // 
-            // Categoria
-            // 
-            this.Categoria.HeaderText = "Categoria";
-            this.Categoria.Name = "Categoria";
-            this.Categoria.ReadOnly = true;
-            // 
-            // Setor
-            // 
-            this.Setor.HeaderText = "Setor";
-            this.Setor.Name = "Setor";
-            this.Setor.ReadOnly = true;
-            // 
-            // Quantidade
-            // 
-            this.Quantidade.HeaderText = "Quantidade";
-            this.Quantidade.Name = "Quantidade";
-            this.Quantidade.ReadOnly = true;
-            // 
-            // PrecoUni
-            // 
-            this.PrecoUni.HeaderText = "Preço Uni.";
-            this.PrecoUni.Name = "PrecoUni";
-            this.PrecoUni.ReadOnly = true;
-            // 
-            // Desc
-            // 
-            this.Desc.HeaderText = "Descrição";
-            this.Desc.Name = "Desc";
-            this.Desc.ReadOnly = true;
-            // 
-            // minusButton
-            // 
-            this.minusButton.HeaderText = "";
-            this.minusButton.Name = "minusButton";
-            this.minusButton.ReadOnly = true;
-            this.minusButton.Text = "-1";
-            this.minusButton.UseColumnTextForButtonValue = true;
-            // 
-            // removeButton
-            // 
-            this.removeButton.HeaderText = "";
-            this.removeButton.Name = "removeButton";
-            this.removeButton.ReadOnly = true;
-            this.removeButton.Text = "Remover";
-            this.removeButton.UseColumnTextForButtonValue = true;
             // 
             // Form1
             // 
