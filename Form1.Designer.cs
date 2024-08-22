@@ -54,19 +54,17 @@
             this.compra_button_cancelbuy = new System.Windows.Forms.Button();
             this.compra_label_idDesc = new System.Windows.Forms.Label();
             this.compra_dataView = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Setor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compra_button_additem = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.EstoqueAddButton = new System.Windows.Forms.Button();
+            this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
             this.EstoqueSaveButton = new System.Windows.Forms.Button();
             this.EstoqueAddButton = new System.Windows.Forms.Button();
             this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
+
+            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
+            this.EstoqueSearchButton = new System.Windows.Forms.Button();
             this.EstoqueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,8 +74,16 @@
             this.EstoqueDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueRemoveButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.EstoqueTextbox = new System.Windows.Forms.TextBox();
-            this.EstoqueSearchButton = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Setor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minusButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.removeButton = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -428,54 +434,15 @@
             this.Setor,
             this.Quantidade,
             this.PrecoUni,
-            this.Desc});
+            this.Desc,
+            this.minusButton,
+            this.removeButton});
             this.compra_dataView.Location = new System.Drawing.Point(19, 130);
             this.compra_dataView.Name = "compra_dataView";
             this.compra_dataView.ReadOnly = true;
             this.compra_dataView.Size = new System.Drawing.Size(1089, 453);
             this.compra_dataView.TabIndex = 3;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // Nome
-            // 
-            this.Nome.HeaderText = "Nome";
-            this.Nome.Name = "Nome";
-            this.Nome.ReadOnly = true;
-            // 
-            // Categoria
-            // 
-            this.Categoria.HeaderText = "Categoria";
-            this.Categoria.Name = "Categoria";
-            this.Categoria.ReadOnly = true;
-            // 
-            // Setor
-            // 
-            this.Setor.HeaderText = "Setor";
-            this.Setor.Name = "Setor";
-            this.Setor.ReadOnly = true;
-            // 
-            // Quantidade
-            // 
-            this.Quantidade.HeaderText = "Quantidade";
-            this.Quantidade.Name = "Quantidade";
-            this.Quantidade.ReadOnly = true;
-            // 
-            // PrecoUni
-            // 
-            this.PrecoUni.HeaderText = "Preço Uni.";
-            this.PrecoUni.Name = "PrecoUni";
-            this.PrecoUni.ReadOnly = true;
-            // 
-            // Desc
-            // 
-            this.Desc.HeaderText = "Descrição";
-            this.Desc.Name = "Desc";
-            this.Desc.ReadOnly = true;
+            this.compra_dataView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.compra_dataView_CellContentClick);
             // 
             // compra_button_additem
             // 
@@ -630,6 +597,65 @@
             this.tabPage4.Text = "Alerta";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Nome
+            // 
+            this.Nome.HeaderText = "Nome";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            // 
+            // Categoria
+            // 
+            this.Categoria.HeaderText = "Categoria";
+            this.Categoria.Name = "Categoria";
+            this.Categoria.ReadOnly = true;
+            // 
+            // Setor
+            // 
+            this.Setor.HeaderText = "Setor";
+            this.Setor.Name = "Setor";
+            this.Setor.ReadOnly = true;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.HeaderText = "Quantidade";
+            this.Quantidade.Name = "Quantidade";
+            this.Quantidade.ReadOnly = true;
+            // 
+            // PrecoUni
+            // 
+            this.PrecoUni.HeaderText = "Preço Uni.";
+            this.PrecoUni.Name = "PrecoUni";
+            this.PrecoUni.ReadOnly = true;
+            // 
+            // Desc
+            // 
+            this.Desc.HeaderText = "Descrição";
+            this.Desc.Name = "Desc";
+            this.Desc.ReadOnly = true;
+            // 
+            // minusButton
+            // 
+            this.minusButton.HeaderText = "";
+            this.minusButton.Name = "minusButton";
+            this.minusButton.ReadOnly = true;
+            this.minusButton.Text = "-1";
+            this.minusButton.UseColumnTextForButtonValue = true;
+            // 
+            // removeButton
+            // 
+            this.removeButton.HeaderText = "";
+            this.removeButton.Name = "removeButton";
+            this.removeButton.ReadOnly = true;
+            this.removeButton.Text = "Remover";
+            this.removeButton.UseColumnTextForButtonValue = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -672,13 +698,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button compra_button_additem;
         private System.Windows.Forms.DataGridView compra_dataView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Setor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quantidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrecoUni;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Desc;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabControl tabControl2;
@@ -717,6 +736,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoquePrecoUni;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueDesc;
         private System.Windows.Forms.DataGridViewButtonColumn EstoqueRemoveButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Setor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecoUni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Desc;
+        private System.Windows.Forms.DataGridViewButtonColumn minusButton;
+        private System.Windows.Forms.DataGridViewButtonColumn removeButton;
     }
 }
 
