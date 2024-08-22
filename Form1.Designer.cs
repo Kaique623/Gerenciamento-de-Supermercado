@@ -64,18 +64,19 @@
             this.compra_button_additem = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.EstoqueSaveButton = new System.Windows.Forms.Button();
+            this.EstoqueAddButton = new System.Windows.Forms.Button();
             this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
             this.EstoqueTextbox = new System.Windows.Forms.TextBox();
             this.EstoqueSearchButton = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.EstoqueAddButton = new System.Windows.Forms.Button();
             this.EstoqueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SetorEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoquePrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueRemoveButton = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -85,7 +86,6 @@
             this.tabPage1.SuspendLayout();
             this.compra_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.compra_dataView)).BeginInit();
-            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EstoqueDataGrid)).BeginInit();
             this.SuspendLayout();
@@ -488,6 +488,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.EstoqueSaveButton);
             this.tabPage3.Controls.Add(this.EstoqueAddButton);
             this.tabPage3.Controls.Add(this.EstoqueDataGrid);
             this.tabPage3.Controls.Add(this.EstoqueTextbox);
@@ -500,6 +501,26 @@
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
+            // EstoqueSaveButton
+            // 
+            this.EstoqueSaveButton.Location = new System.Drawing.Point(628, 21);
+            this.EstoqueSaveButton.Name = "EstoqueSaveButton";
+            this.EstoqueSaveButton.Size = new System.Drawing.Size(116, 30);
+            this.EstoqueSaveButton.TabIndex = 11;
+            this.EstoqueSaveButton.Text = "Salvar";
+            this.EstoqueSaveButton.UseVisualStyleBackColor = true;
+            this.EstoqueSaveButton.Click += new System.EventHandler(this.EstoqueSaveButtonFunc);
+            // 
+            // EstoqueAddButton
+            // 
+            this.EstoqueAddButton.Location = new System.Drawing.Point(750, 22);
+            this.EstoqueAddButton.Name = "EstoqueAddButton";
+            this.EstoqueAddButton.Size = new System.Drawing.Size(116, 29);
+            this.EstoqueAddButton.TabIndex = 10;
+            this.EstoqueAddButton.Text = "Adicionar";
+            this.EstoqueAddButton.UseVisualStyleBackColor = true;
+            this.EstoqueAddButton.Click += new System.EventHandler(this.EstoqueAddButon);
+            // 
             // EstoqueDataGrid
             // 
             this.EstoqueDataGrid.AllowUserToAddRows = false;
@@ -507,12 +528,12 @@
             this.EstoqueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EstoqueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EstoqueID,
+            this.EstoqueNome,
             this.TipoEstoque,
             this.SetorEstoque,
             this.EstoqueQuantidade,
             this.EstoquePrecoUni,
             this.EstoqueDesc,
-            this.EstoqueNome,
             this.EstoqueRemoveButton});
             this.EstoqueDataGrid.Location = new System.Drawing.Point(21, 57);
             this.EstoqueDataGrid.Name = "EstoqueDataGrid";
@@ -552,20 +573,15 @@
             this.tabPage4.Text = "Alerta";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // EstoqueAddButton
-            // 
-            this.EstoqueAddButton.Location = new System.Drawing.Point(750, 22);
-            this.EstoqueAddButton.Name = "EstoqueAddButton";
-            this.EstoqueAddButton.Size = new System.Drawing.Size(116, 29);
-            this.EstoqueAddButton.TabIndex = 10;
-            this.EstoqueAddButton.Text = "Adicionar";
-            this.EstoqueAddButton.UseVisualStyleBackColor = true;
-            this.EstoqueAddButton.Click += new System.EventHandler(this.EstoqueAddButon);
-            // 
             // EstoqueID
             // 
             this.EstoqueID.HeaderText = "ID";
             this.EstoqueID.Name = "EstoqueID";
+            // 
+            // EstoqueNome
+            // 
+            this.EstoqueNome.HeaderText = "Nome";
+            this.EstoqueNome.Name = "EstoqueNome";
             // 
             // TipoEstoque
             // 
@@ -591,11 +607,6 @@
             // 
             this.EstoqueDesc.HeaderText = "Descrição";
             this.EstoqueDesc.Name = "EstoqueDesc";
-            // 
-            // EstoqueNome
-            // 
-            this.EstoqueNome.HeaderText = "Nome";
-            this.EstoqueNome.Name = "EstoqueNome";
             // 
             // EstoqueRemoveButton
             // 
@@ -628,8 +639,6 @@
             this.compra_groupBox.ResumeLayout(false);
             this.compra_groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.compra_dataView)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EstoqueDataGrid)).EndInit();
@@ -687,13 +696,14 @@
         private System.Windows.Forms.Button EstoqueSearchButton;
         private System.Windows.Forms.DataGridView EstoqueDataGrid;
         private System.Windows.Forms.Button EstoqueAddButton;
+        private System.Windows.Forms.Button EstoqueSaveButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueNome;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoEstoque;
         private System.Windows.Forms.DataGridViewTextBoxColumn SetorEstoque;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueQuantidade;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoquePrecoUni;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueDesc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueNome;
         private System.Windows.Forms.DataGridViewButtonColumn EstoqueRemoveButton;
     }
 }

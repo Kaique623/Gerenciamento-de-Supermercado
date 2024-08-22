@@ -14,7 +14,8 @@ namespace Gerenciamento_de_Supermercado
     public partial class Form1 : Form
     {
         string telaAtual = "🛒 Compras";
-        
+
+        Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
         public Form1()
         {
@@ -114,6 +115,25 @@ namespace Gerenciamento_de_Supermercado
         }
         private void EstoqueAddButon(object sender, EventArgs e){
             EstoqueDataGrid.Rows.Add();
+        }
+        private void EstoqueSaveButtonFunc(object sender, EventArgs e){
+            EstoqueData = new Dictionary<string, Dictionary<string, string>>();
+            foreach (DataGridViewRow row in EstoqueDataGrid.Rows)
+            {
+                MessageBox.Show((string)row.Cells[0].Value);
+                EstoqueData.Add((string)row.Cells[0].Value, new Dictionary<string, string>()
+                {
+                    {"Nome", (string)row.Cells[1].Value},
+                    {"Tipo", (string)row.Cells[2].Value},
+                    {"Setor", (string)row.Cells[3].Value},
+                    {"Quant", (string)row.Cells[4].Value},
+                    {"Preco", (string)row.Cells[5].Value},
+                    {"Desc", (string)row.Cells[6].Value},
+                });
+            }
+            foreach (var id in EstoqueData.Keys)
+                foreach (var value in EstoqueData[id].Keys)
+                MessageBox.Show(EstoqueData[id][value], "ID: "+ id +" | " +  value); 
         }
     }
 }
