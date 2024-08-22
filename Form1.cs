@@ -88,5 +88,15 @@ namespace Gerenciamento_de_Supermercado
         {
             MessageBox.Show(textBox2.Text);
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
