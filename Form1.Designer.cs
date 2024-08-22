@@ -415,6 +415,10 @@
             // 
             // compra_dataView
             // 
+            this.compra_dataView.AllowUserToAddRows = false;
+            this.compra_dataView.AllowUserToDeleteRows = false;
+            this.compra_dataView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.compra_dataView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.compra_dataView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.compra_dataView.ColumnHeadersHeight = 20;
             this.compra_dataView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -427,6 +431,7 @@
             this.Desc});
             this.compra_dataView.Location = new System.Drawing.Point(19, 130);
             this.compra_dataView.Name = "compra_dataView";
+            this.compra_dataView.ReadOnly = true;
             this.compra_dataView.Size = new System.Drawing.Size(1089, 453);
             this.compra_dataView.TabIndex = 3;
             // 
@@ -434,36 +439,43 @@
             // 
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
             // 
             // Nome
             // 
             this.Nome.HeaderText = "Nome";
             this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
             // 
             // Categoria
             // 
             this.Categoria.HeaderText = "Categoria";
             this.Categoria.Name = "Categoria";
+            this.Categoria.ReadOnly = true;
             // 
             // Setor
             // 
             this.Setor.HeaderText = "Setor";
             this.Setor.Name = "Setor";
+            this.Setor.ReadOnly = true;
             // 
             // Quantidade
             // 
             this.Quantidade.HeaderText = "Quantidade";
             this.Quantidade.Name = "Quantidade";
+            this.Quantidade.ReadOnly = true;
             // 
             // PrecoUni
             // 
             this.PrecoUni.HeaderText = "Preço Uni.";
             this.PrecoUni.Name = "PrecoUni";
+            this.PrecoUni.ReadOnly = true;
             // 
             // Desc
             // 
             this.Desc.HeaderText = "Descrição";
             this.Desc.Name = "Desc";
+            this.Desc.ReadOnly = true;
             // 
             // compra_button_additem
             // 
