@@ -101,15 +101,12 @@ namespace Gerenciamento_de_Supermercado
         }
         private void EstoqueButton_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.ColumnIndex == 7)
-                {
+            try{
+                if (e.ColumnIndex == 7){
                     EstoqueDataGrid.Rows.RemoveAt(e.RowIndex);
                 }
             }
-            catch (Exception)
-            {
+            catch (Exception){
                 Console.WriteLine("Unable to delete row");
             }
         }

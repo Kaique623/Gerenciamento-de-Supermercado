@@ -67,9 +67,6 @@
             this.EstoqueSaveButton = new System.Windows.Forms.Button();
             this.EstoqueAddButton = new System.Windows.Forms.Button();
             this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
-            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
-            this.EstoqueSearchButton = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.EstoqueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,6 +75,9 @@
             this.EstoquePrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueRemoveButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
+            this.EstoqueSearchButton = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -553,38 +553,6 @@
             this.EstoqueDataGrid.TabIndex = 9;
             this.EstoqueDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EstoqueButton_CellContentClick);
             // 
-            // EstoqueTextbox
-            // 
-            this.EstoqueTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EstoqueTextbox.Location = new System.Drawing.Point(21, 22);
-            this.EstoqueTextbox.MaximumSize = new System.Drawing.Size(1000, 40);
-            this.EstoqueTextbox.Name = "EstoqueTextbox";
-            this.EstoqueTextbox.Size = new System.Drawing.Size(273, 29);
-            this.EstoqueTextbox.TabIndex = 8;
-            // 
-            // EstoqueSearchButton
-            // 
-            this.EstoqueSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EstoqueSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.EstoqueSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.75F);
-            this.EstoqueSearchButton.Location = new System.Drawing.Point(292, 21);
-            this.EstoqueSearchButton.Margin = new System.Windows.Forms.Padding(1);
-            this.EstoqueSearchButton.Name = "EstoqueSearchButton";
-            this.EstoqueSearchButton.Size = new System.Drawing.Size(41, 31);
-            this.EstoqueSearchButton.TabIndex = 7;
-            this.EstoqueSearchButton.Text = "🔎";
-            this.EstoqueSearchButton.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1143, 702);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Alerta";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
             // EstoqueID
             // 
             this.EstoqueID.HeaderText = "ID";
@@ -629,6 +597,38 @@
             this.EstoqueRemoveButton.Text = "Remover";
             this.EstoqueRemoveButton.ToolTipText = "Remover";
             this.EstoqueRemoveButton.UseColumnTextForButtonValue = true;
+            // 
+            // EstoqueTextbox
+            // 
+            this.EstoqueTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EstoqueTextbox.Location = new System.Drawing.Point(21, 22);
+            this.EstoqueTextbox.MaximumSize = new System.Drawing.Size(1000, 40);
+            this.EstoqueTextbox.Name = "EstoqueTextbox";
+            this.EstoqueTextbox.Size = new System.Drawing.Size(273, 29);
+            this.EstoqueTextbox.TabIndex = 8;
+            // 
+            // EstoqueSearchButton
+            // 
+            this.EstoqueSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EstoqueSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.EstoqueSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.75F);
+            this.EstoqueSearchButton.Location = new System.Drawing.Point(292, 21);
+            this.EstoqueSearchButton.Margin = new System.Windows.Forms.Padding(1);
+            this.EstoqueSearchButton.Name = "EstoqueSearchButton";
+            this.EstoqueSearchButton.Size = new System.Drawing.Size(41, 31);
+            this.EstoqueSearchButton.TabIndex = 7;
+            this.EstoqueSearchButton.Text = "🔎";
+            this.EstoqueSearchButton.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1143, 702);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Alerta";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
