@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label_alerta = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label_alerta = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -96,8 +96,18 @@
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(1315, 728);
-            this.splitContainer1.SplitterDistance = 161;
+            this.splitContainer1.SplitterDistance = 160;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // label_alerta
+            // 
+            this.label_alerta.AutoSize = true;
+            this.label_alerta.Location = new System.Drawing.Point(86, 232);
+            this.label_alerta.Name = "label_alerta";
+            this.label_alerta.Size = new System.Drawing.Size(13, 13);
+            this.label_alerta.TabIndex = 8;
+            this.label_alerta.Text = "0";
+            this.label_alerta.Visible = false;
             // 
             // button5
             // 
@@ -233,7 +243,7 @@
             this.Quantidade,
             this.PrecoUni,
             this.Desc});
-            this.dataGridView1.Location = new System.Drawing.Point(64, 84);
+            this.dataGridView1.Location = new System.Drawing.Point(19, 84);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(743, 393);
             this.dataGridView1.TabIndex = 3;
@@ -290,7 +300,7 @@
             // button7
             // 
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(647, 19);
+            this.button7.Location = new System.Drawing.Point(653, 22);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(109, 40);
             this.button7.TabIndex = 2;
@@ -304,7 +314,7 @@
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(879, 517);
+            this.tabPage2.Size = new System.Drawing.Size(910, 564);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Historico";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -336,7 +346,7 @@
             this.tabPage3.Controls.Add(this.tabControl2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(879, 517);
+            this.tabPage3.Size = new System.Drawing.Size(910, 564);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Estoque";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -377,20 +387,10 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(879, 517);
+            this.tabPage4.Size = new System.Drawing.Size(910, 564);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Alerta";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label_alerta
-            // 
-            this.label_alerta.AutoSize = true;
-            this.label_alerta.Location = new System.Drawing.Point(86, 232);
-            this.label_alerta.Name = "label_alerta";
-            this.label_alerta.Text = "0";
-            this.label_alerta.Visible = false;
-            this.label_alerta.Size = new System.Drawing.Size(0, 13);
-            this.label_alerta.TabIndex = 8;
             // 
             // Form1
             // 
