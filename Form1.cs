@@ -14,7 +14,8 @@ namespace Gerenciamento_de_Supermercado
     public partial class Form1 : Form
     {
         string telaAtual = "🛒 Compras";
-        
+
+        Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
         public Form1()
         {
@@ -29,7 +30,7 @@ namespace Gerenciamento_de_Supermercado
 
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        { 
+        {
 
         }
 
@@ -72,10 +73,10 @@ namespace Gerenciamento_de_Supermercado
         {
 
         }
-        
+
         private void button7_Click(object sender, EventArgs e)
         {
-            if (compra_comboBox.Text == "") 
+            if (compra_comboBox.Text == "")
             {
                 MessageBox.Show("Digite um ID");
             }
@@ -95,7 +96,7 @@ namespace Gerenciamento_de_Supermercado
 
         private void button8_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -121,7 +122,8 @@ namespace Gerenciamento_de_Supermercado
                 Console.WriteLine("Unable to delete row");
             }
         }
-        private void EstoqueAddButon(object sender, EventArgs e){
+        private void EstoqueAddButon(object sender, EventArgs e)
+        {
             EstoqueDataGrid.Rows.Add();
         }
 
@@ -129,11 +131,11 @@ namespace Gerenciamento_de_Supermercado
         {
             try
             {
-                if (e.ColumnIndex == 8) 
+                if (e.ColumnIndex == 8)
                 {
                     compra_dataView.Rows.RemoveAt(e.RowIndex);
                 }
-                else if (e.ColumnIndex == 7) 
+                else if (e.ColumnIndex == 7)
                 {
                     int rowValue = Convert.ToInt16(compra_dataView.Rows[e.RowIndex].Cells[4].Value.ToString());
                     if (rowValue == 1)
@@ -152,6 +154,26 @@ namespace Gerenciamento_de_Supermercado
             {
                 MessageBox.Show("Deu ruim");
             }
+        }
+        private void EstoqueSaveButtonFunc(object sender, EventArgs e)
+        {
+            EstoqueData = new Dictionary<string, Dictionary<string, string>>();
+            foreach (DataGridViewRow row in EstoqueDataGrid.Rows)
+            {
+                MessageBox.Show((string)row.Cells[0].Value);
+                EstoqueData.Add((string)row.Cells[0].Value, new Dictionary<string, string>()
+                {
+                    {"Nome", (string)row.Cells[1].Value},
+                    {"Tipo", (string)row.Cells[2].Value},
+                    {"Setor", (string)row.Cells[3].Value},
+                    {"Quant", (string)row.Cells[4].Value},
+                    {"Preco", (string)row.Cells[5].Value},
+                    {"Desc", (string)row.Cells[6].Value},
+                });
+            }
+            foreach (var id in EstoqueData.Keys)
+                foreach (var value in EstoqueData[id].Keys)
+                    MessageBox.Show(EstoqueData[id][value], "ID: " + id + " | " + value);
         }
     }
 }
