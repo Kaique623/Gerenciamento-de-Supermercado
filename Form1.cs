@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Gerenciamento_de_Supermercado
 {
@@ -14,8 +16,9 @@ namespace Gerenciamento_de_Supermercado
     public partial class Form1 : Form
     {
         string telaAtual = "🛒 Compras";
-
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
+
+        string JsonFileData = "";
 
         public Form1()
         {
@@ -26,12 +29,11 @@ namespace Gerenciamento_de_Supermercado
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
             splitContainer1.IsSplitterFixed = true;
-        }
 
+            var text = File.ReadAllText("EstoqueData.json");
+            EstoqueData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(text);
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
+            compra_comboBox.DataSource = new BindingSource(EstoqueData.Keys, null);
         }
 
         private void dashboardButton_click(object sender, EventArgs e)
@@ -49,65 +51,55 @@ namespace Gerenciamento_de_Supermercado
                 this.Close();
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(EstoqueTextbox.Text);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
-            if (compra_comboBox.Text == "")
+            if (compra_comboBox.Text == "" || compra_comboBox.Text == "(Coleção)")
             {
                 MessageBox.Show("Digite um ID");
             }
             else
             {
-                compra_dataView.Rows.Add();
-                compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value = "1";
-                compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[0].Value = compra_comboBox.Text;
-                compra_comboBox.Text = "";
+                bool addCompra = false;
+                foreach (DataGridViewRow row in compra_dataView.Rows)
+                {
+                    if (compra_comboBox.Text == (string)row.Cells[0].Value)
+                        addCompra = true;
+                }
+                if (addCompra && Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) < Convert.ToInt16(EstoqueData[compra_comboBox.Text]["Quant"]))
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value = Convert.ToString(Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) + 1);
+                else if (addCompra)
+                    MessageBox.Show("Quantidade Indisponível no estoque!");
+                else
+                {
+                    compra_dataView.Rows.Add();
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[0].Value = compra_comboBox.Text;
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[1].Value = EstoqueData[compra_comboBox.Text]["Nome"];
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[2].Value = EstoqueData[compra_comboBox.Text]["Categoria"];
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[3].Value = EstoqueData[compra_comboBox.Text]["Setor"];
+                    if (Convert.ToInt16(EstoqueData[compra_comboBox.Text]["Quant"]) > 0)
+                    {
+                        compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value = "1";
+                    }
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[5].Value = EstoqueData[compra_comboBox.Text]["Preco"];
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[6].Value = EstoqueData[compra_comboBox.Text]["Desc"];
+                    compra_comboBox.Text = "";
+                }
             }
+            compra_label_returnFinalPrice.Text = $"R$: {CalcularValorFinal().ToString()}";
+        }
+        double CalcularValorFinal(){
+            double aux = 0;
+            foreach (DataGridViewRow row in compra_dataView.Rows) {
+               aux += Convert.ToDouble(row.Cells[5].Value) * Convert.ToInt16(row.Cells[4].Value);
+            }
+            return aux;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         private void EstoqueButton_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try{
@@ -158,10 +150,12 @@ namespace Gerenciamento_de_Supermercado
             foreach (DataGridViewRow row in EstoqueDataGrid.Rows)
             {
                 MessageBox.Show((string)row.Cells[0].Value);
+                string aux = (string)row.Cells[5].Value;
+                row.Cells[5].Value = aux.Replace(",", ".");
                 EstoqueData.Add((string)row.Cells[0].Value, new Dictionary<string, string>()
                 {
                     {"Nome", (string)row.Cells[1].Value},
-                    {"Tipo", (string)row.Cells[2].Value},
+                    {"Categoria", (string)row.Cells[2].Value},
                     {"Setor", (string)row.Cells[3].Value},
                     {"Quant", (string)row.Cells[4].Value},
                     {"Preco", (string)row.Cells[5].Value},
@@ -171,6 +165,14 @@ namespace Gerenciamento_de_Supermercado
             foreach (var id in EstoqueData.Keys)
                 foreach (var value in EstoqueData[id].Keys)
                     MessageBox.Show(EstoqueData[id][value], "ID: " + id + " | " + value);
+            compra_comboBox.DataSource = new BindingSource(EstoqueData, null);
+            compra_comboBox.DisplayMember = "Key";
+
+            JsonFileData = JsonConvert.SerializeObject(EstoqueData);
+
+            using (StreamWriter file = new StreamWriter("EstoqueData.json"))
+                file.WriteLine(JsonFileData);
         }
+        
     }
 }

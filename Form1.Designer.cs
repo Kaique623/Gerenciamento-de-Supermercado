@@ -69,17 +69,17 @@
             this.EstoqueSaveButton = new System.Windows.Forms.Button();
             this.EstoqueAddButton = new System.Windows.Forms.Button();
             this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
+            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
+            this.EstoqueSearchButton = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.EstoqueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoriaEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SetorEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoquePrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueRemoveButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
-            this.EstoqueSearchButton = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -118,7 +118,6 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(1315, 728);
             this.splitContainer1.SplitterDistance = 136;
             this.splitContainer1.TabIndex = 0;
@@ -252,7 +251,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Compras";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click_1);
             // 
             // compra_comboBox
             // 
@@ -264,7 +262,6 @@
             this.compra_comboBox.Name = "compra_comboBox";
             this.compra_comboBox.Size = new System.Drawing.Size(278, 32);
             this.compra_comboBox.TabIndex = 17;
-            this.compra_comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // compra_label_returnFinalPrice
             // 
@@ -363,7 +360,6 @@
             this.compra_label_quantProduct.Size = new System.Drawing.Size(151, 20);
             this.compra_label_quantProduct.TabIndex = 2;
             this.compra_label_quantProduct.Text = "Quant. de Produtos:";
-            this.compra_label_quantProduct.Click += new System.EventHandler(this.label5_Click);
             // 
             // compra_label_returnQuantTotal
             // 
@@ -517,7 +513,7 @@
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1143, 702);
+            this.tabPage2.Size = new System.Drawing.Size(1167, 702);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Historico";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -531,11 +527,10 @@
             this.tabPage3.Controls.Add(this.EstoqueSearchButton);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1143, 702);
+            this.tabPage3.Size = new System.Drawing.Size(1167, 702);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Estoque";
             this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // EstoqueSaveButton
             // 
@@ -565,7 +560,7 @@
             this.EstoqueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EstoqueID,
             this.EstoqueNome,
-            this.TipoEstoque,
+            this.CategoriaEstoque,
             this.SetorEstoque,
             this.EstoqueQuantidade,
             this.EstoquePrecoUni,
@@ -577,6 +572,38 @@
             this.EstoqueDataGrid.TabIndex = 9;
             this.EstoqueDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EstoqueButton_CellContentClick);
             // 
+            // EstoqueTextbox
+            // 
+            this.EstoqueTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EstoqueTextbox.Location = new System.Drawing.Point(21, 22);
+            this.EstoqueTextbox.MaximumSize = new System.Drawing.Size(1000, 40);
+            this.EstoqueTextbox.Name = "EstoqueTextbox";
+            this.EstoqueTextbox.Size = new System.Drawing.Size(273, 29);
+            this.EstoqueTextbox.TabIndex = 8;
+            // 
+            // EstoqueSearchButton
+            // 
+            this.EstoqueSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EstoqueSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.EstoqueSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.75F);
+            this.EstoqueSearchButton.Location = new System.Drawing.Point(292, 21);
+            this.EstoqueSearchButton.Margin = new System.Windows.Forms.Padding(1);
+            this.EstoqueSearchButton.Name = "EstoqueSearchButton";
+            this.EstoqueSearchButton.Size = new System.Drawing.Size(41, 31);
+            this.EstoqueSearchButton.TabIndex = 7;
+            this.EstoqueSearchButton.Text = "🔎";
+            this.EstoqueSearchButton.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1167, 702);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Alerta";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // EstoqueID
             // 
             this.EstoqueID.HeaderText = "ID";
@@ -587,10 +614,10 @@
             this.EstoqueNome.HeaderText = "Nome";
             this.EstoqueNome.Name = "EstoqueNome";
             // 
-            // TipoEstoque
+            // CategoriaEstoque
             // 
-            this.TipoEstoque.HeaderText = "Tipo";
-            this.TipoEstoque.Name = "TipoEstoque";
+            this.CategoriaEstoque.HeaderText = "Categoria";
+            this.CategoriaEstoque.Name = "CategoriaEstoque";
             // 
             // SetorEstoque
             // 
@@ -622,38 +649,6 @@
             this.EstoqueRemoveButton.ToolTipText = "Remover";
             this.EstoqueRemoveButton.UseColumnTextForButtonValue = true;
             // 
-            // EstoqueTextbox
-            // 
-            this.EstoqueTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EstoqueTextbox.Location = new System.Drawing.Point(21, 22);
-            this.EstoqueTextbox.MaximumSize = new System.Drawing.Size(1000, 40);
-            this.EstoqueTextbox.Name = "EstoqueTextbox";
-            this.EstoqueTextbox.Size = new System.Drawing.Size(273, 29);
-            this.EstoqueTextbox.TabIndex = 8;
-            // 
-            // EstoqueSearchButton
-            // 
-            this.EstoqueSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EstoqueSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.EstoqueSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.75F);
-            this.EstoqueSearchButton.Location = new System.Drawing.Point(292, 21);
-            this.EstoqueSearchButton.Margin = new System.Windows.Forms.Padding(1);
-            this.EstoqueSearchButton.Name = "EstoqueSearchButton";
-            this.EstoqueSearchButton.Size = new System.Drawing.Size(41, 31);
-            this.EstoqueSearchButton.TabIndex = 7;
-            this.EstoqueSearchButton.Text = "🔎";
-            this.EstoqueSearchButton.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1143, 702);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Alerta";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -663,7 +658,6 @@
             this.Name = "Form1";
             this.Text = "Gerenciador de SuperMecado";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -726,14 +720,6 @@
         private System.Windows.Forms.DataGridView EstoqueDataGrid;
         private System.Windows.Forms.Button EstoqueAddButton;
         private System.Windows.Forms.Button EstoqueSaveButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueNome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TipoEstoque;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SetorEstoque;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueQuantidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstoquePrecoUni;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueDesc;
-        private System.Windows.Forms.DataGridViewButtonColumn EstoqueRemoveButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
@@ -743,6 +729,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Desc;
         private System.Windows.Forms.DataGridViewButtonColumn minusButton;
         private System.Windows.Forms.DataGridViewButtonColumn removeButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueNome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaEstoque;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SetorEstoque;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueQuantidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstoquePrecoUni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueDesc;
+        private System.Windows.Forms.DataGridViewButtonColumn EstoqueRemoveButton;
     }
 }
 
