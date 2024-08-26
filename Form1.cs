@@ -15,8 +15,7 @@ namespace Gerenciamento_de_Supermercado
 {
 
     public partial class Form1 : Form
-    {
-        
+    {  
         string telaAtual = "🛒 Compras";
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
@@ -26,7 +25,6 @@ namespace Gerenciamento_de_Supermercado
         {
             InitializeComponent();
         }
-
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -210,6 +208,5 @@ namespace Gerenciamento_de_Supermercado
             using (StreamWriter file = new StreamWriter("EstoqueData.json"))
                 file.WriteLine(JsonFileData);
         }
-        
     }
 }
