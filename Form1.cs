@@ -25,11 +25,19 @@ namespace Gerenciamento_de_Supermercado
         public Form1()
         {
             InitializeComponent();
+            compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
+        }
+
+        void updateTime()
+        {
+            compra_returnTimeBuy.Text = string.Format("{0:HH:mm tt}", DateTime.Now);
+            Task.Delay(20000).ContinueWith(t => updateTime());
         }
 
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
+            updateTime();
             splitContainer1.IsSplitterFixed = true;
             if (!File.Exists("EstoqueData.json"))
                 File.Create("EstoqueData.json").Dispose();
@@ -210,6 +218,17 @@ namespace Gerenciamento_de_Supermercado
             using (StreamWriter file = new StreamWriter("EstoqueData.json"))
                 file.WriteLine(JsonFileData);
         }
-        
+
+        private void compra_button_endbuy_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in compra_dataView.Rows)
+            {
+                int temp_quant = int.TryParse(row.Cells[4].Value?.ToString(), out int result) ? result : 0;
+                MessageBox.Show(temp_quant.ToString());
+                string temp_id = (string)row.Cells[0].Value; MessageBox.Show(temp_id);
+                EstoqueData[temp_id]["Quant"] = (Convert.ToInt16(EstoqueData[temp_id]["Quant"]) - temp_quant).ToString();
+            }
+            compra_dataView.Rows.Clear();
+        }
     }
 }

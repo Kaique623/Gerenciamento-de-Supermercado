@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.compra_comboBox = new System.Windows.Forms.ComboBox();
             this.compra_label_returnFinalPrice = new System.Windows.Forms.Label();
             this.compra_label_finalPrice = new System.Windows.Forms.Label();
@@ -69,9 +70,6 @@
             this.EstoqueSaveButton = new System.Windows.Forms.Button();
             this.EstoqueAddButton = new System.Windows.Forms.Button();
             this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
-            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
-            this.EstoqueSearchButton = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.EstoqueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CategoriaEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +78,9 @@
             this.EstoquePrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueRemoveButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
+            this.EstoqueSearchButton = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -127,7 +128,7 @@
             this.label_alerta.AutoSize = true;
             this.label_alerta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label_alerta.ForeColor = System.Drawing.Color.Yellow;
-            this.label_alerta.Location = new System.Drawing.Point(77, 232);
+            this.label_alerta.Location = new System.Drawing.Point(90, 232);
             this.label_alerta.Name = "label_alerta";
             this.label_alerta.Size = new System.Drawing.Size(13, 13);
             this.label_alerta.TabIndex = 8;
@@ -236,6 +237,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.compra_comboBox);
             this.tabPage1.Controls.Add(this.compra_label_returnFinalPrice);
             this.tabPage1.Controls.Add(this.compra_label_finalPrice);
@@ -251,6 +253,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Compras";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(587, 86);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Hugo Bobao ";
             // 
             // compra_comboBox
             // 
@@ -294,9 +305,9 @@
             this.compra_groupBox.Controls.Add(this.compra_label_returnQuantTotal);
             this.compra_groupBox.Controls.Add(this.compra_label_quantTotal);
             this.compra_groupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compra_groupBox.Location = new System.Drawing.Point(694, 589);
+            this.compra_groupBox.Location = new System.Drawing.Point(642, 589);
             this.compra_groupBox.Name = "compra_groupBox";
-            this.compra_groupBox.Size = new System.Drawing.Size(414, 93);
+            this.compra_groupBox.Size = new System.Drawing.Size(466, 93);
             this.compra_groupBox.TabIndex = 14;
             this.compra_groupBox.TabStop = false;
             this.compra_groupBox.Text = "Informações";
@@ -307,9 +318,8 @@
             this.compra_returnTimeBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.compra_returnTimeBuy.Location = new System.Drawing.Point(365, 66);
             this.compra_returnTimeBuy.Name = "compra_returnTimeBuy";
-            this.compra_returnTimeBuy.Size = new System.Drawing.Size(45, 20);
+            this.compra_returnTimeBuy.Size = new System.Drawing.Size(0, 20);
             this.compra_returnTimeBuy.TabIndex = 7;
-            this.compra_returnTimeBuy.Text = "0000";
             // 
             // compra_label_timeBuy
             // 
@@ -327,9 +337,8 @@
             this.compra_label_returnDayBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.compra_label_returnDayBuy.Location = new System.Drawing.Point(363, 32);
             this.compra_label_returnDayBuy.Name = "compra_label_returnDayBuy";
-            this.compra_label_returnDayBuy.Size = new System.Drawing.Size(45, 20);
+            this.compra_label_returnDayBuy.Size = new System.Drawing.Size(0, 20);
             this.compra_label_returnDayBuy.TabIndex = 5;
-            this.compra_label_returnDayBuy.Text = "0000";
             // 
             // compra_label_dayBuy
             // 
@@ -345,7 +354,7 @@
             // 
             this.compra_label_returnQuantPreduct.AutoSize = true;
             this.compra_label_returnQuantPreduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compra_label_returnQuantPreduct.Location = new System.Drawing.Point(166, 66);
+            this.compra_label_returnQuantPreduct.Location = new System.Drawing.Point(159, 66);
             this.compra_label_returnQuantPreduct.Name = "compra_label_returnQuantPreduct";
             this.compra_label_returnQuantPreduct.Size = new System.Drawing.Size(45, 20);
             this.compra_label_returnQuantPreduct.TabIndex = 3;
@@ -365,7 +374,7 @@
             // 
             this.compra_label_returnQuantTotal.AutoSize = true;
             this.compra_label_returnQuantTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compra_label_returnQuantTotal.Location = new System.Drawing.Point(166, 32);
+            this.compra_label_returnQuantTotal.Location = new System.Drawing.Point(159, 32);
             this.compra_label_returnQuantTotal.Name = "compra_label_returnQuantTotal";
             this.compra_label_returnQuantTotal.Size = new System.Drawing.Size(45, 20);
             this.compra_label_returnQuantTotal.TabIndex = 1;
@@ -391,6 +400,7 @@
             this.compra_button_endbuy.TabIndex = 13;
             this.compra_button_endbuy.Text = "Finalizar Compra";
             this.compra_button_endbuy.UseVisualStyleBackColor = true;
+            this.compra_button_endbuy.Click += new System.EventHandler(this.compra_button_endbuy_Click);
             // 
             // compra_button_cancelbuy
             // 
@@ -572,38 +582,6 @@
             this.EstoqueDataGrid.TabIndex = 9;
             this.EstoqueDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EstoqueButton_CellContentClick);
             // 
-            // EstoqueTextbox
-            // 
-            this.EstoqueTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EstoqueTextbox.Location = new System.Drawing.Point(21, 22);
-            this.EstoqueTextbox.MaximumSize = new System.Drawing.Size(1000, 40);
-            this.EstoqueTextbox.Name = "EstoqueTextbox";
-            this.EstoqueTextbox.Size = new System.Drawing.Size(273, 29);
-            this.EstoqueTextbox.TabIndex = 8;
-            // 
-            // EstoqueSearchButton
-            // 
-            this.EstoqueSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EstoqueSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.EstoqueSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.75F);
-            this.EstoqueSearchButton.Location = new System.Drawing.Point(292, 21);
-            this.EstoqueSearchButton.Margin = new System.Windows.Forms.Padding(1);
-            this.EstoqueSearchButton.Name = "EstoqueSearchButton";
-            this.EstoqueSearchButton.Size = new System.Drawing.Size(41, 31);
-            this.EstoqueSearchButton.TabIndex = 7;
-            this.EstoqueSearchButton.Text = "🔎";
-            this.EstoqueSearchButton.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1167, 702);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Alerta";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
             // EstoqueID
             // 
             this.EstoqueID.HeaderText = "ID";
@@ -649,6 +627,38 @@
             this.EstoqueRemoveButton.ToolTipText = "Remover";
             this.EstoqueRemoveButton.UseColumnTextForButtonValue = true;
             // 
+            // EstoqueTextbox
+            // 
+            this.EstoqueTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EstoqueTextbox.Location = new System.Drawing.Point(21, 22);
+            this.EstoqueTextbox.MaximumSize = new System.Drawing.Size(1000, 40);
+            this.EstoqueTextbox.Name = "EstoqueTextbox";
+            this.EstoqueTextbox.Size = new System.Drawing.Size(273, 29);
+            this.EstoqueTextbox.TabIndex = 8;
+            // 
+            // EstoqueSearchButton
+            // 
+            this.EstoqueSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EstoqueSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.EstoqueSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.75F);
+            this.EstoqueSearchButton.Location = new System.Drawing.Point(292, 21);
+            this.EstoqueSearchButton.Margin = new System.Windows.Forms.Padding(1);
+            this.EstoqueSearchButton.Name = "EstoqueSearchButton";
+            this.EstoqueSearchButton.Size = new System.Drawing.Size(41, 31);
+            this.EstoqueSearchButton.TabIndex = 7;
+            this.EstoqueSearchButton.Text = "🔎";
+            this.EstoqueSearchButton.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1167, 702);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Alerta";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -692,11 +702,7 @@
         private System.Windows.Forms.DataGridView compra_dataView;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button compra_button_cancelbuy;
         private System.Windows.Forms.Label compra_label_idDesc;
         private System.Windows.Forms.GroupBox compra_groupBox;
@@ -712,8 +718,6 @@
         private System.Windows.Forms.Label compra_label_returnQuantPreduct;
         private System.Windows.Forms.Label compra_label_quantProduct;
         private System.Windows.Forms.ComboBox compra_comboBox;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox EstoqueTextbox;
         private System.Windows.Forms.Button EstoqueSearchButton;
@@ -737,6 +741,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoquePrecoUni;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueDesc;
         private System.Windows.Forms.DataGridViewButtonColumn EstoqueRemoveButton;
+        private System.Windows.Forms.Label label2;
     }
 }
 
