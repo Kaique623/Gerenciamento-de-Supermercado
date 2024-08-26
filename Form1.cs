@@ -15,6 +15,7 @@ namespace Gerenciamento_de_Supermercado
 
     public partial class Form1 : Form
     {
+        
         string telaAtual = "🛒 Compras";
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
@@ -22,6 +23,7 @@ namespace Gerenciamento_de_Supermercado
 
         public Form1()
         {
+            
             InitializeComponent();
         }
 
@@ -29,11 +31,16 @@ namespace Gerenciamento_de_Supermercado
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
             splitContainer1.IsSplitterFixed = true;
-
+            File.Create("EstoqueData.json").Dispose();
             var text = File.ReadAllText("EstoqueData.json");
             EstoqueData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(text);
 
-            compra_comboBox.DataSource = new BindingSource(EstoqueData.Keys, null);
+            try {
+                compra_comboBox.DataSource = new BindingSource(EstoqueData.Keys, null);
+            }
+            catch {
+                Console.WriteLine("Nada a carregar");
+            }
         }
 
         private void dashboardButton_click(object sender, EventArgs e)
@@ -49,6 +56,15 @@ namespace Gerenciamento_de_Supermercado
                 tabControl1.SelectedIndex = 3;
             else if (telaAtual == "🚪 Sair")
                 this.Close();
+        }
+
+        private void reloadEstoque()
+        {
+            EstoqueDataGrid.Rows.Clear();
+            foreach (string data in EstoqueData.Keys)
+            {
+               
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
