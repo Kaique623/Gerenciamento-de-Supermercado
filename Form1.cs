@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +16,7 @@ namespace Gerenciamento_de_Supermercado
 {
 
     public partial class Form1 : Form
-    {
-        
+    {  
         string telaAtual = "🛒 Compras";
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
@@ -33,7 +33,6 @@ namespace Gerenciamento_de_Supermercado
             compra_returnTimeBuy.Text = string.Format("{0:HH:mm tt}", DateTime.Now);
             Task.Delay(20000).ContinueWith(t => updateTime());
         }
-
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -218,7 +217,6 @@ namespace Gerenciamento_de_Supermercado
             using (StreamWriter file = new StreamWriter("EstoqueData.json"))
                 file.WriteLine(JsonFileData);
         }
-
         private void compra_button_endbuy_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in compra_dataView.Rows)
