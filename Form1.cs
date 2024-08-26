@@ -23,7 +23,6 @@ namespace Gerenciamento_de_Supermercado
 
         public Form1()
         {
-            
             InitializeComponent();
         }
 
@@ -31,7 +30,8 @@ namespace Gerenciamento_de_Supermercado
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
             splitContainer1.IsSplitterFixed = true;
-            File.Create("EstoqueData.json").Dispose();
+            if (!File.Exists("EstoqueData.json"))
+                File.Create("EstoqueData.json").Dispose();
             var text = File.ReadAllText("EstoqueData.json");
             EstoqueData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(text);
 
@@ -43,6 +43,29 @@ namespace Gerenciamento_de_Supermercado
             }
         }
 
+        private void reloadEstoque()
+        {
+            try
+            {
+                EstoqueDataGrid.Rows.Clear();
+                foreach (string data in EstoqueData.Keys)
+                {
+                    EstoqueDataGrid.Rows.Add();
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[0].Value = data;
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[1].Value = EstoqueData[data]["Nome"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[2].Value = EstoqueData[data]["Categoria"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[3].Value = EstoqueData[data]["Setor"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[4].Value = EstoqueData[data]["Quant"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[5].Value = EstoqueData[data]["Preco"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[6].Value = EstoqueData[data]["Desc"];
+                }
+            }
+            catch
+            {
+                Console.WriteLine("ERROR WHILE READING FILE");
+            }
+        }
+
         private void dashboardButton_click(object sender, EventArgs e)
         {
             telaAtual = (sender as Button).Text;
@@ -51,20 +74,14 @@ namespace Gerenciamento_de_Supermercado
             else if (telaAtual == "📖 Histórico ")
                 tabControl1.SelectedIndex = 1;
             else if (telaAtual == "📦 Estoque")
+            {
                 tabControl1.SelectedIndex = 2;
+                reloadEstoque();
+            }
             else if (telaAtual == "Alertas")
                 tabControl1.SelectedIndex = 3;
             else if (telaAtual == "🚪 Sair")
                 this.Close();
-        }
-
-        private void reloadEstoque()
-        {
-            EstoqueDataGrid.Rows.Clear();
-            foreach (string data in EstoqueData.Keys)
-            {
-               
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -178,9 +195,6 @@ namespace Gerenciamento_de_Supermercado
                     {"Desc", (string)row.Cells[6].Value},
                 });
             }
-            foreach (var id in EstoqueData.Keys)
-                foreach (var value in EstoqueData[id].Keys)
-                    MessageBox.Show(EstoqueData[id][value], "ID: " + id + " | " + value);
             compra_comboBox.DataSource = new BindingSource(EstoqueData, null);
             compra_comboBox.DisplayMember = "Key";
 
