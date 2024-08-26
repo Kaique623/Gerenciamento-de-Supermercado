@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
+using System.Globalization;
 
 namespace Gerenciamento_de_Supermercado
 {
@@ -125,12 +126,18 @@ namespace Gerenciamento_de_Supermercado
             }
             compra_label_returnFinalPrice.Text = $"R$: {CalcularValorFinal():F2}";
         }
-        double CalcularValorFinal(){
-            double aux = 0;
-            foreach (DataGridViewRow row in compra_dataView.Rows) {
-               aux += Convert.ToDouble(row.Cells[5].Value) * Convert.ToInt16(row.Cells[4].Value);
+        double CalcularValorFinal()
+        {
+            double total = 0;
+            foreach (DataGridViewRow row in compra_dataView.Rows)
+            {
+                    if (double.TryParse(row.Cells[5].Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double valor) &&
+                        int.TryParse(row.Cells[4].Value.ToString(), out int quantidade))
+                    {
+                        total += valor * quantidade;
+                    }
             }
-            return aux;
+            return total;
         }
 
         private void EstoqueButton_CellContentClick(object sender, DataGridViewCellEventArgs e)
