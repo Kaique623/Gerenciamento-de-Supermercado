@@ -123,7 +123,7 @@ namespace Gerenciamento_de_Supermercado
                     compra_comboBox.Text = "";
                 }
             }
-            compra_label_returnFinalPrice.Text = $"R$: {CalcularValorFinal().ToString()}";
+            compra_label_returnFinalPrice.Text = $"R$: {CalcularValorFinal():F2}";
         }
         double CalcularValorFinal(){
             double aux = 0;
