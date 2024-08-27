@@ -21,11 +21,13 @@ namespace Gerenciamento_de_Supermercado
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
         string JsonFileData = "";
+        int productQuant = 0;
+        int totalQuant = 0;
 
         public Form1()
         {
             InitializeComponent();
-            compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
+            compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now); 
         }
 
         void updateTime()
@@ -68,6 +70,7 @@ namespace Gerenciamento_de_Supermercado
                     EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[6].Value = EstoqueData[data]["Desc"];
                 }
             }
+
             catch
             {
                 Console.WriteLine("ERROR WHILE READING FILE");
@@ -103,25 +106,37 @@ namespace Gerenciamento_de_Supermercado
             {
                 MessageBox.Show("Digite um ID");
             }
+
             else
             {
                 bool addCompra = false;
                 foreach (DataGridViewRow row in compra_dataView.Rows)
                 {
                     if (compra_comboBox.Text == (string)row.Cells[0].Value)
+                    {
                         addCompra = true;
+                        
+                    }
                 }
-                if (addCompra && Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) < Convert.ToInt16(EstoqueData[compra_comboBox.Text]["Quant"]))
+
+                if (addCompra && Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) < Convert.ToInt16(EstoqueData[compra_comboBox.Text]["Quant"])) {
+                    totalQuant += 1;
                     compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value = Convert.ToString(Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) + 1);
+                }
+                    
                 else if (addCompra)
                     MessageBox.Show("Quantidade Indisponível no estoque!");
+
                 else
                 {
+                    productQuant += 1;
+                    totalQuant += 1;
                     compra_dataView.Rows.Add();
                     compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[0].Value = compra_comboBox.Text;
                     compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[1].Value = EstoqueData[compra_comboBox.Text]["Nome"];
                     compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[2].Value = EstoqueData[compra_comboBox.Text]["Categoria"];
                     compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[3].Value = EstoqueData[compra_comboBox.Text]["Setor"];
+
                     if (Convert.ToInt16(EstoqueData[compra_comboBox.Text]["Quant"]) > 0)
                     {
                         compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value = "1";
@@ -131,7 +146,7 @@ namespace Gerenciamento_de_Supermercado
                     compra_comboBox.Text = "";
                 }
             }
-            compra_label_returnFinalPrice.Text = $"R$: {CalcularValorFinal():F2}";
+            updateTelaDeCompra();
         }
         double CalcularValorFinal()
         {
@@ -145,6 +160,13 @@ namespace Gerenciamento_de_Supermercado
                     }
             }
             return total;
+        }
+
+        void updateTelaDeCompra()
+        {
+            compra_label_returnFinalPrice.Text = $"R$: {CalcularValorFinal():F2}";
+            compra_label_returnQuantTotal.Text = totalQuant.ToString();
+            compra_label_returnQuantPreduct.Text = productQuant.ToString();
         }
 
         private void EstoqueButton_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -169,6 +191,8 @@ namespace Gerenciamento_de_Supermercado
             {
                 if (e.ColumnIndex == 8)
                 {
+                    totalQuant -= Convert.ToInt16(compra_dataView.Rows[e.RowIndex].Cells[4].Value);
+                    productQuant -= 1;
                     compra_dataView.Rows.RemoveAt(e.RowIndex);
                 }
                 else if (e.ColumnIndex == 7)
@@ -177,12 +201,14 @@ namespace Gerenciamento_de_Supermercado
                     if (rowValue == 1)
                     {
                         compra_dataView.Rows.RemoveAt(e.RowIndex);
+                        totalQuant -= 1;
+                        productQuant -= 1;
                     }
                     else if (rowValue > 1)
                     {
                         rowValue--;
                         compra_dataView.Rows[e.RowIndex].Cells[4].Value = rowValue.ToString();
-
+                        totalQuant -= 1;
                     }
                 }
             }
@@ -190,6 +216,7 @@ namespace Gerenciamento_de_Supermercado
             {
                 MessageBox.Show("Deu ruim");
             }
+            updateTelaDeCompra();
         }
         private void EstoqueSaveButtonFunc(object sender, EventArgs e)
         {
