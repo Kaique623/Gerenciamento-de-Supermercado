@@ -38,6 +38,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.compra_radio_pix = new System.Windows.Forms.RadioButton();
+            this.compra_radio_din = new System.Windows.Forms.RadioButton();
+            this.compra_radio_deb = new System.Windows.Forms.RadioButton();
+            this.compra_radio_cre = new System.Windows.Forms.RadioButton();
             this.compra_comboBox = new System.Windows.Forms.ComboBox();
             this.compra_label_returnFinalPrice = new System.Windows.Forms.Label();
             this.compra_label_finalPrice = new System.Windows.Forms.Label();
@@ -54,23 +59,21 @@
             this.compra_button_cancelbuy = new System.Windows.Forms.Button();
             this.compra_label_idDesc = new System.Windows.Forms.Label();
             this.compra_dataView = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Setor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minusButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.removeButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.compra_button_additem = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.histyOne_tab = new System.Windows.Forms.TabPage();
+            this.histyOne_label_totalItems = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Histoty_dataGrid = new System.Windows.Forms.DataGridView();
             this.CompraID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorarioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecoCompraHist = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VisualizarInfo = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.histyOne_button_refreseh = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.histyTwo_tab = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.EstoqueSaveButton = new System.Windows.Forms.Button();
             this.EstoqueAddButton = new System.Windows.Forms.Button();
@@ -86,20 +89,31 @@
             this.EstoqueTextbox = new System.Windows.Forms.TextBox();
             this.EstoqueSearchButton = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Setor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecoUni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minusButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.removeButton = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.compra_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.compra_dataView)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabControl2.SuspendLayout();
+            this.histyOne_tab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Histoty_dataGrid)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EstoqueDataGrid)).BeginInit();
             this.SuspendLayout();
@@ -134,7 +148,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.splitContainer1.Panel2MinSize = 420;
-            this.splitContainer1.Size = new System.Drawing.Size(1315, 736);
+            this.splitContainer1.Size = new System.Drawing.Size(1277, 736);
             this.splitContainer1.SplitterDistance = 134;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 0;
@@ -251,18 +265,17 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(0, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1178, 727);
+            this.tabControl1.Size = new System.Drawing.Size(1141, 736);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.radioButton4);
-            this.tabPage1.Controls.Add(this.radioButton3);
-            this.tabPage1.Controls.Add(this.radioButton2);
-            this.tabPage1.Controls.Add(this.radioButton1);
+            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.compra_comboBox);
             this.tabPage1.Controls.Add(this.compra_label_returnFinalPrice);
             this.tabPage1.Controls.Add(this.compra_label_finalPrice);
@@ -274,10 +287,76 @@
             this.tabPage1.Controls.Add(this.compra_button_additem);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1170, 701);
+            this.tabPage1.Size = new System.Drawing.Size(1133, 710);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Compras";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.compra_radio_pix);
+            this.groupBox1.Controls.Add(this.compra_radio_din);
+            this.groupBox1.Controls.Add(this.compra_radio_deb);
+            this.groupBox1.Controls.Add(this.compra_radio_cre);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.groupBox1.Location = new System.Drawing.Point(284, 589);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(198, 93);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Forma de Pagamento";
+            // 
+            // compra_radio_pix
+            // 
+            this.compra_radio_pix.AutoSize = true;
+            this.compra_radio_pix.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.compra_radio_pix.Location = new System.Drawing.Point(106, 62);
+            this.compra_radio_pix.Name = "compra_radio_pix";
+            this.compra_radio_pix.Size = new System.Drawing.Size(47, 24);
+            this.compra_radio_pix.TabIndex = 23;
+            this.compra_radio_pix.TabStop = true;
+            this.compra_radio_pix.Text = "Pix";
+            this.compra_radio_pix.UseVisualStyleBackColor = true;
+            this.compra_radio_pix.CheckedChanged += new System.EventHandler(this.compra_radio_pix_CheckedChanged);
+            // 
+            // compra_radio_din
+            // 
+            this.compra_radio_din.AutoSize = true;
+            this.compra_radio_din.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.compra_radio_din.Location = new System.Drawing.Point(106, 26);
+            this.compra_radio_din.Name = "compra_radio_din";
+            this.compra_radio_din.Size = new System.Drawing.Size(86, 24);
+            this.compra_radio_din.TabIndex = 22;
+            this.compra_radio_din.TabStop = true;
+            this.compra_radio_din.Text = "Dinheiro";
+            this.compra_radio_din.UseVisualStyleBackColor = true;
+            this.compra_radio_din.CheckedChanged += new System.EventHandler(this.compra_radio_din_CheckedChanged);
+            // 
+            // compra_radio_deb
+            // 
+            this.compra_radio_deb.AutoSize = true;
+            this.compra_radio_deb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.compra_radio_deb.Location = new System.Drawing.Point(6, 62);
+            this.compra_radio_deb.Name = "compra_radio_deb";
+            this.compra_radio_deb.Size = new System.Drawing.Size(74, 24);
+            this.compra_radio_deb.TabIndex = 21;
+            this.compra_radio_deb.TabStop = true;
+            this.compra_radio_deb.Text = "Debito";
+            this.compra_radio_deb.UseVisualStyleBackColor = true;
+            this.compra_radio_deb.CheckedChanged += new System.EventHandler(this.compra_radio_deb_CheckedChanged);
+            // 
+            // compra_radio_cre
+            // 
+            this.compra_radio_cre.AutoSize = true;
+            this.compra_radio_cre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.compra_radio_cre.Location = new System.Drawing.Point(6, 26);
+            this.compra_radio_cre.Name = "compra_radio_cre";
+            this.compra_radio_cre.Size = new System.Drawing.Size(78, 24);
+            this.compra_radio_cre.TabIndex = 20;
+            this.compra_radio_cre.TabStop = true;
+            this.compra_radio_cre.Text = "Credito";
+            this.compra_radio_cre.UseVisualStyleBackColor = true;
+            this.compra_radio_cre.CheckedChanged += new System.EventHandler(this.compra_radio_cre_CheckedChanged);
             // 
             // compra_comboBox
             // 
@@ -295,7 +374,7 @@
             this.compra_label_returnFinalPrice.AutoSize = true;
             this.compra_label_returnFinalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.compra_label_returnFinalPrice.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.compra_label_returnFinalPrice.Location = new System.Drawing.Point(159, 589);
+            this.compra_label_returnFinalPrice.Location = new System.Drawing.Point(159, 590);
             this.compra_label_returnFinalPrice.Name = "compra_label_returnFinalPrice";
             this.compra_label_returnFinalPrice.Size = new System.Drawing.Size(107, 25);
             this.compra_label_returnFinalPrice.TabIndex = 16;
@@ -446,7 +525,7 @@
             this.compra_label_idDesc.AutoSize = true;
             this.compra_label_idDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.compra_label_idDesc.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.compra_label_idDesc.Location = new System.Drawing.Point(15, 31);
+            this.compra_label_idDesc.Location = new System.Drawing.Point(15, 35);
             this.compra_label_idDesc.Name = "compra_label_idDesc";
             this.compra_label_idDesc.Size = new System.Drawing.Size(271, 20);
             this.compra_label_idDesc.TabIndex = 7;
@@ -467,6 +546,7 @@
             this.Setor,
             this.Quantidade,
             this.PrecoUni,
+            this.total,
             this.Desc,
             this.minusButton,
             this.removeButton});
@@ -476,65 +556,6 @@
             this.compra_dataView.Size = new System.Drawing.Size(1089, 453);
             this.compra_dataView.TabIndex = 3;
             this.compra_dataView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.compra_dataView_CellContentClick);
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Nome
-            // 
-            this.Nome.HeaderText = "Nome";
-            this.Nome.Name = "Nome";
-            this.Nome.ReadOnly = true;
-            // 
-            // Categoria
-            // 
-            this.Categoria.HeaderText = "Categoria";
-            this.Categoria.Name = "Categoria";
-            this.Categoria.ReadOnly = true;
-            // 
-            // Setor
-            // 
-            this.Setor.HeaderText = "Setor";
-            this.Setor.Name = "Setor";
-            this.Setor.ReadOnly = true;
-            // 
-            // Quantidade
-            // 
-            this.Quantidade.HeaderText = "Quantidade";
-            this.Quantidade.Name = "Quantidade";
-            this.Quantidade.ReadOnly = true;
-            // 
-            // PrecoUni
-            // 
-            this.PrecoUni.HeaderText = "Preço Uni.";
-            this.PrecoUni.Name = "PrecoUni";
-            this.PrecoUni.ReadOnly = true;
-            // 
-            // Desc
-            // 
-            this.Desc.HeaderText = "Descrição";
-            this.Desc.Name = "Desc";
-            this.Desc.ReadOnly = true;
-            // 
-            // minusButton
-            // 
-            this.minusButton.HeaderText = "";
-            this.minusButton.Name = "minusButton";
-            this.minusButton.ReadOnly = true;
-            this.minusButton.Text = "-1";
-            this.minusButton.UseColumnTextForButtonValue = true;
-            // 
-            // removeButton
-            // 
-            this.removeButton.HeaderText = "";
-            this.removeButton.Name = "removeButton";
-            this.removeButton.ReadOnly = true;
-            this.removeButton.Text = "Remover";
-            this.removeButton.UseColumnTextForButtonValue = true;
             // 
             // compra_button_additem
             // 
@@ -551,52 +572,143 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Controls.Add(this.tabControl2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1170, 701);
+            this.tabPage2.Size = new System.Drawing.Size(1133, 710);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Historico";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // tabControl2
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tabControl2.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControl2.Controls.Add(this.histyOne_tab);
+            this.tabControl2.Controls.Add(this.histyTwo_tab);
+            this.tabControl2.Location = new System.Drawing.Point(3, 3);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1127, 707);
+            this.tabControl2.TabIndex = 12;
+            // 
+            // histyOne_tab
+            // 
+            this.histyOne_tab.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.histyOne_tab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.histyOne_tab.Controls.Add(this.histyOne_label_totalItems);
+            this.histyOne_tab.Controls.Add(this.textBox2);
+            this.histyOne_tab.Controls.Add(this.Histoty_dataGrid);
+            this.histyOne_tab.Controls.Add(this.histyOne_button_refreseh);
+            this.histyOne_tab.Controls.Add(this.button1);
+            this.histyOne_tab.Location = new System.Drawing.Point(4, 25);
+            this.histyOne_tab.Name = "histyOne_tab";
+            this.histyOne_tab.Padding = new System.Windows.Forms.Padding(3);
+            this.histyOne_tab.Size = new System.Drawing.Size(1119, 678);
+            this.histyOne_tab.TabIndex = 0;
+            this.histyOne_tab.Text = "Historico de Compras";
+            // 
+            // histyOne_label_totalItems
+            // 
+            this.histyOne_label_totalItems.AutoSize = true;
+            this.histyOne_label_totalItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.histyOne_label_totalItems.Location = new System.Drawing.Point(356, 31);
+            this.histyOne_label_totalItems.Name = "histyOne_label_totalItems";
+            this.histyOne_label_totalItems.Size = new System.Drawing.Size(207, 20);
+            this.histyOne_label_totalItems.TabIndex = 12;
+            this.histyOne_label_totalItems.Text = "Compras Registradas: 0000";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(16, 21);
+            this.textBox2.MaximumSize = new System.Drawing.Size(1000, 40);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(273, 29);
+            this.textBox2.TabIndex = 10;
+            // 
+            // Histoty_dataGrid
+            // 
+            this.Histoty_dataGrid.AllowUserToAddRows = false;
+            this.Histoty_dataGrid.AllowUserToDeleteRows = false;
+            this.Histoty_dataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.Histoty_dataGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.Histoty_dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Histoty_dataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CompraID,
             this.DataCompra,
             this.HorarioCompra,
             this.PrecoCompraHist,
             this.VisualizarInfo});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1161, 696);
-            this.dataGridView1.TabIndex = 0;
+            this.Histoty_dataGrid.Location = new System.Drawing.Point(16, 72);
+            this.Histoty_dataGrid.Name = "Histoty_dataGrid";
+            this.Histoty_dataGrid.ReadOnly = true;
+            this.Histoty_dataGrid.Size = new System.Drawing.Size(1088, 541);
+            this.Histoty_dataGrid.TabIndex = 0;
             // 
             // CompraID
             // 
             this.CompraID.HeaderText = "ID de Compra";
             this.CompraID.Name = "CompraID";
+            this.CompraID.ReadOnly = true;
             // 
             // DataCompra
             // 
             this.DataCompra.HeaderText = "Data da Compra";
             this.DataCompra.Name = "DataCompra";
+            this.DataCompra.ReadOnly = true;
             // 
             // HorarioCompra
             // 
             this.HorarioCompra.HeaderText = "Horário da Compra";
             this.HorarioCompra.Name = "HorarioCompra";
+            this.HorarioCompra.ReadOnly = true;
             // 
             // PrecoCompraHist
             // 
             this.PrecoCompraHist.HeaderText = "Preço da Compra";
             this.PrecoCompraHist.Name = "PrecoCompraHist";
+            this.PrecoCompraHist.ReadOnly = true;
             // 
             // VisualizarInfo
             // 
             this.VisualizarInfo.HeaderText = "Visualizar Informações";
             this.VisualizarInfo.Name = "VisualizarInfo";
+            this.VisualizarInfo.ReadOnly = true;
+            this.VisualizarInfo.Text = "Visualizar Informações";
+            this.VisualizarInfo.UseColumnTextForButtonValue = true;
+            // 
+            // histyOne_button_refreseh
+            // 
+            this.histyOne_button_refreseh.Location = new System.Drawing.Point(970, 20);
+            this.histyOne_button_refreseh.Name = "histyOne_button_refreseh";
+            this.histyOne_button_refreseh.Size = new System.Drawing.Size(134, 33);
+            this.histyOne_button_refreseh.TabIndex = 11;
+            this.histyOne_button_refreseh.Text = "Recarregar";
+            this.histyOne_button_refreseh.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.75F);
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.button1.Location = new System.Drawing.Point(287, 20);
+            this.button1.Margin = new System.Windows.Forms.Padding(1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 31);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "🔎";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // histyTwo_tab
+            // 
+            this.histyTwo_tab.Location = new System.Drawing.Point(4, 25);
+            this.histyTwo_tab.Name = "histyTwo_tab";
+            this.histyTwo_tab.Padding = new System.Windows.Forms.Padding(3);
+            this.histyTwo_tab.Size = new System.Drawing.Size(1119, 678);
+            this.histyTwo_tab.TabIndex = 1;
+            this.histyTwo_tab.Text = "Historico de Estoque";
+            this.histyTwo_tab.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -607,7 +719,7 @@
             this.tabPage3.Controls.Add(this.EstoqueSearchButton);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1170, 701);
+            this.tabPage3.Size = new System.Drawing.Size(1133, 710);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Estoque";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -727,54 +839,105 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1170, 701);
+            this.tabPage4.Size = new System.Drawing.Size(1133, 710);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Alerta";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // tabPage5
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(293, 624);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 17);
-            this.radioButton1.TabIndex = 18;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1133, 710);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "tabPage5";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // tabPage6
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(293, 657);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(85, 17);
-            this.radioButton2.TabIndex = 19;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "radioButton2";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1133, 710);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "tabPage6";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // ID
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(395, 623);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(85, 17);
-            this.radioButton3.TabIndex = 20;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "radioButton3";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.ID.FillWeight = 105.471F;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // radioButton4
+            // Nome
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(395, 657);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(85, 17);
-            this.radioButton4.TabIndex = 21;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "radioButton4";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.Nome.FillWeight = 105.471F;
+            this.Nome.HeaderText = "Nome";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            // 
+            // Categoria
+            // 
+            this.Categoria.FillWeight = 105.471F;
+            this.Categoria.HeaderText = "Categoria";
+            this.Categoria.Name = "Categoria";
+            this.Categoria.ReadOnly = true;
+            // 
+            // Setor
+            // 
+            this.Setor.FillWeight = 105.471F;
+            this.Setor.HeaderText = "Setor";
+            this.Setor.Name = "Setor";
+            this.Setor.ReadOnly = true;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.FillWeight = 105.471F;
+            this.Quantidade.HeaderText = "Quantidade";
+            this.Quantidade.Name = "Quantidade";
+            this.Quantidade.ReadOnly = true;
+            // 
+            // PrecoUni
+            // 
+            this.PrecoUni.FillWeight = 105.471F;
+            this.PrecoUni.HeaderText = "Preço Uni.";
+            this.PrecoUni.Name = "PrecoUni";
+            this.PrecoUni.ReadOnly = true;
+            // 
+            // total
+            // 
+            this.total.FillWeight = 105.471F;
+            this.total.HeaderText = "Preço Total";
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            // 
+            // Desc
+            // 
+            this.Desc.FillWeight = 105.471F;
+            this.Desc.HeaderText = "Descrição";
+            this.Desc.Name = "Desc";
+            this.Desc.ReadOnly = true;
+            // 
+            // minusButton
+            // 
+            this.minusButton.FillWeight = 50.76142F;
+            this.minusButton.HeaderText = "";
+            this.minusButton.Name = "minusButton";
+            this.minusButton.ReadOnly = true;
+            this.minusButton.Text = "-1";
+            this.minusButton.UseColumnTextForButtonValue = true;
+            // 
+            // removeButton
+            // 
+            this.removeButton.FillWeight = 105.471F;
+            this.removeButton.HeaderText = "";
+            this.removeButton.Name = "removeButton";
+            this.removeButton.ReadOnly = true;
+            this.removeButton.Text = "Remover";
+            this.removeButton.UseColumnTextForButtonValue = true;
             // 
             // Form1
             // 
@@ -784,7 +947,7 @@
             this.AutoScrollMargin = new System.Drawing.Size(1, 1);
             this.AutoScrollMinSize = new System.Drawing.Size(1, 1);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1315, 736);
+            this.ClientSize = new System.Drawing.Size(1277, 736);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "Form1";
@@ -799,11 +962,16 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.compra_groupBox.ResumeLayout(false);
             this.compra_groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.compra_dataView)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabControl2.ResumeLayout(false);
+            this.histyOne_tab.ResumeLayout(false);
+            this.histyOne_tab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Histoty_dataGrid)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EstoqueDataGrid)).EndInit();
@@ -827,7 +995,6 @@
         private System.Windows.Forms.DataGridView compra_dataView;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button compra_button_cancelbuy;
         private System.Windows.Forms.Label compra_label_idDesc;
         private System.Windows.Forms.GroupBox compra_groupBox;
@@ -849,15 +1016,6 @@
         private System.Windows.Forms.DataGridView EstoqueDataGrid;
         private System.Windows.Forms.Button EstoqueAddButton;
         private System.Windows.Forms.Button EstoqueSaveButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Setor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quantidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrecoUni;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Desc;
-        private System.Windows.Forms.DataGridViewButtonColumn minusButton;
-        private System.Windows.Forms.DataGridViewButtonColumn removeButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueID;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueNome;
         private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaEstoque;
@@ -866,17 +1024,36 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoquePrecoUni;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstoqueDesc;
         private System.Windows.Forms.DataGridViewButtonColumn EstoqueRemoveButton;
-
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.RadioButton compra_radio_cre;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton compra_radio_pix;
+        private System.Windows.Forms.RadioButton compra_radio_din;
+        private System.Windows.Forms.RadioButton compra_radio_deb;
+        private System.Windows.Forms.DataGridView Histoty_dataGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn CompraID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn HorarioCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecoCompraHist;
         private System.Windows.Forms.DataGridViewButtonColumn VisualizarInfo;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage histyOne_tab;
+        private System.Windows.Forms.Label histyOne_label_totalItems;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button histyOne_button_refreseh;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage histyTwo_tab;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Setor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecoUni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Desc;
+        private System.Windows.Forms.DataGridViewButtonColumn minusButton;
+        private System.Windows.Forms.DataGridViewButtonColumn removeButton;
     }
 }
 

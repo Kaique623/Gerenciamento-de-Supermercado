@@ -18,6 +18,8 @@ namespace Gerenciamento_de_Supermercado
     public partial class Form1 : Form
     {  
         string telaAtual = "🛒 Compras";
+        bool stateCompraRadioButton = false;
+
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
         string JsonFileData = "";
@@ -115,13 +117,19 @@ namespace Gerenciamento_de_Supermercado
                     if (compra_comboBox.Text == (string)row.Cells[0].Value)
                     {
                         addCompra = true;
-                        
                     }
                 }
 
                 if (addCompra && Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) < Convert.ToInt16(EstoqueData[compra_comboBox.Text]["Quant"])) {
                     totalQuant += 1;
-                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value = Convert.ToString(Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) + 1);
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value 
+                        = Convert.ToString(Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) + 1);
+                    if (double.TryParse(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[5].Value.ToString(), out double valor1) &&
+                        int.TryParse(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value.ToString(), out int valor2))
+                    {
+                        decimal resultado = valor1 * valor2;
+                        compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[6].Value = $"{resultado:F2}";
+                    }
                 }
                     
                 else if (addCompra)
@@ -141,28 +149,48 @@ namespace Gerenciamento_de_Supermercado
                     {
                         compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value = "1";
                     }
+
                     compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[5].Value = EstoqueData[compra_comboBox.Text]["Preco"];
-                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[6].Value = EstoqueData[compra_comboBox.Text]["Desc"];
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[6].Value = EstoqueData[compra_comboBox.Text]["Preco"];
+                    compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[7].Value = EstoqueData[compra_comboBox.Text]["Desc"];
                     compra_comboBox.Text = "";
                 }
             }
             updateTelaDeCompra();
         }
+
         double CalcularValorFinal()
         {
             double total = 0;
             foreach (DataGridViewRow row in compra_dataView.Rows)
             {
-                    if (double.TryParse(row.Cells[5].Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double valor) &&
-                        int.TryParse(row.Cells[4].Value.ToString(), out int quantidade))
-                    {
-                        total += valor * quantidade;
-                    }
+                if (double.TryParse(row.Cells[5].Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double valor) 
+                    && int.TryParse(row.Cells[4].Value.ToString(), out int quantidade))
+                {
+                    total += valor * quantidade;
+                }
+            }
+
+            if (compra_radio_cre.Checked)
+            {
+                total += (total * 0.02);
+            }
+            else if (compra_radio_deb.Checked)
+            {
+                total += (total * 0.01);
+            }
+            else if (compra_radio_din.Checked)
+            {
+
+            }
+            else if (compra_radio_pix.Checked)
+            {
+                
             }
             return total;
         }
 
-        void updateTelaDeCompra()
+        private void updateTelaDeCompra()
         {
             compra_label_returnFinalPrice.Text = $"R$: {CalcularValorFinal():F2}";
             compra_label_returnQuantTotal.Text = totalQuant.ToString();
@@ -180,6 +208,7 @@ namespace Gerenciamento_de_Supermercado
                 Console.WriteLine("Unable to delete row");
             }
         }
+
         private void EstoqueAddButon(object sender, EventArgs e)
         {
             EstoqueDataGrid.Rows.Add();
@@ -189,13 +218,13 @@ namespace Gerenciamento_de_Supermercado
         {
             try
             {
-                if (e.ColumnIndex == 8)
+                if (e.ColumnIndex == 9)
                 {
                     totalQuant -= Convert.ToInt16(compra_dataView.Rows[e.RowIndex].Cells[4].Value);
                     productQuant -= 1;
                     compra_dataView.Rows.RemoveAt(e.RowIndex);
                 }
-                else if (e.ColumnIndex == 7)
+                else if (e.ColumnIndex == 8)
                 {
                     int rowValue = Convert.ToInt16(compra_dataView.Rows[e.RowIndex].Cells[4].Value.ToString());
                     if (rowValue == 1)
@@ -209,6 +238,10 @@ namespace Gerenciamento_de_Supermercado
                         rowValue--;
                         compra_dataView.Rows[e.RowIndex].Cells[4].Value = rowValue.ToString();
                         totalQuant -= 1;
+                        compra_dataView.Rows[e.RowIndex].Cells[6].Value =
+                        Convert.ToDecimal(compra_dataView.Rows[e.RowIndex].Cells[6].Value) -
+                        Convert.ToDecimal(compra_dataView.Rows[e.RowIndex].Cells[5].Value);
+                        
                     }
                 }
             }
@@ -218,6 +251,7 @@ namespace Gerenciamento_de_Supermercado
             }
             updateTelaDeCompra();
         }
+
         private void EstoqueSaveButtonFunc(object sender, EventArgs e)
         {
             EstoqueData = new Dictionary<string, Dictionary<string, string>>();
@@ -244,16 +278,68 @@ namespace Gerenciamento_de_Supermercado
             using (StreamWriter file = new StreamWriter("EstoqueData.json"))
                 file.WriteLine(JsonFileData);
         }
+
         private void compra_button_endbuy_Click(object sender, EventArgs e)
+        {
+            if (stateCompraRadioButton == false)
+            {
+                MessageBox.Show("Selecione uma forma de Pagamento", "Erro de Seleção");
+            }
+            else
+            {
+                foreach (DataGridViewRow row in compra_dataView.Rows)
+                {
+                    int temp_quant = int.TryParse(row.Cells[4].Value?.ToString(), out int result) ? result : 0;
+                    string temp_id = (string)row.Cells[0].Value; MessageBox.Show(temp_id);
+                    EstoqueData[temp_id]["Quant"] = (Convert.ToInt16(EstoqueData[temp_id]["Quant"]) - temp_quant).ToString();
+                }           
+                compra_dataView.Rows.Clear();
+                compra_label_returnFinalPrice.Text = $"R$: {0:F2}";
+            }
+        }
+
+        private void compra_radio_pix_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton_click(sender, e);
+            stateCompraRadioButton = true;
+        }
+
+        private void compra_radio_din_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton_click(sender, e);
+            stateCompraRadioButton = true;
+        }
+
+        private void compra_radio_deb_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton_click(sender, e);
+            stateCompraRadioButton = true;
+        }
+
+        private void compra_radio_cre_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton_click(sender, e);
+            stateCompraRadioButton = true;
+        }
+
+        private void radioButton_click(object sender, EventArgs e)
+        {
+            if ((sender as RadioButton)?.Checked == true)
+            {
+                updateTelaDeCompra();
+            }
+        }
+
+        private void RenerateBuyRegister()
         {
             foreach (DataGridViewRow row in compra_dataView.Rows)
             {
-                int temp_quant = int.TryParse(row.Cells[4].Value?.ToString(), out int result) ? result : 0;
-                MessageBox.Show(temp_quant.ToString());
-                string temp_id = (string)row.Cells[0].Value; MessageBox.Show(temp_id);
-                EstoqueData[temp_id]["Quant"] = (Convert.ToInt16(EstoqueData[temp_id]["Quant"]) - temp_quant).ToString();
+                string id = Convert.ToString(row.Cells[0].Value);
+                string name = Convert.ToString(row.Cells[1].Value);
+                string quant = Convert.ToString(row.Cells[2].Value);
+                // string id = Convert.ToString(row.Cells[3].Value);
+                // string id = Convert.ToString(row.Cells[4].Value);
             }
-            compra_dataView.Rows.Clear();
         }
     }
 }
