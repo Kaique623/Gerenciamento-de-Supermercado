@@ -22,14 +22,87 @@ namespace Gerenciamento_de_Supermercado
 
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
+        Dictionary<string, System.Windows.Forms.Panel> cloneRowsPanel = new Dictionary<string, System.Windows.Forms.Panel>();
+        Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>();
+
+        List<string> Alertas = new List<string>();
+
         string JsonFileData = "";
         int productQuant = 0;
         int totalQuant = 0;
+
+        int AlertaRowCounter = 0;
 
         public Form1()
         {
             InitializeComponent();
             compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now); 
+        }
+
+        void createRow(string id)
+        {
+
+            cloneRowsPanel[id] = new Panel();
+            AlertaPanel1.Controls.Add(cloneRowsPanel[id]);
+            cloneRowsPanel[id].BackColor = System.Drawing.Color.WhiteSmoke;
+            cloneRowsPanel[id].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            cloneRowsPanel[id].Location = new System.Drawing.Point(3, 0 + (51 * AlertaRowCounter));
+            cloneRowsPanel[id].Name = "TemplatePanel";
+            cloneRowsPanel[id].Size = new System.Drawing.Size(1140, 53);
+
+
+            int tempCounter = 0;
+            foreach (KeyValuePair<string, string> value in new Dictionary<string, string> {
+            { "ID: ", "Id" },
+            { "Nome do Produto: ", "Nome" },
+            { "Categoria: ", "Categoria"},
+            { "Setor:",  "Setor"},
+            { "Preço", "Preco"},
+            { "Quantidade Disponível", "Quant" },
+            { "Alerta (Máximo)", "AlertaMax" },
+            { "Alerta (Mínimo)", "AlertaMin" }
+            })
+            {
+                cloneRowsLabel[id] = new Dictionary<string, Label>();
+                cloneRowsLabel[id][value.Key] = new Label();
+                cloneRowsPanel[id].Controls.Add(cloneRowsLabel[id][value.Key]);
+                cloneRowsLabel[id][value.Key].AutoSize = true;
+                cloneRowsLabel[id][value.Key].Location = new System.Drawing.Point(4 + (150 * tempCounter), 4);
+                cloneRowsLabel[id][value.Key].Size = new System.Drawing.Size(80, 13);
+                cloneRowsLabel[id][value.Key].TabIndex = 0;
+                if (tempCounter == 0)
+                    cloneRowsLabel[id][value.Key].Text = $"{value.Key}\n{id}";
+                else
+                    cloneRowsLabel[id][value.Key].Text = $"{value.Key}\n{EstoqueData[id][value.Value]}";
+                tempCounter++;
+                Alertas.Add(id);
+            }
+
+        }
+        private void AlertaPanel1_Paint(object sender, PaintEventArgs e)
+        {
+            AlertaPanel1.AutoScroll = true;
+            AlertaPanel1.HorizontalScroll.Maximum = 0;
+        }
+
+        void refreshAlerta()
+        {
+            try
+            {
+                foreach (string id in EstoqueData.Keys)
+                {
+                    if (Convert.ToInt16(EstoqueData[id]["Quant"]) <= Convert.ToInt16(EstoqueData[id]["AlertaMin"]) && !Alertas.Contains(id))
+                    {
+                        createRow(id);
+                        AlertaRowCounter += 1;
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Erro ao Criar Fileira");
+            }
+            label_alerta.Text = Convert.ToString(AlertaRowCounter);
         }
 
         void updateTime()
@@ -53,6 +126,7 @@ namespace Gerenciamento_de_Supermercado
             catch {
                 Console.WriteLine("Nada a carregar");
             }
+            refreshAlerta();
         }
 
         private void reloadEstoque()
@@ -70,6 +144,8 @@ namespace Gerenciamento_de_Supermercado
                     EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[4].Value = EstoqueData[data]["Quant"];
                     EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[5].Value = EstoqueData[data]["Preco"];
                     EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[6].Value = EstoqueData[data]["Desc"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[7].Value = EstoqueData[data]["AlertaMin"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[8].Value = EstoqueData[data]["AlertaMax"];
                 }
             }
 
@@ -92,7 +168,10 @@ namespace Gerenciamento_de_Supermercado
                 reloadEstoque();
             }
             else if (telaAtual == "Alertas")
+            {
+                refreshAlerta();
                 tabControl1.SelectedIndex = 3;
+            }
             else if (telaAtual == "🚪 Sair")
                 this.Close();
         }
@@ -124,7 +203,7 @@ namespace Gerenciamento_de_Supermercado
                     totalQuant += 1;
                     compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value 
                         = Convert.ToString(Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) + 1);
-                    if (double.TryParse(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[5].Value.ToString(), out double valor1) &&
+                    if (decimal.TryParse(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[5].Value.ToString(), out decimal valor1) &&
                         int.TryParse(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value.ToString(), out int valor2))
                     {
                         decimal resultado = valor1 * valor2;
@@ -200,7 +279,7 @@ namespace Gerenciamento_de_Supermercado
         private void EstoqueButton_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try{
-                if (e.ColumnIndex == 7){
+                if (e.ColumnIndex == 9){
                     EstoqueDataGrid.Rows.RemoveAt(e.RowIndex);
                 }
             }
@@ -267,7 +346,8 @@ namespace Gerenciamento_de_Supermercado
                     {"Setor", (string)row.Cells[3].Value},
                     {"Quant", (string)row.Cells[4].Value},
                     {"Preco", (string)row.Cells[5].Value},
-                    {"Desc", (string)row.Cells[6].Value},
+                    {"AlertaMin", (string)row.Cells[7].Value },
+                    {"AlertaMax", (string)row.Cells[8].Value }
                 });
             }
             compra_comboBox.DataSource = new BindingSource(EstoqueData, null);
