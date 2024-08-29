@@ -333,13 +333,11 @@ namespace Gerenciamento_de_Supermercado
             }
             updateTelaDeCompra();
         }
-
-        private void EstoqueSaveButtonFunc(object sender, EventArgs e)
+        public void EstoqueSaveButtonFunc(object sender, EventArgs e)
         {
             EstoqueData = new Dictionary<string, Dictionary<string, string>>();
             foreach (DataGridViewRow row in EstoqueDataGrid.Rows)
             {
-                MessageBox.Show((string)row.Cells[0].Value);
                 string aux = (string)row.Cells[5].Value;
                 row.Cells[5].Value = aux.Replace(",", ".");
                 EstoqueData.Add((string)row.Cells[0].Value, new Dictionary<string, string>()
@@ -349,6 +347,7 @@ namespace Gerenciamento_de_Supermercado
                     {"Setor", (string)row.Cells[3].Value},
                     {"Quant", (string)row.Cells[4].Value},
                     {"Preco", (string)row.Cells[5].Value},
+                    {"Desc", (string)row.Cells[6].Value},
                     {"AlertaMin", (string)row.Cells[7].Value },
                     {"AlertaMax", (string)row.Cells[8].Value }
                 });
@@ -359,17 +358,19 @@ namespace Gerenciamento_de_Supermercado
             JsonFileData = JsonConvert.SerializeObject(EstoqueData);
 
             using (StreamWriter file = new StreamWriter("EstoqueData.json"))
-                file.WriteLine(JsonFileData);
+                file.WriteLine(JsonFileData)
         }
 
         private void compra_button_endbuy_Click(object sender, EventArgs e)
+
         {
             if (stateCompraRadioButton == false)
             {
                 MessageBox.Show("Selecione uma forma de Pagamento", "Erro de Seleção");
             }
-            else if (compra_dataView.Rows.Count < 1) 
+            else if (compra_dataView.Rows.Count < 1)
             {
+
                 MessageBox.Show("Adicione um produto");
             }
             else
@@ -377,33 +378,18 @@ namespace Gerenciamento_de_Supermercado
                 foreach (DataGridViewRow row in compra_dataView.Rows)
                 {
                     int temp_quant = int.TryParse(row.Cells[4].Value?.ToString(), out int result) ? result : 0;
+
                     string temp_id = (string)row.Cells[0].Value; MessageBox.Show(temp_id);
+
                     EstoqueData[temp_id]["Quant"] = (Convert.ToInt16(EstoqueData[temp_id]["Quant"]) - temp_quant).ToString();
-                }           
+                }
                 compra_dataView.Rows.Clear();
                 compra_label_returnFinalPrice.Text = $"R$: {0:F2}";
             }
         }
 
-        private void compra_radio_pix_CheckedChanged(object sender, EventArgs e)
-        {
-            radioButton_click(sender, e);
-            stateCompraRadioButton = true;
-        }
 
-        private void compra_radio_din_CheckedChanged(object sender, EventArgs e)
-        {
-            radioButton_click(sender, e);
-            stateCompraRadioButton = true;
-        }
-
-        private void compra_radio_deb_CheckedChanged(object sender, EventArgs e)
-        {
-            radioButton_click(sender, e);
-            stateCompraRadioButton = true;
-        }
-
-        private void compra_radio_cre_CheckedChanged(object sender, EventArgs e)
+        private void radioButtonClick(object sender, EventArgs e)
         {
             radioButton_click(sender, e);
             stateCompraRadioButton = true;
@@ -426,6 +412,38 @@ namespace Gerenciamento_de_Supermercado
                 string quant = Convert.ToString(row.Cells[2].Value);
                 // string id = Convert.ToString(row.Cells[3].Value);
                 // string id = Convert.ToString(row.Cells[4].Value);
+            }
+        }
+        private void searchbutton_Click(object sender, EventArgs e)
+        {
+            string searchValue = EstoqueTextbox.Text;
+            EstoqueDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            try
+            {
+                bool valueResult = false;
+                foreach (DataGridViewRow row in EstoqueDataGrid.Rows)
+                {
+                    for (int i = 0; i < row.Cells.Count; i++)
+                    {
+                        if (row.Cells[i].Value != null && row.Cells[i].Value.ToString().Equals(searchValue))
+                        {
+                            int rowIndex = row.Index;
+                            EstoqueDataGrid.Rows[rowIndex].Selected = true;
+                            valueResult = true;
+                            break;
+                        }
+                    }
+
+                }
+                if (!valueResult)
+                {
+                    MessageBox.Show("Unable to find " + EstoqueTextbox.Text, "Not Found");
+                    return;
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
             }
         }
     }

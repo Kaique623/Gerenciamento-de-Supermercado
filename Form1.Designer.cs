@@ -161,10 +161,10 @@
             // label_alerta
             // 
             this.label_alerta.AutoSize = true;
-            this.label_alerta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label_alerta.BackColor = System.Drawing.Color.Transparent;
             this.label_alerta.ForeColor = System.Drawing.Color.Yellow;
             this.label_alerta.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.label_alerta.Location = new System.Drawing.Point(77, 232);
+            this.label_alerta.Location = new System.Drawing.Point(101, 232);
             this.label_alerta.Name = "label_alerta";
             this.label_alerta.Size = new System.Drawing.Size(13, 13);
             this.label_alerta.TabIndex = 8;
@@ -329,6 +329,7 @@
             this.EstoqueSearchButton.TabIndex = 7;
             this.EstoqueSearchButton.Text = "🔎";
             this.EstoqueSearchButton.UseVisualStyleBackColor = true;
+            this.EstoqueSearchButton.Click += new System.EventHandler(this.searchbutton_Click);
             // 
             // EstoqueTextbox
             // 
@@ -909,7 +910,7 @@
             this.compra_radio_cre.TabStop = true;
             this.compra_radio_cre.Text = "Credito";
             this.compra_radio_cre.UseVisualStyleBackColor = true;
-            this.compra_radio_cre.CheckedChanged += new System.EventHandler(this.compra_radio_cre_CheckedChanged);
+            this.compra_radio_cre.CheckedChanged += new System.EventHandler(this.radioButtonClick);
             // 
             // compra_radio_deb
             // 
@@ -922,7 +923,7 @@
             this.compra_radio_deb.TabStop = true;
             this.compra_radio_deb.Text = "Debito";
             this.compra_radio_deb.UseVisualStyleBackColor = true;
-            this.compra_radio_deb.CheckedChanged += new System.EventHandler(this.compra_radio_deb_CheckedChanged);
+            this.compra_radio_deb.CheckedChanged += new System.EventHandler(this.radioButtonClick);
             // 
             // compra_radio_din
             // 
@@ -935,7 +936,7 @@
             this.compra_radio_din.TabStop = true;
             this.compra_radio_din.Text = "Dinheiro";
             this.compra_radio_din.UseVisualStyleBackColor = true;
-            this.compra_radio_din.CheckedChanged += new System.EventHandler(this.compra_radio_din_CheckedChanged);
+            this.compra_radio_din.CheckedChanged += new System.EventHandler(this.radioButtonClick);
             // 
             // compra_radio_pix
             // 
@@ -948,7 +949,7 @@
             this.compra_radio_pix.TabStop = true;
             this.compra_radio_pix.Text = "Pix";
             this.compra_radio_pix.UseVisualStyleBackColor = true;
-            this.compra_radio_pix.CheckedChanged += new System.EventHandler(this.compra_radio_pix_CheckedChanged);
+            this.compra_radio_pix.CheckedChanged += new System.EventHandler(this.radioButtonClick);
             // 
             // tabControl1
             // 
