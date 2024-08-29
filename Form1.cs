@@ -203,11 +203,11 @@ namespace Gerenciamento_de_Supermercado
                     totalQuant += 1;
                     compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value 
                         = Convert.ToString(Convert.ToInt16(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value) + 1);
-                    if (decimal.TryParse(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[5].Value.ToString(), out decimal valor1) &&
+                    if (double.TryParse(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[5].Value.ToString(),
+                        NumberStyles.Any, CultureInfo.InvariantCulture, out double valor1) &&
                         int.TryParse(compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[4].Value.ToString(), out int valor2))
                     {
-                        decimal resultado = valor1 * valor2;
-                        compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[6].Value = $"{resultado:F2}";
+                        compra_dataView.Rows[compra_dataView.Rows.Count - 1].Cells[6].Value = valor1 * valor2;
                     }
                 }
                     
@@ -317,10 +317,13 @@ namespace Gerenciamento_de_Supermercado
                         rowValue--;
                         compra_dataView.Rows[e.RowIndex].Cells[4].Value = rowValue.ToString();
                         totalQuant -= 1;
-                        compra_dataView.Rows[e.RowIndex].Cells[6].Value =
-                        Convert.ToDecimal(compra_dataView.Rows[e.RowIndex].Cells[6].Value) -
-                        Convert.ToDecimal(compra_dataView.Rows[e.RowIndex].Cells[5].Value);
-                        
+                        if (double.TryParse(compra_dataView.Rows[e.RowIndex].Cells[5].Value.ToString(),
+                        NumberStyles.Any, CultureInfo.InvariantCulture, out double valor1) &&
+                        int.TryParse(compra_dataView.Rows[e.RowIndex].Cells[4].Value.ToString(), out int valor2))
+                        {
+                            compra_dataView.Rows[e.RowIndex].Cells[6].Value = valor1 * valor2;
+                        }
+
                     }
                 }
             }
@@ -364,6 +367,10 @@ namespace Gerenciamento_de_Supermercado
             if (stateCompraRadioButton == false)
             {
                 MessageBox.Show("Selecione uma forma de Pagamento", "Erro de Seleção");
+            }
+            else if (compra_dataView.Rows.Count < 1) 
+            {
+                MessageBox.Show("Adicione um produto");
             }
             else
             {
