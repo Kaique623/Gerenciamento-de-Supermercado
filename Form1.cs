@@ -23,7 +23,7 @@ namespace Gerenciamento_de_Supermercado
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
         Dictionary<string, System.Windows.Forms.Panel> cloneRowsPanel = new Dictionary<string, System.Windows.Forms.Panel>();
-        Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>();
+        Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>(); 
 
         List<string> Alertas = new List<string>();
 
@@ -39,12 +39,16 @@ namespace Gerenciamento_de_Supermercado
             compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now); 
         }
 
-        void createRow(string id)
+        void createRow(string id, string color)
         {
 
+            
             cloneRowsPanel[id] = new Panel();
             AlertaPanel1.Controls.Add(cloneRowsPanel[id]);
-            cloneRowsPanel[id].BackColor = System.Drawing.Color.WhiteSmoke;
+            if (color == "min")
+                cloneRowsPanel[id].BackColor = Color.FromArgb(255, 255, 102, 102);
+            else
+                cloneRowsPanel[id].BackColor = Color.FromArgb(255, 255, 255, 153);
             cloneRowsPanel[id].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             cloneRowsPanel[id].Location = new System.Drawing.Point(3, 0 + (51 * AlertaRowCounter));
             cloneRowsPanel[id].Name = "TemplatePanel";
@@ -93,7 +97,12 @@ namespace Gerenciamento_de_Supermercado
                 {
                     if (Convert.ToInt16(EstoqueData[id]["Quant"]) <= Convert.ToInt16(EstoqueData[id]["AlertaMin"]) && !Alertas.Contains(id))
                     {
-                        createRow(id);
+                        createRow(id, "min");
+                        AlertaRowCounter += 1;
+                    }
+                    else if (Convert.ToInt16(EstoqueData[id]["Quant"]) >= Convert.ToInt16(EstoqueData[id]["AlertaMax"]) && !Alertas.Contains(id))
+                    {
+                        createRow(id, "max");
                         AlertaRowCounter += 1;
                     }
                 }
@@ -108,7 +117,7 @@ namespace Gerenciamento_de_Supermercado
         void updateTime()
         {
             compra_returnTimeBuy.Text = string.Format("{0:HH:mm tt}", DateTime.Now);
-            Task.Delay(20000).ContinueWith(t => updateTime());
+            Task.Delay(60000).ContinueWith(t => updateTime());
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
@@ -127,6 +136,7 @@ namespace Gerenciamento_de_Supermercado
                 Console.WriteLine("Nada a carregar");
             }
             refreshAlerta();
+            updateTelaDeCompra();
         }
 
         private void reloadEstoque()
@@ -153,6 +163,7 @@ namespace Gerenciamento_de_Supermercado
             {
                 Console.WriteLine("ERROR WHILE READING FILE");
             }
+            refreshAlerta();
         }
 
         private void dashboardButton_click(object sender, EventArgs e)
@@ -174,6 +185,7 @@ namespace Gerenciamento_de_Supermercado
             }
             else if (telaAtual == "🚪 Sair")
                 this.Close();
+            updateTelaDeCompra();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -286,6 +298,7 @@ namespace Gerenciamento_de_Supermercado
             catch (Exception){
                 Console.WriteLine("Unable to delete row");
             }
+            refreshAlerta();
         }
 
         private void EstoqueAddButon(object sender, EventArgs e)
@@ -448,6 +461,14 @@ namespace Gerenciamento_de_Supermercado
             {
                 MessageBox.Show(exc.Message);
             }
+        }
+
+        private void compra_button_cancelbuy_Click(object sender, EventArgs e)
+        {
+            compra_dataView.Rows.Clear();
+            productQuant = 0;
+            totalQuant = 0;
+            updateTelaDeCompra();
         }
     }
 }
