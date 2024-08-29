@@ -358,7 +358,7 @@ namespace Gerenciamento_de_Supermercado
             JsonFileData = JsonConvert.SerializeObject(EstoqueData);
 
             using (StreamWriter file = new StreamWriter("EstoqueData.json"))
-                file.WriteLine(JsonFileData)
+                file.WriteLine(JsonFileData);
         }
 
         private void compra_button_endbuy_Click(object sender, EventArgs e)
@@ -385,7 +385,10 @@ namespace Gerenciamento_de_Supermercado
                 }
                 compra_dataView.Rows.Clear();
                 compra_label_returnFinalPrice.Text = $"R$: {0:F2}";
+                reloadEstoque();
+                EstoqueSaveButtonFunc(sender, e);
             }
+            
         }
 
 
