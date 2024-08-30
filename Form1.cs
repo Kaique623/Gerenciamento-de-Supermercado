@@ -22,13 +22,14 @@ namespace Gerenciamento_de_Supermercado
         int lastIdBuy = 0;
 
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
+        Dictionary<string, Dictionary<string, string>> EstoqueDataPendente = new Dictionary<string, Dictionary<string, string>>();
 
         private Dictionary<string, Dictionary<string, object>> ComprasData = new Dictionary<string, Dictionary<string, object>>();
         Dictionary<string, System.Windows.Forms.Panel> cloneRowsPanel = new Dictionary<string, System.Windows.Forms.Panel>();
-
-        Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>();
+        Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>(); 
 
         List<string> Alertas = new List<string>();
+        string currentEstoque = "EstoqueData";
 
         string JsonFileData = "";
         int productQuant = 0;
@@ -37,16 +38,22 @@ namespace Gerenciamento_de_Supermercado
         int AlertaRowCounter = 0;
 
         public Form1()
-        {
+        {   
             InitializeComponent();
             compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
+            EstoqueComboBox.Text = "Atual";
         }
-        void createRow(string id)
+
+        void createRow(string id, string color)
         {
 
+            
             cloneRowsPanel[id] = new Panel();
             AlertaPanel1.Controls.Add(cloneRowsPanel[id]);
-            cloneRowsPanel[id].BackColor = System.Drawing.Color.WhiteSmoke;
+            if (color == "min")
+                cloneRowsPanel[id].BackColor = Color.FromArgb(255, 255, 102, 102);
+            else
+                cloneRowsPanel[id].BackColor = Color.FromArgb(255, 255, 255, 153);
             cloneRowsPanel[id].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             cloneRowsPanel[id].Location = new System.Drawing.Point(3, 0 + (51 * AlertaRowCounter));
             cloneRowsPanel[id].Name = "TemplatePanel";
@@ -96,7 +103,12 @@ namespace Gerenciamento_de_Supermercado
                 {
                     if (Convert.ToInt16(EstoqueData[id]["Quant"]) <= Convert.ToInt16(EstoqueData[id]["AlertaMin"]) && !Alertas.Contains(id))
                     {
-                        createRow(id);
+                        createRow(id, "min");
+                        AlertaRowCounter += 1;
+                    }
+                    else if (Convert.ToInt16(EstoqueData[id]["Quant"]) >= Convert.ToInt16(EstoqueData[id]["AlertaMax"]) && !Alertas.Contains(id))
+                    {
+                        createRow(id, "max");
                         AlertaRowCounter += 1;
                     }
                 }
@@ -111,7 +123,7 @@ namespace Gerenciamento_de_Supermercado
         void updateTime()
         {
             compra_returnTimeBuy.Text = string.Format("{0:HH:mm tt}", DateTime.Now);
-            Task.Delay(20000).ContinueWith(t => updateTime());
+            Task.Delay(60000).ContinueWith(t => updateTime());
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
@@ -120,8 +132,25 @@ namespace Gerenciamento_de_Supermercado
             splitContainer1.IsSplitterFixed = true;
             if (!File.Exists("EstoqueData.json"))
                 File.Create("EstoqueData.json").Dispose();
-            var text = File.ReadAllText("EstoqueData.json");
-            EstoqueData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(text);
+
+            if (!File.Exists("EstoqueDataPendente.json"))
+                File.Create("EstoqueDataPendente.json").Dispose();
+
+            if (!File.Exists("registerBuys.json"))
+                File.Create("registerBuys.json").Dispose();
+
+            try
+            {
+                var text = File.ReadAllText("EstoqueData.json");
+                EstoqueData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(text);
+
+                text = File.ReadAllText("EstoqueDataPendente.json");
+                EstoqueDataPendente = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(text);
+            }
+            catch
+            {
+                Console.WriteLine("Nada aqui");
+            }
 
             try {
                 compra_comboBox.DataSource = new BindingSource(EstoqueData.Keys, null);
@@ -130,25 +159,34 @@ namespace Gerenciamento_de_Supermercado
                 Console.WriteLine("Nada a carregar");
             }
             refreshAlerta();
+            updateTelaDeCompra();
         }
 
         private void reloadEstoque()
         {
+            var estoqueAux = EstoqueData;
+            if (currentEstoque == "EstoqueData")
+                estoqueAux = EstoqueData;
+            else if (currentEstoque == "EstoqueDataPendente")
+                estoqueAux = EstoqueDataPendente;
+            else
+                estoqueAux = EstoqueData;
+
             try
             {
                 EstoqueDataGrid.Rows.Clear();
-                foreach (string data in EstoqueData.Keys)
+                foreach (string data in estoqueAux.Keys)
                 {
                     EstoqueDataGrid.Rows.Add();
                     EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[0].Value = data;
-                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[1].Value = EstoqueData[data]["Nome"];
-                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[2].Value = EstoqueData[data]["Categoria"];
-                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[3].Value = EstoqueData[data]["Setor"];
-                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[4].Value = EstoqueData[data]["Quant"];
-                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[5].Value = EstoqueData[data]["Preco"];
-                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[6].Value = EstoqueData[data]["Desc"];
-                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[7].Value = EstoqueData[data]["AlertaMin"];
-                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[8].Value = EstoqueData[data]["AlertaMax"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[1].Value = estoqueAux[data]["Nome"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[2].Value = estoqueAux[data]["Categoria"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[3].Value = estoqueAux[data]["Setor"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[4].Value = estoqueAux[data]["Quant"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[5].Value = estoqueAux[data]["Preco"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[6].Value = estoqueAux[data]["Desc"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[7].Value = estoqueAux[data]["AlertaMin"];
+                    EstoqueDataGrid.Rows[EstoqueDataGrid.Rows.Count - 1].Cells[8].Value = estoqueAux[data]["AlertaMax"];
                 }
             }
 
@@ -156,6 +194,7 @@ namespace Gerenciamento_de_Supermercado
             {
                 Console.WriteLine("ERROR WHILE READING FILE");
             }
+            refreshAlerta();
         }
 
         private void dashboardButton_click(object sender, EventArgs e)
@@ -183,6 +222,7 @@ namespace Gerenciamento_de_Supermercado
             {
                 this.Close();
             }
+            updateTelaDeCompra();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -295,11 +335,12 @@ namespace Gerenciamento_de_Supermercado
             catch (Exception){
                 Console.WriteLine("Unable to delete row");
             }
+            refreshAlerta();
         }
-
+        
         private void EstoqueAddButon(object sender, EventArgs e)
         {
-            EstoqueDataGrid.Rows.Add();
+            tabControl1.SelectedIndex = 4;
         }
 
         private void compra_dataView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -345,12 +386,14 @@ namespace Gerenciamento_de_Supermercado
 
         public void EstoqueSaveButtonFunc(object sender, EventArgs e)
         {
-            EstoqueData = new Dictionary<string, Dictionary<string, string>>();
+            var estoqueAux = EstoqueData;
+
+            estoqueAux = new Dictionary<string, Dictionary<string, string>>();
             foreach (DataGridViewRow row in EstoqueDataGrid.Rows)
             {
                 string aux = (string)row.Cells[5].Value;
                 row.Cells[5].Value = aux.Replace(",", ".");
-                EstoqueData.Add((string)row.Cells[0].Value, new Dictionary<string, string>()
+                estoqueAux.Add((string)row.Cells[0].Value, new Dictionary<string, string>()
                 {
                     {"Nome", (string)row.Cells[1].Value},
                     {"Categoria", (string)row.Cells[2].Value},
@@ -365,9 +408,14 @@ namespace Gerenciamento_de_Supermercado
             compra_comboBox.DataSource = new BindingSource(EstoqueData, null);
             compra_comboBox.DisplayMember = "Key";
 
-            JsonFileData = JsonConvert.SerializeObject(EstoqueData);
+            if (currentEstoque == "EstoqueData")
+                EstoqueData = estoqueAux;
+            else if (currentEstoque == "EstoqueDataPendente")
+                EstoqueDataPendente = estoqueAux;
 
-            using (StreamWriter file = new StreamWriter("EstoqueData.json"))
+            JsonFileData = JsonConvert.SerializeObject(estoqueAux);
+
+            using (StreamWriter file = new StreamWriter($"{currentEstoque}.json"))
                 file.WriteLine(JsonFileData);
         }
 
@@ -396,7 +444,17 @@ namespace Gerenciamento_de_Supermercado
                 compra_label_returnFinalPrice.Text = $"R$: {0:F2}";
                 RenerateBuyRegister();
                 compra_dataView.Rows.Clear();
+                reloadEstoque();
+                EstoqueSaveButtonFunc(sender, e);
             }
+            
+        }
+        void conferirEstoqueAtual()
+        {
+            if (EstoqueComboBox.Text == "Atual")
+                currentEstoque = "EstoqueData";
+            else if (EstoqueComboBox.Text == "Pendente")
+                currentEstoque = "EstoqueDataPendente";
         }
 
         private void radioButtonClick(object sender, EventArgs e)
@@ -418,7 +476,14 @@ namespace Gerenciamento_de_Supermercado
             try
             {
                 returnCompraData();
-                lastIdBuy = Convert.ToInt16(ComprasData.Keys.Last());
+                try
+                {
+                    lastIdBuy = Convert.ToInt16(ComprasData.Keys.Last()) + 1;
+                }
+                catch
+                {
+                    lastIdBuy = 1;
+                }
                 MessageBox.Show(Convert.ToString(ComprasData));
 
                 Dictionary<string, Dictionary<string, object>> items = new Dictionary<string, Dictionary<string, object>>();
@@ -460,11 +525,6 @@ namespace Gerenciamento_de_Supermercado
                     { "payForm", payForm },
                     { "Items", items }
                 };
-
-                if (!File.Exists("registerBuys.json"))
-                {
-                    File.Create("registerBuys.json").Dispose();
-                }
 
                 string json = JsonConvert.SerializeObject(ComprasData, Formatting.Indented);
                 File.WriteAllText("registerBuys.json", json);
@@ -540,5 +600,69 @@ namespace Gerenciamento_de_Supermercado
             }
         }
 
+        private void compra_button_cancelbuy_Click(object sender, EventArgs e)
+        {
+            compra_dataView.Rows.Clear();
+            productQuant = 0;
+            totalQuant = 0;
+            updateTelaDeCompra();
+        }
+
+        private void EstoqueComboBox_TextUpdate(object sender, EventArgs e)
+        {
+            var aux = (sender as ComboBox);
+            if (aux.Name == "EstoqueTypeComboBox")
+                EstoqueComboBox.Text = aux.Text;
+            else
+                EstoqueTypeComboBox.Text = EstoqueComboBox.Text;
+            conferirEstoqueAtual();
+            reloadEstoque();
+        }
+
+        private void Cancelar(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+            limparCampos();
+        }
+        void limparCampos()
+        { //uau
+            EstoqueAddIdCombobox.Text = "";
+            AddItemTextBox.Text = "";
+            EstoqueAddCategoriaTextBox.Text = "";
+            EstoqueAddSetorTextBox.Text = "";
+            EstoqueAddQuantTextBox.Text = "";
+            EstoqueAddPrecoTextBox.Text = "";
+            EstoqueAddDescTextBox.Text = "";
+            EstoqueAddMinTextBox.Text = "";
+            EstoqueAddMaxTextBox.Text = "";
+        }
+        private void EstoqueAddSaveButton_Click(object sender, EventArgs e)
+        {
+            var estoqueAux = EstoqueData;
+            if (currentEstoque == "EstoqueData")
+                estoqueAux = EstoqueData;
+            else if (currentEstoque == "EstoqueDataPendente")
+                estoqueAux = EstoqueDataPendente;
+
+            estoqueAux[EstoqueAddIdCombobox.Text] = new Dictionary<string, string>()
+            {
+                {"Nome",  AddItemTextBox.Text},
+                {"Categoria",  EstoqueAddCategoriaTextBox.Text},
+                {"Setor",  EstoqueAddSetorTextBox.Text},
+                {"Quant",  EstoqueAddQuantTextBox.Text},
+                {"Preco",  EstoqueAddPrecoTextBox.Text},
+                {"Desc",  EstoqueAddDescTextBox.Text},
+                {"AlertaMin",  EstoqueAddMinTextBox.Text},
+                {"AlertaMax",  EstoqueAddMaxTextBox.Text},
+            };
+
+            if (currentEstoque == "EstoqueData")
+                EstoqueData = estoqueAux;
+            else if (currentEstoque == "EstoqueDataPendente")
+                EstoqueDataPendente = estoqueAux;
+            reloadEstoque();
+            EstoqueSaveButtonFunc(sender, e);
+            limparCampos();
+        }
     }
 }
