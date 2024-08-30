@@ -19,10 +19,13 @@ namespace Gerenciamento_de_Supermercado
     {  
         string telaAtual = "🛒 Compras";
         bool stateCompraRadioButton = false;
+        int lastIdBuy = 0;
 
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
 
+        private Dictionary<string, Dictionary<string, object>> ComprasData = new Dictionary<string, Dictionary<string, object>>();
         Dictionary<string, System.Windows.Forms.Panel> cloneRowsPanel = new Dictionary<string, System.Windows.Forms.Panel>();
+
         Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>();
 
         List<string> Alertas = new List<string>();
@@ -36,9 +39,8 @@ namespace Gerenciamento_de_Supermercado
         public Form1()
         {
             InitializeComponent();
-            compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now); 
+            compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
         }
-
         void createRow(string id)
         {
 
@@ -79,6 +81,7 @@ namespace Gerenciamento_de_Supermercado
             }
 
         }
+
         private void AlertaPanel1_Paint(object sender, PaintEventArgs e)
         {
             AlertaPanel1.AutoScroll = true;
@@ -159,9 +162,13 @@ namespace Gerenciamento_de_Supermercado
         {
             telaAtual = (sender as Button).Text;
             if (telaAtual == "🛒 Compras")
+            {
                 tabControl1.SelectedIndex = 0;
+            }
             else if (telaAtual == "📖 Histórico ")
+            {
                 tabControl1.SelectedIndex = 1;
+            }
             else if (telaAtual == "📦 Estoque")
             {
                 tabControl1.SelectedIndex = 2;
@@ -173,7 +180,9 @@ namespace Gerenciamento_de_Supermercado
                 tabControl1.SelectedIndex = 3;
             }
             else if (telaAtual == "🚪 Sair")
+            {
                 this.Close();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -333,6 +342,7 @@ namespace Gerenciamento_de_Supermercado
             }
             updateTelaDeCompra();
         }
+
         public void EstoqueSaveButtonFunc(object sender, EventArgs e)
         {
             EstoqueData = new Dictionary<string, Dictionary<string, string>>();
@@ -358,7 +368,7 @@ namespace Gerenciamento_de_Supermercado
             JsonFileData = JsonConvert.SerializeObject(EstoqueData);
 
             using (StreamWriter file = new StreamWriter("EstoqueData.json"))
-                file.WriteLine(JsonFileData)
+                file.WriteLine(JsonFileData);
         }
 
         private void compra_button_endbuy_Click(object sender, EventArgs e)
@@ -383,11 +393,11 @@ namespace Gerenciamento_de_Supermercado
 
                     EstoqueData[temp_id]["Quant"] = (Convert.ToInt16(EstoqueData[temp_id]["Quant"]) - temp_quant).ToString();
                 }
-                compra_dataView.Rows.Clear();
                 compra_label_returnFinalPrice.Text = $"R$: {0:F2}";
+                RenerateBuyRegister();
+                compra_dataView.Rows.Clear();
             }
         }
-
 
         private void radioButtonClick(object sender, EventArgs e)
         {
@@ -405,15 +415,66 @@ namespace Gerenciamento_de_Supermercado
 
         private void RenerateBuyRegister()
         {
-            foreach (DataGridViewRow row in compra_dataView.Rows)
+            try
             {
-                string id = Convert.ToString(row.Cells[0].Value);
-                string name = Convert.ToString(row.Cells[1].Value);
-                string quant = Convert.ToString(row.Cells[2].Value);
-                // string id = Convert.ToString(row.Cells[3].Value);
-                // string id = Convert.ToString(row.Cells[4].Value);
+                returnCompraData();
+                lastIdBuy = Convert.ToInt16(ComprasData.Keys.Last());
+                MessageBox.Show(Convert.ToString(ComprasData));
+
+                Dictionary<string, Dictionary<string, object>> items = new Dictionary<string, Dictionary<string, object>>();
+
+                foreach (DataGridViewRow row in compra_dataView.Rows)
+                {
+
+                    Dictionary<string, object> itemData = new Dictionary<string, object>();
+
+                    var columnsToCheck = new List<string> { "minusButton", "removeButton" };
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        string columnName = compra_dataView.Columns[cell.ColumnIndex].Name;
+                        if (!columnsToCheck.Contains(columnName))
+                        {
+                            itemData[columnName] = cell.Value;
+                        }
+                    }
+
+                    items.Add("Item" + row.Index, itemData);
+                }
+
+                lastIdBuy++;
+
+                string payForm = "";
+                if (compra_radio_cre.Checked)
+                    payForm = "Credito";
+                else if (compra_radio_deb.Checked)
+                    payForm = "Debito";
+                else if (compra_radio_din.Checked)
+                    payForm = "Dinheiro";
+                else if (compra_radio_pix.Checked)
+                    payForm = "Pix";
+
+                ComprasData[lastIdBuy.ToString()] = new Dictionary<string, object>
+                {
+                    { "Date", compra_label_returnDayBuy.Text },
+                    { "Time", compra_returnTimeBuy.Text },
+                    { "payForm", payForm },
+                    { "Items", items }
+                };
+
+                if (!File.Exists("registerBuys.json"))
+                {
+                    File.Create("registerBuys.json").Dispose();
+                }
+
+                string json = JsonConvert.SerializeObject(ComprasData, Formatting.Indented);
+                File.WriteAllText("registerBuys.json", json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao gerar o registro de compra: " + ex.Message);
             }
         }
+
         private void searchbutton_Click(object sender, EventArgs e)
         {
             string searchValue = EstoqueTextbox.Text;
@@ -446,5 +507,38 @@ namespace Gerenciamento_de_Supermercado
                 MessageBox.Show(exc.Message);
             }
         }
+
+        private void returnCompraData()
+        {
+            try
+            {
+                string caminhoArquivo = "registerBuys.json";
+                if (File.Exists(caminhoArquivo))
+                {
+                    string jsonString = File.ReadAllText(caminhoArquivo);
+                    ComprasData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(jsonString) ?? new Dictionary<string, Dictionary<string, object>>();
+                }
+                else
+                {
+                    ComprasData = new Dictionary<string, Dictionary<string, object>>();
+                }
+            }
+            catch (JsonException jsonEx)
+            {
+                MessageBox.Show("Erro ao deserializar o JSON: " + jsonEx.Message);
+                ComprasData = new Dictionary<string, Dictionary<string, object>>();
+            }
+            catch (IOException ioEx)
+            {
+                MessageBox.Show("Erro ao ler o arquivo: " + ioEx.Message);
+                ComprasData = new Dictionary<string, Dictionary<string, object>>();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro inesperado: " + ex.Message);
+                ComprasData = new Dictionary<string, Dictionary<string, object>>();
+            }
+        }
+
     }
 }
