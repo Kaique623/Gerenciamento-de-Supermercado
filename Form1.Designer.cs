@@ -90,23 +90,6 @@
             this.EstoqueSaveButton = new System.Windows.Forms.Button();
             this.EstoqueAddButton = new System.Windows.Forms.Button();
             this.EstoqueDataGrid = new System.Windows.Forms.DataGridView();
-            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
-            this.EstoqueSearchButton = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.LegendaGroupBox = new System.Windows.Forms.GroupBox();
-            this.LabelLegenda2 = new System.Windows.Forms.Label();
-            this.LegendaLabel1 = new System.Windows.Forms.Label();
-            this.AlertasLabel = new System.Windows.Forms.Label();
-            this.AlertaPanel1 = new System.Windows.Forms.Panel();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.EstoqueAddIdLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddIdCombobox = new System.Windows.Forms.ComboBox();
-            this.EstoqueAddNomeDoProduto = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.EstoqueAddCategoriaLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddCategoriaTextBox = new System.Windows.Forms.TextBox();
             this.EstoqueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CategoriaEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -117,22 +100,41 @@
             this.AlertaMinEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AlertaMaxEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstoqueRemoveButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.EstoqueAddQuantLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddQuantTextBox = new System.Windows.Forms.TextBox();
-            this.EstoqueAddPrecoLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddPrecoTextBox = new System.Windows.Forms.TextBox();
-            this.EstoqueAddDescLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddDescTextBox = new System.Windows.Forms.TextBox();
-            this.EstoqueAddMinLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddMinTextBox = new System.Windows.Forms.TextBox();
-            this.EstoqueAddMaxLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddMaxTextBox = new System.Windows.Forms.TextBox();
-            this.EstoqueAddSaveButton = new System.Windows.Forms.Button();
-            this.EstoqueAddCancelButton = new System.Windows.Forms.Button();
-            this.EstoqueAddSaveExitButton = new System.Windows.Forms.Button();
-            this.EstoqueAddEstoqueTypeLabel = new System.Windows.Forms.Label();
-            this.EstoqueTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.EstoqueTextbox = new System.Windows.Forms.TextBox();
+            this.EstoqueSearchButton = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.LegendaGroupBox = new System.Windows.Forms.GroupBox();
+            this.LabelLegenda2 = new System.Windows.Forms.Label();
+            this.LegendaLabel1 = new System.Windows.Forms.Label();
+            this.AlertasLabel = new System.Windows.Forms.Label();
+            this.AlertaPanel1 = new System.Windows.Forms.Panel();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.button7 = new System.Windows.Forms.Button();
+            this.EstoqueTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.EstoqueAddEstoqueTypeLabel = new System.Windows.Forms.Label();
+            this.EstoqueAddSaveExitButton = new System.Windows.Forms.Button();
+            this.EstoqueAddCancelButton = new System.Windows.Forms.Button();
+            this.EstoqueAddSaveButton = new System.Windows.Forms.Button();
+            this.EstoqueAddMaxTextBox = new System.Windows.Forms.TextBox();
+            this.EstoqueAddMaxLabel = new System.Windows.Forms.Label();
+            this.EstoqueAddMinTextBox = new System.Windows.Forms.TextBox();
+            this.EstoqueAddMinLabel = new System.Windows.Forms.Label();
+            this.EstoqueAddDescTextBox = new System.Windows.Forms.TextBox();
+            this.EstoqueAddDescLabel = new System.Windows.Forms.Label();
+            this.EstoqueAddPrecoTextBox = new System.Windows.Forms.TextBox();
+            this.EstoqueAddPrecoLabel = new System.Windows.Forms.Label();
+            this.EstoqueAddQuantTextBox = new System.Windows.Forms.TextBox();
+            this.EstoqueAddQuantLabel = new System.Windows.Forms.Label();
+            this.EstoqueAddCategoriaTextBox = new System.Windows.Forms.TextBox();
+            this.EstoqueAddCategoriaLabel = new System.Windows.Forms.Label();
+            this.AddItemTextBox = new System.Windows.Forms.TextBox();
+            this.EstoqueAddNomeDoProduto = new System.Windows.Forms.Label();
+            this.EstoqueAddIdCombobox = new System.Windows.Forms.ComboBox();
+            this.EstoqueAddLabel = new System.Windows.Forms.Label();
+            this.EstoqueAddIdLabel = new System.Windows.Forms.Label();
+            this.EstoqueAddSetorTextBox = new System.Windows.Forms.TextBox();
+            this.DiferentementeDoAndreEuDouNomeAVariaveis = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -879,7 +881,7 @@
             this.EstoqueAddButton.Name = "EstoqueAddButton";
             this.EstoqueAddButton.Size = new System.Drawing.Size(116, 30);
             this.EstoqueAddButton.TabIndex = 10;
-            this.EstoqueAddButton.Text = "Adicionar";
+            this.EstoqueAddButton.Text = "Adicionar/Editar";
             this.EstoqueAddButton.UseVisualStyleBackColor = true;
             this.EstoqueAddButton.Click += new System.EventHandler(this.EstoqueAddButon);
             // 
@@ -904,6 +906,61 @@
             this.EstoqueDataGrid.Size = new System.Drawing.Size(1104, 645);
             this.EstoqueDataGrid.TabIndex = 9;
             this.EstoqueDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EstoqueButton_CellContentClick);
+            // 
+            // EstoqueID
+            // 
+            this.EstoqueID.HeaderText = "ID";
+            this.EstoqueID.Name = "EstoqueID";
+            // 
+            // EstoqueNome
+            // 
+            this.EstoqueNome.HeaderText = "Nome";
+            this.EstoqueNome.Name = "EstoqueNome";
+            // 
+            // CategoriaEstoque
+            // 
+            this.CategoriaEstoque.HeaderText = "Categoria";
+            this.CategoriaEstoque.Name = "CategoriaEstoque";
+            // 
+            // SetorEstoque
+            // 
+            this.SetorEstoque.HeaderText = "Setor";
+            this.SetorEstoque.Name = "SetorEstoque";
+            // 
+            // EstoqueQuantidade
+            // 
+            this.EstoqueQuantidade.HeaderText = "Quantidade";
+            this.EstoqueQuantidade.Name = "EstoqueQuantidade";
+            // 
+            // EstoquePrecoUni
+            // 
+            this.EstoquePrecoUni.HeaderText = "Preço Uni.";
+            this.EstoquePrecoUni.Name = "EstoquePrecoUni";
+            // 
+            // EstoqueDesc
+            // 
+            this.EstoqueDesc.HeaderText = "Descrição";
+            this.EstoqueDesc.Name = "EstoqueDesc";
+            // 
+            // AlertaMinEstoque
+            // 
+            this.AlertaMinEstoque.HeaderText = "Alerta (Mínimo)";
+            this.AlertaMinEstoque.Name = "AlertaMinEstoque";
+            // 
+            // AlertaMaxEstoque
+            // 
+            this.AlertaMaxEstoque.HeaderText = "Alerta (Máximo)";
+            this.AlertaMaxEstoque.Name = "AlertaMaxEstoque";
+            // 
+            // EstoqueRemoveButton
+            // 
+            this.EstoqueRemoveButton.HeaderText = "";
+            this.EstoqueRemoveButton.Name = "EstoqueRemoveButton";
+            this.EstoqueRemoveButton.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.EstoqueRemoveButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.EstoqueRemoveButton.Text = "Remover";
+            this.EstoqueRemoveButton.ToolTipText = "Remover";
+            this.EstoqueRemoveButton.UseColumnTextForButtonValue = true;
             // 
             // EstoqueTextbox
             // 
@@ -1005,6 +1062,8 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.DiferentementeDoAndreEuDouNomeAVariaveis);
+            this.tabPage5.Controls.Add(this.EstoqueAddSetorTextBox);
             this.tabPage5.Controls.Add(this.button7);
             this.tabPage5.Controls.Add(this.EstoqueTypeComboBox);
             this.tabPage5.Controls.Add(this.EstoqueAddEstoqueTypeLabel);
@@ -1023,7 +1082,7 @@
             this.tabPage5.Controls.Add(this.EstoqueAddQuantLabel);
             this.tabPage5.Controls.Add(this.EstoqueAddCategoriaTextBox);
             this.tabPage5.Controls.Add(this.EstoqueAddCategoriaLabel);
-            this.tabPage5.Controls.Add(this.textBox1);
+            this.tabPage5.Controls.Add(this.AddItemTextBox);
             this.tabPage5.Controls.Add(this.EstoqueAddNomeDoProduto);
             this.tabPage5.Controls.Add(this.EstoqueAddIdCombobox);
             this.tabPage5.Controls.Add(this.EstoqueAddLabel);
@@ -1036,15 +1095,206 @@
             this.tabPage5.Text = "Adicionar Estoque";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // EstoqueAddIdLabel
+            // button7
             // 
-            this.EstoqueAddIdLabel.AutoSize = true;
-            this.EstoqueAddIdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddIdLabel.Location = new System.Drawing.Point(279, 105);
-            this.EstoqueAddIdLabel.Name = "EstoqueAddIdLabel";
-            this.EstoqueAddIdLabel.Size = new System.Drawing.Size(32, 22);
-            this.EstoqueAddIdLabel.TabIndex = 0;
-            this.EstoqueAddIdLabel.Text = "ID:";
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.button7.Location = new System.Drawing.Point(410, 455);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(235, 31);
+            this.button7.TabIndex = 22;
+            this.button7.Text = "Limpar Campos";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // EstoqueTypeComboBox
+            // 
+            this.EstoqueTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.EstoqueTypeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EstoqueTypeComboBox.FormattingEnabled = true;
+            this.EstoqueTypeComboBox.Items.AddRange(new object[] {
+            "Atual",
+            "Pendente"});
+            this.EstoqueTypeComboBox.Location = new System.Drawing.Point(410, 74);
+            this.EstoqueTypeComboBox.Name = "EstoqueTypeComboBox";
+            this.EstoqueTypeComboBox.Size = new System.Drawing.Size(235, 28);
+            this.EstoqueTypeComboBox.TabIndex = 21;
+            this.EstoqueTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.EstoqueComboBox_TextUpdate);
+            // 
+            // EstoqueAddEstoqueTypeLabel
+            // 
+            this.EstoqueAddEstoqueTypeLabel.AutoSize = true;
+            this.EstoqueAddEstoqueTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddEstoqueTypeLabel.Location = new System.Drawing.Point(269, 75);
+            this.EstoqueAddEstoqueTypeLabel.Name = "EstoqueAddEstoqueTypeLabel";
+            this.EstoqueAddEstoqueTypeLabel.Size = new System.Drawing.Size(81, 22);
+            this.EstoqueAddEstoqueTypeLabel.TabIndex = 20;
+            this.EstoqueAddEstoqueTypeLabel.Text = "Estoque:";
+            // 
+            // EstoqueAddSaveExitButton
+            // 
+            this.EstoqueAddSaveExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.EstoqueAddSaveExitButton.Location = new System.Drawing.Point(410, 492);
+            this.EstoqueAddSaveExitButton.Name = "EstoqueAddSaveExitButton";
+            this.EstoqueAddSaveExitButton.Size = new System.Drawing.Size(235, 34);
+            this.EstoqueAddSaveExitButton.TabIndex = 19;
+            this.EstoqueAddSaveExitButton.Text = "Salvar e Sair";
+            this.EstoqueAddSaveExitButton.UseVisualStyleBackColor = true;
+            // 
+            // EstoqueAddCancelButton
+            // 
+            this.EstoqueAddCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.EstoqueAddCancelButton.Location = new System.Drawing.Point(533, 418);
+            this.EstoqueAddCancelButton.Name = "EstoqueAddCancelButton";
+            this.EstoqueAddCancelButton.Size = new System.Drawing.Size(112, 31);
+            this.EstoqueAddCancelButton.TabIndex = 18;
+            this.EstoqueAddCancelButton.Text = "Cancelar";
+            this.EstoqueAddCancelButton.UseVisualStyleBackColor = true;
+            this.EstoqueAddCancelButton.Click += new System.EventHandler(this.Cancelar);
+            // 
+            // EstoqueAddSaveButton
+            // 
+            this.EstoqueAddSaveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.EstoqueAddSaveButton.Location = new System.Drawing.Point(410, 418);
+            this.EstoqueAddSaveButton.Name = "EstoqueAddSaveButton";
+            this.EstoqueAddSaveButton.Size = new System.Drawing.Size(112, 31);
+            this.EstoqueAddSaveButton.TabIndex = 17;
+            this.EstoqueAddSaveButton.Text = "Salvar";
+            this.EstoqueAddSaveButton.UseVisualStyleBackColor = true;
+            this.EstoqueAddSaveButton.Click += new System.EventHandler(this.EstoqueAddSaveButton_Click);
+            // 
+            // EstoqueAddMaxTextBox
+            // 
+            this.EstoqueAddMaxTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddMaxTextBox.Location = new System.Drawing.Point(410, 377);
+            this.EstoqueAddMaxTextBox.Name = "EstoqueAddMaxTextBox";
+            this.EstoqueAddMaxTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddMaxTextBox.TabIndex = 16;
+            // 
+            // EstoqueAddMaxLabel
+            // 
+            this.EstoqueAddMaxLabel.AutoSize = true;
+            this.EstoqueAddMaxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddMaxLabel.Location = new System.Drawing.Point(269, 380);
+            this.EstoqueAddMaxLabel.Name = "EstoqueAddMaxLabel";
+            this.EstoqueAddMaxLabel.Size = new System.Drawing.Size(135, 22);
+            this.EstoqueAddMaxLabel.TabIndex = 15;
+            this.EstoqueAddMaxLabel.Text = "Alerta (Máximo)";
+            // 
+            // EstoqueAddMinTextBox
+            // 
+            this.EstoqueAddMinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddMinTextBox.Location = new System.Drawing.Point(410, 344);
+            this.EstoqueAddMinTextBox.Name = "EstoqueAddMinTextBox";
+            this.EstoqueAddMinTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddMinTextBox.TabIndex = 14;
+            // 
+            // EstoqueAddMinLabel
+            // 
+            this.EstoqueAddMinLabel.AutoSize = true;
+            this.EstoqueAddMinLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddMinLabel.Location = new System.Drawing.Point(269, 347);
+            this.EstoqueAddMinLabel.Name = "EstoqueAddMinLabel";
+            this.EstoqueAddMinLabel.Size = new System.Drawing.Size(130, 22);
+            this.EstoqueAddMinLabel.TabIndex = 13;
+            this.EstoqueAddMinLabel.Text = "Alerta (Mínimo)";
+            // 
+            // EstoqueAddDescTextBox
+            // 
+            this.EstoqueAddDescTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddDescTextBox.Location = new System.Drawing.Point(410, 311);
+            this.EstoqueAddDescTextBox.Name = "EstoqueAddDescTextBox";
+            this.EstoqueAddDescTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddDescTextBox.TabIndex = 12;
+            // 
+            // EstoqueAddDescLabel
+            // 
+            this.EstoqueAddDescLabel.AutoSize = true;
+            this.EstoqueAddDescLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddDescLabel.Location = new System.Drawing.Point(269, 314);
+            this.EstoqueAddDescLabel.Name = "EstoqueAddDescLabel";
+            this.EstoqueAddDescLabel.Size = new System.Drawing.Size(95, 22);
+            this.EstoqueAddDescLabel.TabIndex = 11;
+            this.EstoqueAddDescLabel.Text = "Descrição:";
+            // 
+            // EstoqueAddPrecoTextBox
+            // 
+            this.EstoqueAddPrecoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddPrecoTextBox.Location = new System.Drawing.Point(410, 276);
+            this.EstoqueAddPrecoTextBox.Name = "EstoqueAddPrecoTextBox";
+            this.EstoqueAddPrecoTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddPrecoTextBox.TabIndex = 10;
+            // 
+            // EstoqueAddPrecoLabel
+            // 
+            this.EstoqueAddPrecoLabel.AutoSize = true;
+            this.EstoqueAddPrecoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddPrecoLabel.Location = new System.Drawing.Point(269, 279);
+            this.EstoqueAddPrecoLabel.Name = "EstoqueAddPrecoLabel";
+            this.EstoqueAddPrecoLabel.Size = new System.Drawing.Size(99, 22);
+            this.EstoqueAddPrecoLabel.TabIndex = 9;
+            this.EstoqueAddPrecoLabel.Text = "Preço Uni.:";
+            // 
+            // EstoqueAddQuantTextBox
+            // 
+            this.EstoqueAddQuantTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddQuantTextBox.Location = new System.Drawing.Point(410, 243);
+            this.EstoqueAddQuantTextBox.Name = "EstoqueAddQuantTextBox";
+            this.EstoqueAddQuantTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddQuantTextBox.TabIndex = 8;
+            // 
+            // EstoqueAddQuantLabel
+            // 
+            this.EstoqueAddQuantLabel.AutoSize = true;
+            this.EstoqueAddQuantLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddQuantLabel.Location = new System.Drawing.Point(269, 246);
+            this.EstoqueAddQuantLabel.Name = "EstoqueAddQuantLabel";
+            this.EstoqueAddQuantLabel.Size = new System.Drawing.Size(108, 22);
+            this.EstoqueAddQuantLabel.TabIndex = 7;
+            this.EstoqueAddQuantLabel.Text = "Quantidade:";
+            // 
+            // EstoqueAddCategoriaTextBox
+            // 
+            this.EstoqueAddCategoriaTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddCategoriaTextBox.Location = new System.Drawing.Point(410, 177);
+            this.EstoqueAddCategoriaTextBox.Name = "EstoqueAddCategoriaTextBox";
+            this.EstoqueAddCategoriaTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddCategoriaTextBox.TabIndex = 6;
+            // 
+            // EstoqueAddCategoriaLabel
+            // 
+            this.EstoqueAddCategoriaLabel.AutoSize = true;
+            this.EstoqueAddCategoriaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddCategoriaLabel.Location = new System.Drawing.Point(269, 180);
+            this.EstoqueAddCategoriaLabel.Name = "EstoqueAddCategoriaLabel";
+            this.EstoqueAddCategoriaLabel.Size = new System.Drawing.Size(93, 22);
+            this.EstoqueAddCategoriaLabel.TabIndex = 5;
+            this.EstoqueAddCategoriaLabel.Text = "Categoria:";
+            // 
+            // AddItemTextBox
+            // 
+            this.AddItemTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.AddItemTextBox.Location = new System.Drawing.Point(410, 144);
+            this.AddItemTextBox.Name = "AddItemTextBox";
+            this.AddItemTextBox.Size = new System.Drawing.Size(235, 27);
+            this.AddItemTextBox.TabIndex = 4;
+            // 
+            // EstoqueAddNomeDoProduto
+            // 
+            this.EstoqueAddNomeDoProduto.AutoSize = true;
+            this.EstoqueAddNomeDoProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddNomeDoProduto.Location = new System.Drawing.Point(269, 147);
+            this.EstoqueAddNomeDoProduto.Name = "EstoqueAddNomeDoProduto";
+            this.EstoqueAddNomeDoProduto.Size = new System.Drawing.Size(62, 22);
+            this.EstoqueAddNomeDoProduto.TabIndex = 3;
+            this.EstoqueAddNomeDoProduto.Text = "Nome:";
+            // 
+            // EstoqueAddIdCombobox
+            // 
+            this.EstoqueAddIdCombobox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddIdCombobox.FormattingEnabled = true;
+            this.EstoqueAddIdCombobox.Location = new System.Drawing.Point(410, 108);
+            this.EstoqueAddIdCombobox.Name = "EstoqueAddIdCombobox";
+            this.EstoqueAddIdCombobox.Size = new System.Drawing.Size(235, 30);
+            this.EstoqueAddIdCombobox.TabIndex = 2;
             // 
             // EstoqueAddLabel
             // 
@@ -1056,260 +1306,33 @@
             this.EstoqueAddLabel.TabIndex = 1;
             this.EstoqueAddLabel.Text = "Adicionar/Editar Estoque";
             // 
-            // EstoqueAddIdCombobox
+            // EstoqueAddIdLabel
             // 
-            this.EstoqueAddIdCombobox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddIdCombobox.FormattingEnabled = true;
-            this.EstoqueAddIdCombobox.Location = new System.Drawing.Point(410, 102);
-            this.EstoqueAddIdCombobox.Name = "EstoqueAddIdCombobox";
-            this.EstoqueAddIdCombobox.Size = new System.Drawing.Size(235, 30);
-            this.EstoqueAddIdCombobox.TabIndex = 2;
+            this.EstoqueAddIdLabel.AutoSize = true;
+            this.EstoqueAddIdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddIdLabel.Location = new System.Drawing.Point(269, 111);
+            this.EstoqueAddIdLabel.Name = "EstoqueAddIdLabel";
+            this.EstoqueAddIdLabel.Size = new System.Drawing.Size(32, 22);
+            this.EstoqueAddIdLabel.TabIndex = 0;
+            this.EstoqueAddIdLabel.Text = "ID:";
             // 
-            // EstoqueAddNomeDoProduto
+            // EstoqueAddSetorTextBox
             // 
-            this.EstoqueAddNomeDoProduto.AutoSize = true;
-            this.EstoqueAddNomeDoProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddNomeDoProduto.Location = new System.Drawing.Point(279, 141);
-            this.EstoqueAddNomeDoProduto.Name = "EstoqueAddNomeDoProduto";
-            this.EstoqueAddNomeDoProduto.Size = new System.Drawing.Size(62, 22);
-            this.EstoqueAddNomeDoProduto.TabIndex = 3;
-            this.EstoqueAddNomeDoProduto.Text = "Nome:";
+            this.EstoqueAddSetorTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddSetorTextBox.Location = new System.Drawing.Point(410, 210);
+            this.EstoqueAddSetorTextBox.Name = "EstoqueAddSetorTextBox";
+            this.EstoqueAddSetorTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddSetorTextBox.TabIndex = 23;
             // 
-            // textBox1
+            // DiferentementeDoAndreEuDouNomeAVariaveis
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.textBox1.Location = new System.Drawing.Point(410, 138);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(235, 27);
-            this.textBox1.TabIndex = 4;
-            // 
-            // EstoqueAddCategoriaLabel
-            // 
-            this.EstoqueAddCategoriaLabel.AutoSize = true;
-            this.EstoqueAddCategoriaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddCategoriaLabel.Location = new System.Drawing.Point(279, 172);
-            this.EstoqueAddCategoriaLabel.Name = "EstoqueAddCategoriaLabel";
-            this.EstoqueAddCategoriaLabel.Size = new System.Drawing.Size(93, 22);
-            this.EstoqueAddCategoriaLabel.TabIndex = 5;
-            this.EstoqueAddCategoriaLabel.Text = "Categoria:";
-            // 
-            // EstoqueAddCategoriaTextBox
-            // 
-            this.EstoqueAddCategoriaTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddCategoriaTextBox.Location = new System.Drawing.Point(410, 174);
-            this.EstoqueAddCategoriaTextBox.Name = "EstoqueAddCategoriaTextBox";
-            this.EstoqueAddCategoriaTextBox.Size = new System.Drawing.Size(235, 27);
-            this.EstoqueAddCategoriaTextBox.TabIndex = 6;
-            // 
-            // EstoqueID
-            // 
-            this.EstoqueID.HeaderText = "ID";
-            this.EstoqueID.Name = "EstoqueID";
-            // 
-            // EstoqueNome
-            // 
-            this.EstoqueNome.HeaderText = "Nome";
-            this.EstoqueNome.Name = "EstoqueNome";
-            // 
-            // CategoriaEstoque
-            // 
-            this.CategoriaEstoque.HeaderText = "Categoria";
-            this.CategoriaEstoque.Name = "CategoriaEstoque";
-            // 
-            // SetorEstoque
-            // 
-            this.SetorEstoque.HeaderText = "Setor";
-            this.SetorEstoque.Name = "SetorEstoque";
-            // 
-            // EstoqueQuantidade
-            // 
-            this.EstoqueQuantidade.HeaderText = "Quantidade";
-            this.EstoqueQuantidade.Name = "EstoqueQuantidade";
-            // 
-            // EstoquePrecoUni
-            // 
-            this.EstoquePrecoUni.HeaderText = "Preço Uni.";
-            this.EstoquePrecoUni.Name = "EstoquePrecoUni";
-            // 
-            // EstoqueDesc
-            // 
-            this.EstoqueDesc.HeaderText = "Descrição";
-            this.EstoqueDesc.Name = "EstoqueDesc";
-            // 
-            // AlertaMinEstoque
-            // 
-            this.AlertaMinEstoque.HeaderText = "Alerta (Mínimo)";
-            this.AlertaMinEstoque.Name = "AlertaMinEstoque";
-            // 
-            // AlertaMaxEstoque
-            // 
-            this.AlertaMaxEstoque.HeaderText = "Alerta (Máximo)";
-            this.AlertaMaxEstoque.Name = "AlertaMaxEstoque";
-            // 
-            // EstoqueRemoveButton
-            // 
-            this.EstoqueRemoveButton.HeaderText = "";
-            this.EstoqueRemoveButton.Name = "EstoqueRemoveButton";
-            this.EstoqueRemoveButton.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.EstoqueRemoveButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.EstoqueRemoveButton.Text = "Remover";
-            this.EstoqueRemoveButton.ToolTipText = "Remover";
-            this.EstoqueRemoveButton.UseColumnTextForButtonValue = true;
-            // 
-            // EstoqueAddQuantLabel
-            // 
-            this.EstoqueAddQuantLabel.AutoSize = true;
-            this.EstoqueAddQuantLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddQuantLabel.Location = new System.Drawing.Point(279, 207);
-            this.EstoqueAddQuantLabel.Name = "EstoqueAddQuantLabel";
-            this.EstoqueAddQuantLabel.Size = new System.Drawing.Size(108, 22);
-            this.EstoqueAddQuantLabel.TabIndex = 7;
-            this.EstoqueAddQuantLabel.Text = "Quantidade:";
-            // 
-            // EstoqueAddQuantTextBox
-            // 
-            this.EstoqueAddQuantTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddQuantTextBox.Location = new System.Drawing.Point(410, 207);
-            this.EstoqueAddQuantTextBox.Name = "EstoqueAddQuantTextBox";
-            this.EstoqueAddQuantTextBox.Size = new System.Drawing.Size(235, 27);
-            this.EstoqueAddQuantTextBox.TabIndex = 8;
-            // 
-            // EstoqueAddPrecoLabel
-            // 
-            this.EstoqueAddPrecoLabel.AutoSize = true;
-            this.EstoqueAddPrecoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddPrecoLabel.Location = new System.Drawing.Point(279, 243);
-            this.EstoqueAddPrecoLabel.Name = "EstoqueAddPrecoLabel";
-            this.EstoqueAddPrecoLabel.Size = new System.Drawing.Size(99, 22);
-            this.EstoqueAddPrecoLabel.TabIndex = 9;
-            this.EstoqueAddPrecoLabel.Text = "Preço Uni.:";
-            // 
-            // EstoqueAddPrecoTextBox
-            // 
-            this.EstoqueAddPrecoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddPrecoTextBox.Location = new System.Drawing.Point(410, 240);
-            this.EstoqueAddPrecoTextBox.Name = "EstoqueAddPrecoTextBox";
-            this.EstoqueAddPrecoTextBox.Size = new System.Drawing.Size(235, 27);
-            this.EstoqueAddPrecoTextBox.TabIndex = 10;
-            // 
-            // EstoqueAddDescLabel
-            // 
-            this.EstoqueAddDescLabel.AutoSize = true;
-            this.EstoqueAddDescLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddDescLabel.Location = new System.Drawing.Point(279, 279);
-            this.EstoqueAddDescLabel.Name = "EstoqueAddDescLabel";
-            this.EstoqueAddDescLabel.Size = new System.Drawing.Size(95, 22);
-            this.EstoqueAddDescLabel.TabIndex = 11;
-            this.EstoqueAddDescLabel.Text = "Descrição:";
-            // 
-            // EstoqueAddDescTextBox
-            // 
-            this.EstoqueAddDescTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddDescTextBox.Location = new System.Drawing.Point(410, 276);
-            this.EstoqueAddDescTextBox.Name = "EstoqueAddDescTextBox";
-            this.EstoqueAddDescTextBox.Size = new System.Drawing.Size(235, 27);
-            this.EstoqueAddDescTextBox.TabIndex = 12;
-            // 
-            // EstoqueAddMinLabel
-            // 
-            this.EstoqueAddMinLabel.AutoSize = true;
-            this.EstoqueAddMinLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddMinLabel.Location = new System.Drawing.Point(279, 316);
-            this.EstoqueAddMinLabel.Name = "EstoqueAddMinLabel";
-            this.EstoqueAddMinLabel.Size = new System.Drawing.Size(130, 22);
-            this.EstoqueAddMinLabel.TabIndex = 13;
-            this.EstoqueAddMinLabel.Text = "Alerta (Mínimo)";
-            // 
-            // EstoqueAddMinTextBox
-            // 
-            this.EstoqueAddMinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddMinTextBox.Location = new System.Drawing.Point(410, 316);
-            this.EstoqueAddMinTextBox.Name = "EstoqueAddMinTextBox";
-            this.EstoqueAddMinTextBox.Size = new System.Drawing.Size(235, 27);
-            this.EstoqueAddMinTextBox.TabIndex = 14;
-            // 
-            // EstoqueAddMaxLabel
-            // 
-            this.EstoqueAddMaxLabel.AutoSize = true;
-            this.EstoqueAddMaxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddMaxLabel.Location = new System.Drawing.Point(279, 352);
-            this.EstoqueAddMaxLabel.Name = "EstoqueAddMaxLabel";
-            this.EstoqueAddMaxLabel.Size = new System.Drawing.Size(135, 22);
-            this.EstoqueAddMaxLabel.TabIndex = 15;
-            this.EstoqueAddMaxLabel.Text = "Alerta (Máximo)";
-            // 
-            // EstoqueAddMaxTextBox
-            // 
-            this.EstoqueAddMaxTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddMaxTextBox.Location = new System.Drawing.Point(410, 349);
-            this.EstoqueAddMaxTextBox.Name = "EstoqueAddMaxTextBox";
-            this.EstoqueAddMaxTextBox.Size = new System.Drawing.Size(235, 27);
-            this.EstoqueAddMaxTextBox.TabIndex = 16;
-            // 
-            // EstoqueAddSaveButton
-            // 
-            this.EstoqueAddSaveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.EstoqueAddSaveButton.Location = new System.Drawing.Point(410, 382);
-            this.EstoqueAddSaveButton.Name = "EstoqueAddSaveButton";
-            this.EstoqueAddSaveButton.Size = new System.Drawing.Size(112, 31);
-            this.EstoqueAddSaveButton.TabIndex = 17;
-            this.EstoqueAddSaveButton.Text = "Salvar";
-            this.EstoqueAddSaveButton.UseVisualStyleBackColor = true;
-            // 
-            // EstoqueAddCancelButton
-            // 
-            this.EstoqueAddCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.EstoqueAddCancelButton.Location = new System.Drawing.Point(533, 382);
-            this.EstoqueAddCancelButton.Name = "EstoqueAddCancelButton";
-            this.EstoqueAddCancelButton.Size = new System.Drawing.Size(112, 31);
-            this.EstoqueAddCancelButton.TabIndex = 18;
-            this.EstoqueAddCancelButton.Text = "Cancelar";
-            this.EstoqueAddCancelButton.UseVisualStyleBackColor = true;
-            this.EstoqueAddCancelButton.Click += new System.EventHandler(this.Cancelar);
-            // 
-            // EstoqueAddSaveExitButton
-            // 
-            this.EstoqueAddSaveExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.EstoqueAddSaveExitButton.Location = new System.Drawing.Point(410, 456);
-            this.EstoqueAddSaveExitButton.Name = "EstoqueAddSaveExitButton";
-            this.EstoqueAddSaveExitButton.Size = new System.Drawing.Size(235, 34);
-            this.EstoqueAddSaveExitButton.TabIndex = 19;
-            this.EstoqueAddSaveExitButton.Text = "Salvar e Sair";
-            this.EstoqueAddSaveExitButton.UseVisualStyleBackColor = true;
-            // 
-            // EstoqueAddEstoqueTypeLabel
-            // 
-            this.EstoqueAddEstoqueTypeLabel.AutoSize = true;
-            this.EstoqueAddEstoqueTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddEstoqueTypeLabel.Location = new System.Drawing.Point(279, 71);
-            this.EstoqueAddEstoqueTypeLabel.Name = "EstoqueAddEstoqueTypeLabel";
-            this.EstoqueAddEstoqueTypeLabel.Size = new System.Drawing.Size(81, 22);
-            this.EstoqueAddEstoqueTypeLabel.TabIndex = 20;
-            this.EstoqueAddEstoqueTypeLabel.Text = "Estoque:";
-            // 
-            // EstoqueTypeComboBox
-            // 
-            this.EstoqueTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.EstoqueTypeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EstoqueTypeComboBox.FormattingEnabled = true;
-            this.EstoqueTypeComboBox.Items.AddRange(new object[] {
-            "Atual",
-            "Pendente"});
-            this.EstoqueTypeComboBox.Location = new System.Drawing.Point(410, 65);
-            this.EstoqueTypeComboBox.Name = "EstoqueTypeComboBox";
-            this.EstoqueTypeComboBox.Size = new System.Drawing.Size(235, 28);
-            this.EstoqueTypeComboBox.TabIndex = 21;
-            this.EstoqueTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.EstoqueComboBox_TextUpdate);
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.button7.Location = new System.Drawing.Point(410, 419);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(235, 31);
-            this.button7.TabIndex = 22;
-            this.button7.Text = "Limpar Campos";
-            this.button7.UseVisualStyleBackColor = true;
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.AutoSize = true;
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Location = new System.Drawing.Point(269, 213);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Name = "DiferentementeDoAndreEuDouNomeAVariaveis";
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Size = new System.Drawing.Size(58, 22);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.TabIndex = 24;
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Text = "Setor:";
             // 
             // Form1
             // 
@@ -1450,7 +1473,7 @@
         private System.Windows.Forms.Label EstoqueAddQuantLabel;
         private System.Windows.Forms.TextBox EstoqueAddCategoriaTextBox;
         private System.Windows.Forms.Label EstoqueAddCategoriaLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox AddItemTextBox;
         private System.Windows.Forms.Label EstoqueAddNomeDoProduto;
         private System.Windows.Forms.ComboBox EstoqueAddIdCombobox;
         private System.Windows.Forms.TextBox EstoqueAddDescTextBox;
@@ -1465,6 +1488,8 @@
         private System.Windows.Forms.Label EstoqueAddEstoqueTypeLabel;
         private System.Windows.Forms.ComboBox EstoqueTypeComboBox;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label DiferentementeDoAndreEuDouNomeAVariaveis;
+        private System.Windows.Forms.TextBox EstoqueAddSetorTextBox;
     }
 }
 

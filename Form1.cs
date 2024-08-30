@@ -522,6 +522,47 @@ namespace Gerenciamento_de_Supermercado
         private void Cancelar(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 2;
+            limparCampos();
+        }
+        void limparCampos()
+        { //uau
+            EstoqueAddIdCombobox.Text = "";
+            AddItemTextBox.Text = "";
+            EstoqueAddCategoriaTextBox.Text = "";
+            EstoqueAddSetorTextBox.Text = "";
+            EstoqueAddQuantTextBox.Text = "";
+            EstoqueAddPrecoTextBox.Text = "";
+            EstoqueAddDescTextBox.Text = "";
+            EstoqueAddMinTextBox.Text = "";
+            EstoqueAddMaxTextBox.Text = "";
+        }
+        private void EstoqueAddSaveButton_Click(object sender, EventArgs e)
+        {
+            var estoqueAux = EstoqueData;
+            if (currentEstoque == "EstoqueData")
+                estoqueAux = EstoqueData;
+            else if (currentEstoque == "EstoqueDataPendente")
+                estoqueAux = EstoqueDataPendente;
+
+            estoqueAux[EstoqueAddIdCombobox.Text] = new Dictionary<string, string>()
+            {
+                {"Nome",  AddItemTextBox.Text},
+                {"Categoria",  EstoqueAddCategoriaTextBox.Text},
+                {"Setor",  EstoqueAddSetorTextBox.Text},
+                {"Quant",  EstoqueAddQuantTextBox.Text},
+                {"Preco",  EstoqueAddPrecoTextBox.Text},
+                {"Desc",  EstoqueAddDescTextBox.Text},
+                {"AlertaMin",  EstoqueAddMinTextBox.Text},
+                {"AlertaMax",  EstoqueAddMaxTextBox.Text},
+            };
+
+            if (currentEstoque == "EstoqueData")
+                EstoqueData = estoqueAux;
+            else if (currentEstoque == "EstoqueDataPendente")
+                EstoqueDataPendente = estoqueAux;
+            reloadEstoque();
+            EstoqueSaveButtonFunc(sender, e);
+            limparCampos();
         }
     }
 }
