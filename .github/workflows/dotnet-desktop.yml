@@ -1,0 +1,36 @@
+trigger:
+  - main  # Configura para rodar o pipeline quando houver mudanças na branch "main"
+
+pool:
+  vmImage: 'windows-latest'  # Usa uma VM Windows
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '7.x'  # Escolha a versão do .NET SDK que você está usando
+      installationPath: $(Agent.ToolsDirectory)/dotnet
+
+  - script: |
+      echo 'Restaurando pacotes...'
+      dotnet restore
+    displayName: 'Restore NuGet packages'
+
+  - script: |
+      echo 'Construindo o projeto...'
+      dotnet build --configuration Release
+    displayName: 'Build project'
+
+  - script: |
+      echo 'Obtendo caminho da pasta bin...'
+      bin_path=$(Build.BinariesDirectory)
+      echo "Caminho da pasta bin: $bin_path"
+    displayName: 'Get bin folder path'
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        $binPath = "$(Build.BinariesDirectory)"
+        Write-Host "O caminho da pasta bin é: $binPath"
+    displayName: 'Display bin folder path'
