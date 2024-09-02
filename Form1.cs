@@ -14,7 +14,6 @@ using System.Globalization;
 
 namespace Gerenciamento_de_Supermercado
 {
-
     public partial class Form1 : Form
     {  
         string telaAtual = "🛒 Compras";
@@ -48,6 +47,7 @@ namespace Gerenciamento_de_Supermercado
         public Form1()
         {   
             InitializeComponent();
+            returnCompraData();
             compra_label_returnDayBuy.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
             EstoqueComboBox.Text = "Atual";
         }
@@ -56,10 +56,12 @@ namespace Gerenciamento_de_Supermercado
         {
             cloneRowsPanel[id] = new Panel();
             AlertaPanel1.Controls.Add(cloneRowsPanel[id]);
+
             if (color == "min")
                 cloneRowsPanel[id].BackColor = Color.FromArgb(255, 255, 102, 102);
             else
                 cloneRowsPanel[id].BackColor = Color.FromArgb(255, 255, 255, 153);
+
             cloneRowsPanel[id].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             cloneRowsPanel[id].Location = new System.Drawing.Point(3, 0 + (51 * AlertaRowCounter));
             cloneRowsPanel[id].Name = "TemplatePanel";
@@ -67,16 +69,17 @@ namespace Gerenciamento_de_Supermercado
 
 
             int tempCounter = 0;
-            foreach (KeyValuePair<string, string> value in new Dictionary<string, string> {
-            { "ID: ", "Id" },
-            { "Nome do Produto: ", "Nome" },
-            { "Categoria: ", "Categoria"},
-            { "Setor:",  "Setor"},
-            { "Preço", "Preco"},
-            { "Quantidade Disponível", "Quant" },
-            { "Alerta (Máximo)", "AlertaMax" },
-            { "Alerta (Mínimo)", "AlertaMin" }
-            })
+            foreach (KeyValuePair<string, string> value in new Dictionary<string, string> 
+            {
+                { "ID: ", "Id" },
+                { "Nome do Produto: ", "Nome" },
+                { "Categoria: ", "Categoria"},
+                { "Setor:",  "Setor"},
+                { "Preço", "Preco"},
+                { "Quantidade Disponível", "Quant" },
+                { "Alerta (Máximo)", "AlertaMax" },
+                { "Alerta (Mínimo)", "AlertaMin" }
+                })
             {
                 cloneRowsLabel[id] = new Dictionary<string, Label>();
                 cloneRowsLabel[id][value.Key] = new Label();
@@ -329,21 +332,22 @@ namespace Gerenciamento_de_Supermercado
             telaAtual = (sender as Button).Text;
             if (telaAtual == "🛒 Compras")
             {
-                tabControl1.SelectedIndex = 0;
+                returnListBuy.SelectedIndex = 0;
             }
             else if (telaAtual == "📖 Histórico ")
             {
-                tabControl1.SelectedIndex = 1;
+                returnListBuy.SelectedIndex = 1;
+                GenerateHistoryBuysScreen();
             }
             else if (telaAtual == "📦 Estoque")
             {
-                tabControl1.SelectedIndex = 2;
+                returnListBuy.SelectedIndex = 2;
                 reloadEstoque();
             }
             else if (telaAtual == "Alertas")
             {
                 refreshAlerta();
-                tabControl1.SelectedIndex = 3;
+                returnListBuy.SelectedIndex = 3;
             }
             else if (telaAtual == "🚪 Sair")
             {
@@ -577,6 +581,7 @@ namespace Gerenciamento_de_Supermercado
             }
             
         }
+
         void conferirEstoqueAtual()
         {
             if (EstoqueComboBox.Text == "Atual")
@@ -603,7 +608,6 @@ namespace Gerenciamento_de_Supermercado
         {
             try
             {
-                returnCompraData();
                 try
                 {
                     lastIdBuy = Convert.ToInt16(ComprasData.Keys.Last()) + 1;
@@ -612,7 +616,6 @@ namespace Gerenciamento_de_Supermercado
                 {
                     lastIdBuy = 1;
                 }
-                MessageBox.Show(Convert.ToString(ComprasData));
 
                 Dictionary<string, Dictionary<string, object>> items = new Dictionary<string, Dictionary<string, object>>();
 
@@ -648,10 +651,13 @@ namespace Gerenciamento_de_Supermercado
 
                 ComprasData[lastIdBuy.ToString()] = new Dictionary<string, object>
                 {
-                    { "Date", compra_label_returnDayBuy.Text },
-                    { "Time", compra_returnTimeBuy.Text },
-                    { "payForm", payForm },
-                    { "Items", items }
+                    { "Date" , compra_label_returnDayBuy.Text },
+                    { "Time" , compra_returnTimeBuy.Text },
+                    { "PayForm" , payForm },
+                    { "Price" , compra_label_returnFinalPrice.Text },
+                    { "TotalItems" , compra_label_returnQuantTotal.Text },
+                    { "ProductQuant" , compra_label_returnQuantPreduct.Text.ToString() },
+                    { "Items" , items }
                 };
 
                 string json = JsonConvert.SerializeObject(ComprasData, Formatting.Indented);
@@ -749,9 +755,10 @@ namespace Gerenciamento_de_Supermercado
 
         private void Cancelar(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex = 2;
+            returnListBuy.SelectedIndex = 2;
             limparCampos();
         }
+
         void limparCampos()
         { //uau
             EstoqueAddIdCombobox.Text = "";
@@ -764,6 +771,7 @@ namespace Gerenciamento_de_Supermercado
             EstoqueAddMinTextBox.Text = "";
             EstoqueAddMaxTextBox.Text = "";
         }
+
         private void EstoqueAddSaveButton_Click(object sender, EventArgs e)
         {
             try
@@ -811,6 +819,7 @@ namespace Gerenciamento_de_Supermercado
             EstoqueSaveButtonFunc(sender, e);
             limparCampos();
             refreshEstoqueHist();
+            
             if ((sender as Button).Text == "Salvar e Sair")
                 Cancelar(sender, e);
         }
@@ -851,6 +860,75 @@ namespace Gerenciamento_de_Supermercado
             EstoqueAddDescTextBox.Text = "";
             EstoqueAddMinTextBox.Text = "";
             EstoqueAddMaxTextBox.Text = "";
+        }
+    
+        private void GenerateHistoryBuysScreen()
+        {
+            List<string> keys = ComprasData.Keys.ToList();
+            keys.Reverse();
+
+            foreach (var item in keys)
+            {
+                try 
+                { 
+                    Histoty_dataGrid.Rows.Add();
+                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[0].Value = Convert.ToString(item);
+                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[1].Value = ComprasData[item]["Date"];
+                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[2].Value = ComprasData[item]["Time"];
+                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[3].Value = ComprasData[item]["Price"];
+                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[4].Value = ComprasData[item]["TotalItems"];
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+        }
+
+        private void Histoty_dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string id = Convert.ToString(e.RowIndex);
+
+            listbuy_label_returnID.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[0].Value);
+            listbuy_label_returnDate.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[1].Value);
+            listbuy_label_returnTime.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[2].Value);
+            listbuy_label_returnFinalPrice.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[3].Value);
+            listbuy_label_returnTotal.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[4].Value);
+            listbuy_label_returnProduts.Text = ComprasData[id]["ProductQuant"].ToString();
+            listbuy_label_payment.Text = ComprasData[id]["PayForm"].ToString();
+
+            if (ComprasData.TryGetValue("Items", out var items))
+            {
+                foreach (var itemKey in items.Keys)
+                {
+                    if (items[itemKey] is Dictionary<string, object> itemData)
+                    {
+                        try
+                        {
+                            listbuy_dataGrid.Rows.Add();
+                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[0].Value = itemData.ContainsKey("ID") ? itemData["ID"].ToString() : string.Empty;
+                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[1].Value = itemData.ContainsKey("Nome") ? itemData["Nome"].ToString() : string.Empty;
+                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[2].Value = itemData.ContainsKey("Categoria") ? itemData["Categoria"].ToString() : string.Empty;
+                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[3].Value = itemData.ContainsKey("Setor") ? itemData["Setor"].ToString() : string.Empty;
+                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[4].Value = itemData.ContainsKey("Quantidade") ? itemData["Quantidade"].ToString() : string.Empty;
+                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[5].Value = itemData.ContainsKey("PrecoUni") ? itemData["PrecoUni"].ToString() : string.Empty;
+                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[6].Value = itemData.ContainsKey("total") ? itemData["total"].ToString() : string.Empty;
+                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[7].Value = itemData.ContainsKey("Desc") ? itemData["Desc"].ToString() : string.Empty;
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            returnListBuy.SelectedIndex = 5;
+        }
+
+        private void listbuy_button_close_Click(object sender, EventArgs e)
+        {
+            returnListBuy.SelectedIndex = 1;
         }
     }
 }
