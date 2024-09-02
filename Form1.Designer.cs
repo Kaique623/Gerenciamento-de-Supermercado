@@ -36,7 +36,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.returnListBuy = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.compra_radio_pix = new System.Windows.Forms.RadioButton();
@@ -80,6 +80,7 @@
             this.DataCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorarioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecoCompraHist = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VisualizarInfo = new System.Windows.Forms.DataGridViewButtonColumn();
             this.histyOne_button_refreseh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -110,6 +111,8 @@
             this.AlertasLabel = new System.Windows.Forms.Label();
             this.AlertaPanel1 = new System.Windows.Forms.Panel();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.DiferentementeDoAndreEuDouNomeAVariaveis = new System.Windows.Forms.Label();
+            this.EstoqueAddSetorTextBox = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.EstoqueTypeComboBox = new System.Windows.Forms.ComboBox();
             this.EstoqueAddEstoqueTypeLabel = new System.Windows.Forms.Label();
@@ -133,13 +136,37 @@
             this.EstoqueAddIdCombobox = new System.Windows.Forms.ComboBox();
             this.EstoqueAddLabel = new System.Windows.Forms.Label();
             this.EstoqueAddIdLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddSetorTextBox = new System.Windows.Forms.TextBox();
-            this.DiferentementeDoAndreEuDouNomeAVariaveis = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.listbuy_label_returnID = new System.Windows.Forms.Label();
+            this.listbuy_label_id = new System.Windows.Forms.Label();
+            this.listbuy_textBoxPay = new System.Windows.Forms.GroupBox();
+            this.listbuy_label_payment = new System.Windows.Forms.Label();
+            this.listbuy_label_returnFinalPrice = new System.Windows.Forms.Label();
+            this.listbuy_label_finalPrice = new System.Windows.Forms.Label();
+            this.listbuy_textbox_infos = new System.Windows.Forms.GroupBox();
+            this.listbuy_label_returnTime = new System.Windows.Forms.Label();
+            this.listbuy_label_time = new System.Windows.Forms.Label();
+            this.listbuy_label_returnDate = new System.Windows.Forms.Label();
+            this.listbuy_label_date = new System.Windows.Forms.Label();
+            this.listbuy_label_returnProduts = new System.Windows.Forms.Label();
+            this.listbuy_label_products = new System.Windows.Forms.Label();
+            this.listbuy_label_returnTotal = new System.Windows.Forms.Label();
+            this.listbuy_label_total = new System.Windows.Forms.Label();
+            this.listbuy_button_close = new System.Windows.Forms.Button();
+            this.listbuy_dataGrid = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.returnListBuy.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.compra_groupBox.SuspendLayout();
@@ -154,6 +181,10 @@
             this.panel1.SuspendLayout();
             this.LegendaGroupBox.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.listbuy_textBoxPay.SuspendLayout();
+            this.listbuy_textbox_infos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listbuy_dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -183,7 +214,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
+            this.splitContainer1.Panel2.Controls.Add(this.returnListBuy);
             this.splitContainer1.Panel2.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.splitContainer1.Panel2MinSize = 420;
             this.splitContainer1.Size = new System.Drawing.Size(1277, 736);
@@ -296,18 +327,19 @@
             this.label1.Text = "Dashboard";
             this.label1.Click += new System.EventHandler(this.dashboardButton_click);
             // 
-            // tabControl1
+            // returnListBuy
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(0, 1);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1141, 736);
-            this.tabControl1.TabIndex = 0;
+            this.returnListBuy.Controls.Add(this.tabPage1);
+            this.returnListBuy.Controls.Add(this.tabPage2);
+            this.returnListBuy.Controls.Add(this.tabPage3);
+            this.returnListBuy.Controls.Add(this.tabPage4);
+            this.returnListBuy.Controls.Add(this.tabPage5);
+            this.returnListBuy.Controls.Add(this.tabPage6);
+            this.returnListBuy.Location = new System.Drawing.Point(0, 1);
+            this.returnListBuy.Name = "returnListBuy";
+            this.returnListBuy.SelectedIndex = 0;
+            this.returnListBuy.Size = new System.Drawing.Size(1141, 736);
+            this.returnListBuy.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -750,12 +782,14 @@
             this.DataCompra,
             this.HorarioCompra,
             this.PrecoCompraHist,
+            this.Column1,
             this.VisualizarInfo});
             this.Histoty_dataGrid.Location = new System.Drawing.Point(16, 72);
             this.Histoty_dataGrid.Name = "Histoty_dataGrid";
             this.Histoty_dataGrid.ReadOnly = true;
             this.Histoty_dataGrid.Size = new System.Drawing.Size(1088, 541);
             this.Histoty_dataGrid.TabIndex = 0;
+            this.Histoty_dataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Histoty_dataGrid_CellContentClick);
             // 
             // CompraID
             // 
@@ -780,6 +814,12 @@
             this.PrecoCompraHist.HeaderText = "Preço da Compra";
             this.PrecoCompraHist.Name = "PrecoCompraHist";
             this.PrecoCompraHist.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Quantidade Total";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // VisualizarInfo
             // 
@@ -889,6 +929,7 @@
             // 
             this.EstoqueDataGrid.AllowUserToAddRows = false;
             this.EstoqueDataGrid.AllowUserToDeleteRows = false;
+            this.EstoqueDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.EstoqueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EstoqueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EstoqueID,
@@ -1094,6 +1135,24 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Adicionar Estoque";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // DiferentementeDoAndreEuDouNomeAVariaveis
+            // 
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.AutoSize = true;
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Location = new System.Drawing.Point(269, 213);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Name = "DiferentementeDoAndreEuDouNomeAVariaveis";
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Size = new System.Drawing.Size(58, 22);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.TabIndex = 24;
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Text = "Setor:";
+            // 
+            // EstoqueAddSetorTextBox
+            // 
+            this.EstoqueAddSetorTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddSetorTextBox.Location = new System.Drawing.Point(410, 210);
+            this.EstoqueAddSetorTextBox.Name = "EstoqueAddSetorTextBox";
+            this.EstoqueAddSetorTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddSetorTextBox.TabIndex = 23;
             // 
             // button7
             // 
@@ -1316,23 +1375,285 @@
             this.EstoqueAddIdLabel.TabIndex = 0;
             this.EstoqueAddIdLabel.Text = "ID:";
             // 
-            // EstoqueAddSetorTextBox
+            // tabPage6
             // 
-            this.EstoqueAddSetorTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddSetorTextBox.Location = new System.Drawing.Point(410, 210);
-            this.EstoqueAddSetorTextBox.Name = "EstoqueAddSetorTextBox";
-            this.EstoqueAddSetorTextBox.Size = new System.Drawing.Size(235, 27);
-            this.EstoqueAddSetorTextBox.TabIndex = 23;
+            this.tabPage6.Controls.Add(this.listbuy_label_returnID);
+            this.tabPage6.Controls.Add(this.listbuy_label_id);
+            this.tabPage6.Controls.Add(this.listbuy_textBoxPay);
+            this.tabPage6.Controls.Add(this.listbuy_label_returnFinalPrice);
+            this.tabPage6.Controls.Add(this.listbuy_label_finalPrice);
+            this.tabPage6.Controls.Add(this.listbuy_textbox_infos);
+            this.tabPage6.Controls.Add(this.listbuy_button_close);
+            this.tabPage6.Controls.Add(this.listbuy_dataGrid);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1133, 710);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "returnListBuy";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // DiferentementeDoAndreEuDouNomeAVariaveis
+            // listbuy_label_returnID
             // 
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.AutoSize = true;
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Location = new System.Drawing.Point(269, 213);
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Name = "DiferentementeDoAndreEuDouNomeAVariaveis";
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Size = new System.Drawing.Size(58, 22);
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.TabIndex = 24;
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Text = "Setor:";
+            this.listbuy_label_returnID.AutoSize = true;
+            this.listbuy_label_returnID.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.listbuy_label_returnID.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_returnID.Location = new System.Drawing.Point(181, 18);
+            this.listbuy_label_returnID.Name = "listbuy_label_returnID";
+            this.listbuy_label_returnID.Size = new System.Drawing.Size(24, 26);
+            this.listbuy_label_returnID.TabIndex = 28;
+            this.listbuy_label_returnID.Text = "0";
+            // 
+            // listbuy_label_id
+            // 
+            this.listbuy_label_id.AutoSize = true;
+            this.listbuy_label_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.listbuy_label_id.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_id.Location = new System.Drawing.Point(21, 16);
+            this.listbuy_label_id.Name = "listbuy_label_id";
+            this.listbuy_label_id.Size = new System.Drawing.Size(154, 26);
+            this.listbuy_label_id.TabIndex = 27;
+            this.listbuy_label_id.Text = "ID da Compra:";
+            // 
+            // listbuy_textBoxPay
+            // 
+            this.listbuy_textBoxPay.Controls.Add(this.listbuy_label_payment);
+            this.listbuy_textBoxPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.listbuy_textBoxPay.Location = new System.Drawing.Point(24, 618);
+            this.listbuy_textBoxPay.Name = "listbuy_textBoxPay";
+            this.listbuy_textBoxPay.Size = new System.Drawing.Size(236, 58);
+            this.listbuy_textBoxPay.TabIndex = 24;
+            this.listbuy_textBoxPay.TabStop = false;
+            this.listbuy_textBoxPay.Text = "Forma de Pagamento";
+            // 
+            // listbuy_label_payment
+            // 
+            this.listbuy_label_payment.AutoSize = true;
+            this.listbuy_label_payment.Location = new System.Drawing.Point(6, 25);
+            this.listbuy_label_payment.Name = "listbuy_label_payment";
+            this.listbuy_label_payment.Size = new System.Drawing.Size(68, 22);
+            this.listbuy_label_payment.TabIndex = 0;
+            this.listbuy_label_payment.Text = "label12";
+            // 
+            // listbuy_label_returnFinalPrice
+            // 
+            this.listbuy_label_returnFinalPrice.AutoSize = true;
+            this.listbuy_label_returnFinalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.listbuy_label_returnFinalPrice.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_returnFinalPrice.Location = new System.Drawing.Point(155, 578);
+            this.listbuy_label_returnFinalPrice.Name = "listbuy_label_returnFinalPrice";
+            this.listbuy_label_returnFinalPrice.Size = new System.Drawing.Size(107, 25);
+            this.listbuy_label_returnFinalPrice.TabIndex = 26;
+            this.listbuy_label_returnFinalPrice.Text = "R$: 000.00";
+            // 
+            // listbuy_label_finalPrice
+            // 
+            this.listbuy_label_finalPrice.AutoSize = true;
+            this.listbuy_label_finalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.listbuy_label_finalPrice.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_finalPrice.Location = new System.Drawing.Point(21, 578);
+            this.listbuy_label_finalPrice.Name = "listbuy_label_finalPrice";
+            this.listbuy_label_finalPrice.Size = new System.Drawing.Size(128, 26);
+            this.listbuy_label_finalPrice.TabIndex = 25;
+            this.listbuy_label_finalPrice.Text = "Preço Final:";
+            // 
+            // listbuy_textbox_infos
+            // 
+            this.listbuy_textbox_infos.Controls.Add(this.listbuy_label_returnTime);
+            this.listbuy_textbox_infos.Controls.Add(this.listbuy_label_time);
+            this.listbuy_textbox_infos.Controls.Add(this.listbuy_label_returnDate);
+            this.listbuy_textbox_infos.Controls.Add(this.listbuy_label_date);
+            this.listbuy_textbox_infos.Controls.Add(this.listbuy_label_returnProduts);
+            this.listbuy_textbox_infos.Controls.Add(this.listbuy_label_products);
+            this.listbuy_textbox_infos.Controls.Add(this.listbuy_label_returnTotal);
+            this.listbuy_textbox_infos.Controls.Add(this.listbuy_label_total);
+            this.listbuy_textbox_infos.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.listbuy_textbox_infos.Location = new System.Drawing.Point(288, 577);
+            this.listbuy_textbox_infos.Name = "listbuy_textbox_infos";
+            this.listbuy_textbox_infos.Size = new System.Drawing.Size(466, 99);
+            this.listbuy_textbox_infos.TabIndex = 23;
+            this.listbuy_textbox_infos.TabStop = false;
+            this.listbuy_textbox_infos.Text = "Informações";
+            // 
+            // listbuy_label_returnTime
+            // 
+            this.listbuy_label_returnTime.AutoSize = true;
+            this.listbuy_label_returnTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listbuy_label_returnTime.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_returnTime.Location = new System.Drawing.Point(365, 66);
+            this.listbuy_label_returnTime.Name = "listbuy_label_returnTime";
+            this.listbuy_label_returnTime.Size = new System.Drawing.Size(0, 20);
+            this.listbuy_label_returnTime.TabIndex = 7;
+            // 
+            // listbuy_label_time
+            // 
+            this.listbuy_label_time.AutoSize = true;
+            this.listbuy_label_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listbuy_label_time.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_time.Location = new System.Drawing.Point(217, 66);
+            this.listbuy_label_time.Name = "listbuy_label_time";
+            this.listbuy_label_time.Size = new System.Drawing.Size(143, 20);
+            this.listbuy_label_time.TabIndex = 6;
+            this.listbuy_label_time.Text = "Horário da Compra";
+            // 
+            // listbuy_label_returnDate
+            // 
+            this.listbuy_label_returnDate.AutoSize = true;
+            this.listbuy_label_returnDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listbuy_label_returnDate.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_returnDate.Location = new System.Drawing.Point(363, 32);
+            this.listbuy_label_returnDate.Name = "listbuy_label_returnDate";
+            this.listbuy_label_returnDate.Size = new System.Drawing.Size(0, 20);
+            this.listbuy_label_returnDate.TabIndex = 5;
+            // 
+            // listbuy_label_date
+            // 
+            this.listbuy_label_date.AutoSize = true;
+            this.listbuy_label_date.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listbuy_label_date.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_date.Location = new System.Drawing.Point(217, 32);
+            this.listbuy_label_date.Name = "listbuy_label_date";
+            this.listbuy_label_date.Size = new System.Drawing.Size(119, 20);
+            this.listbuy_label_date.TabIndex = 4;
+            this.listbuy_label_date.Text = "Dia da Compra:";
+            // 
+            // listbuy_label_returnProduts
+            // 
+            this.listbuy_label_returnProduts.AutoSize = true;
+            this.listbuy_label_returnProduts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listbuy_label_returnProduts.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_returnProduts.Location = new System.Drawing.Point(166, 66);
+            this.listbuy_label_returnProduts.Name = "listbuy_label_returnProduts";
+            this.listbuy_label_returnProduts.Size = new System.Drawing.Size(45, 20);
+            this.listbuy_label_returnProduts.TabIndex = 3;
+            this.listbuy_label_returnProduts.Text = "0000";
+            // 
+            // listbuy_label_products
+            // 
+            this.listbuy_label_products.AutoSize = true;
+            this.listbuy_label_products.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listbuy_label_products.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_products.Location = new System.Drawing.Point(9, 66);
+            this.listbuy_label_products.Name = "listbuy_label_products";
+            this.listbuy_label_products.Size = new System.Drawing.Size(151, 20);
+            this.listbuy_label_products.TabIndex = 2;
+            this.listbuy_label_products.Text = "Quant. de Produtos:";
+            // 
+            // listbuy_label_returnTotal
+            // 
+            this.listbuy_label_returnTotal.AutoSize = true;
+            this.listbuy_label_returnTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listbuy_label_returnTotal.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_returnTotal.Location = new System.Drawing.Point(166, 32);
+            this.listbuy_label_returnTotal.Name = "listbuy_label_returnTotal";
+            this.listbuy_label_returnTotal.Size = new System.Drawing.Size(45, 20);
+            this.listbuy_label_returnTotal.TabIndex = 1;
+            this.listbuy_label_returnTotal.Text = "0000";
+            // 
+            // listbuy_label_total
+            // 
+            this.listbuy_label_total.AutoSize = true;
+            this.listbuy_label_total.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listbuy_label_total.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_label_total.Location = new System.Drawing.Point(9, 32);
+            this.listbuy_label_total.Name = "listbuy_label_total";
+            this.listbuy_label_total.Size = new System.Drawing.Size(135, 20);
+            this.listbuy_label_total.TabIndex = 0;
+            this.listbuy_label_total.Text = "Quantidade Total:";
+            // 
+            // listbuy_button_close
+            // 
+            this.listbuy_button_close.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listbuy_button_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.listbuy_button_close.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listbuy_button_close.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.listbuy_button_close.Location = new System.Drawing.Point(998, 621);
+            this.listbuy_button_close.Name = "listbuy_button_close";
+            this.listbuy_button_close.Size = new System.Drawing.Size(115, 55);
+            this.listbuy_button_close.TabIndex = 21;
+            this.listbuy_button_close.Text = "Sair";
+            this.listbuy_button_close.UseVisualStyleBackColor = true;
+            this.listbuy_button_close.Click += new System.EventHandler(this.listbuy_button_close_Click);
+            // 
+            // listbuy_dataGrid
+            // 
+            this.listbuy_dataGrid.AllowUserToAddRows = false;
+            this.listbuy_dataGrid.AllowUserToDeleteRows = false;
+            this.listbuy_dataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.listbuy_dataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.listbuy_dataGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.listbuy_dataGrid.ColumnHeadersHeight = 20;
+            this.listbuy_dataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+            this.listbuy_dataGrid.Location = new System.Drawing.Point(24, 53);
+            this.listbuy_dataGrid.Name = "listbuy_dataGrid";
+            this.listbuy_dataGrid.ReadOnly = true;
+            this.listbuy_dataGrid.Size = new System.Drawing.Size(1089, 507);
+            this.listbuy_dataGrid.TabIndex = 19;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.FillWeight = 105.471F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.FillWeight = 105.471F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Nome";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.FillWeight = 105.471F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Categoria";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.FillWeight = 105.471F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Setor";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.FillWeight = 105.471F;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Quantidade";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.FillWeight = 105.471F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "Preço Uni.";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.FillWeight = 105.471F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Preço Total";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.FillWeight = 105.471F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Descrição";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
             // 
             // Form1
             // 
@@ -1354,7 +1675,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.returnListBuy.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1377,6 +1698,13 @@
             this.LegendaGroupBox.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            this.listbuy_textBoxPay.ResumeLayout(false);
+            this.listbuy_textBoxPay.PerformLayout();
+            this.listbuy_textbox_infos.ResumeLayout(false);
+            this.listbuy_textbox_infos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listbuy_dataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1391,7 +1719,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label_alerta;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl returnListBuy;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton compra_radio_pix;
@@ -1431,11 +1759,6 @@
         private System.Windows.Forms.Label histyOne_label_totalItems;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.DataGridView Histoty_dataGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompraID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataCompra;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HorarioCompra;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrecoCompraHist;
-        private System.Windows.Forms.DataGridViewButtonColumn VisualizarInfo;
         private System.Windows.Forms.Button histyOne_button_refreseh;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage histyTwo_tab;
@@ -1490,6 +1813,37 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label DiferentementeDoAndreEuDouNomeAVariaveis;
         private System.Windows.Forms.TextBox EstoqueAddSetorTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompraID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HorarioCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecoCompraHist;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewButtonColumn VisualizarInfo;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Label listbuy_label_id;
+        private System.Windows.Forms.GroupBox listbuy_textBoxPay;
+        private System.Windows.Forms.Label listbuy_label_payment;
+        private System.Windows.Forms.Label listbuy_label_returnFinalPrice;
+        private System.Windows.Forms.Label listbuy_label_finalPrice;
+        private System.Windows.Forms.GroupBox listbuy_textbox_infos;
+        private System.Windows.Forms.Label listbuy_label_returnTime;
+        private System.Windows.Forms.Label listbuy_label_time;
+        private System.Windows.Forms.Label listbuy_label_returnDate;
+        private System.Windows.Forms.Label listbuy_label_date;
+        private System.Windows.Forms.Label listbuy_label_returnProduts;
+        private System.Windows.Forms.Label listbuy_label_products;
+        private System.Windows.Forms.Label listbuy_label_returnTotal;
+        private System.Windows.Forms.Label listbuy_label_total;
+        private System.Windows.Forms.Button listbuy_button_close;
+        private System.Windows.Forms.DataGridView listbuy_dataGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.Label listbuy_label_returnID;
     }
 }
-
