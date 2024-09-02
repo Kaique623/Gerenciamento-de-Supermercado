@@ -480,56 +480,43 @@ namespace Gerenciamento_de_Supermercado
         {
             try
             {
-                try
-                {
-                    lastIdBuy = Convert.ToInt16(ComprasData.Keys.Last()) + 1;
-                }
-                catch
-                {
-                    lastIdBuy = 1;
-                }
+                lastIdBuy = ComprasData.Keys.Any() ? Convert.ToInt16(ComprasData.Keys.Last()) + 1 : 1;
 
                 Dictionary<string, Dictionary<string, object>> items = new Dictionary<string, Dictionary<string, object>>();
 
                 foreach (DataGridViewRow row in compra_dataView.Rows)
                 {
+                    if (row.IsNewRow) continue;
 
                     Dictionary<string, object> itemData = new Dictionary<string, object>();
 
-                    var columnsToCheck = new List<string> { "minusButton", "removeButton" };
                     foreach (DataGridViewCell cell in row.Cells)
                     {
                         string columnName = compra_dataView.Columns[cell.ColumnIndex].Name;
-                        if (!columnsToCheck.Contains(columnName))
+
+                        if (!(compra_dataView.Columns[cell.ColumnIndex] is DataGridViewButtonColumn))
                         {
-                            itemData[columnName] = cell.Value;
+                            itemData[columnName] = cell.Value ?? string.Empty;
                         }
                     }
 
-                    items.Add("Item" + row.Index, itemData);
+                    items.Add("Item" + Guid.NewGuid().ToString(), itemData);
                 }
 
-                lastIdBuy++;
-
-                string payForm = "";
-                if (compra_radio_cre.Checked)
-                    payForm = "Credito";
-                else if (compra_radio_deb.Checked)
-                    payForm = "Debito";
-                else if (compra_radio_din.Checked)
-                    payForm = "Dinheiro";
-                else if (compra_radio_pix.Checked)
-                    payForm = "Pix";
+                string payForm = compra_radio_cre.Checked ? "Credito" :
+                                compra_radio_deb.Checked ? "Debito" :
+                                compra_radio_din.Checked ? "Dinheiro" :
+                                compra_radio_pix.Checked ? "Pix" : string.Empty;
 
                 ComprasData[lastIdBuy.ToString()] = new Dictionary<string, object>
                 {
-                    { "Date" , compra_label_returnDayBuy.Text },
-                    { "Time" , compra_returnTimeBuy.Text },
-                    { "PayForm" , payForm },
-                    { "Price" , compra_label_returnFinalPrice.Text },
-                    { "TotalItems" , compra_label_returnQuantTotal.Text },
-                    { "ProductQuant" , compra_label_returnQuantPreduct.Text.ToString() },
-                    { "Items" , items }
+                    { "Date", compra_label_returnDayBuy.Text },
+                    { "Time", compra_returnTimeBuy.Text },
+                    { "PayForm", payForm },
+                    { "Price", compra_label_returnFinalPrice.Text },
+                    { "TotalItems", compra_label_returnQuantTotal.Text },
+                    { "ProductQuant", compra_label_returnQuantPreduct.Text.ToString() },
+                    { "Items", items }
                 };
 
                 string json = JsonConvert.SerializeObject(ComprasData, Formatting.Indented);
@@ -540,6 +527,7 @@ namespace Gerenciamento_de_Supermercado
                 MessageBox.Show("Erro ao gerar o registro de compra: " + ex.Message);
             }
         }
+
 
         private void searchbutton_Click(object sender, EventArgs e)
         {
@@ -605,7 +593,7 @@ namespace Gerenciamento_de_Supermercado
                 ComprasData = new Dictionary<string, Dictionary<string, object>>();
             }
         }
-
+        
         private void compra_button_cancelbuy_Click(object sender, EventArgs e)
         {
             compra_dataView.Rows.Clear();
@@ -676,40 +664,59 @@ namespace Gerenciamento_de_Supermercado
     
         private void GenerateHistoryBuysScreen()
         {
-            List<string> keys = ComprasData.Keys.ToList();
-            keys.Reverse();
-
-            foreach (var item in keys)
+            foreach (var item in ComprasData.Keys.Reverse())
             {
-                try 
-                { 
-                    Histoty_dataGrid.Rows.Add();
-                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[0].Value = Convert.ToString(item);
-                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[1].Value = ComprasData[item]["Date"];
-                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[2].Value = ComprasData[item]["Time"];
-                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[3].Value = ComprasData[item]["Price"];
-                    Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[4].Value = ComprasData[item]["TotalItems"];
-                }
-                catch
-                {
-                    continue;
-                }
+                AddRowToHistoryGrid(item);
+            }
+        }
+
+        private void AddRowToHistoryGrid(string key)
+        {
+            try
+            {
+                Histoty_dataGrid.Rows.Add();
+                var row = Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1];
+                row.Cells[0].Value = key;
+                row.Cells[1].Value = ComprasData[key]["Date"];
+                row.Cells[2].Value = ComprasData[key]["Time"];
+                row.Cells[3].Value = ComprasData[key]["Price"];
+                row.Cells[4].Value = ComprasData[key]["TotalItems"];
+            }
+            catch (Exception ex)
+            {
+                // Log error here
             }
         }
 
         private void Histoty_dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string id = Convert.ToString(e.RowIndex);
+            if (e.RowIndex < 0) return; // Validates if a valid row is clicked
+            
+            string id = Histoty_dataGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
+            
+            if (ComprasData.TryGetValue(id, out var compra))
+            {
+                UpdateLabels(compra);
+                UpdateItemsGrid(compra);
+            }
 
-            listbuy_label_returnID.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[0].Value);
-            listbuy_label_returnDate.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[1].Value);
-            listbuy_label_returnTime.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[2].Value);
-            listbuy_label_returnFinalPrice.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[3].Value);
-            listbuy_label_returnTotal.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[4].Value);
-            listbuy_label_returnProduts.Text = ComprasData[id]["ProductQuant"].ToString();
-            listbuy_label_payment.Text = ComprasData[id]["PayForm"].ToString();
+            returnListBuy.SelectedIndex = 5;
+        }
 
-            if (ComprasData.TryGetValue("Items", out var items))
+        private void UpdateLabels(Dictionary<string, object> compra)
+        {
+            listbuy_label_returnID.Text = compra["ID"].ToString();
+            listbuy_label_returnDate.Text = compra["Date"].ToString();
+            listbuy_label_returnTime.Text = compra["Time"].ToString();
+            listbuy_label_returnFinalPrice.Text = compra["Price"].ToString();
+            listbuy_label_returnTotal.Text = compra["TotalItems"].ToString();
+            listbuy_label_returnProduts.Text = compra["ProductQuant"].ToString();
+            listbuy_label_payment.Text = compra["PayForm"].ToString();
+        }
+
+        private void UpdateItemsGrid(Dictionary<string, object> compra)
+        {
+            if (compra.TryGetValue("Items", out var itemsObj) && itemsObj is Dictionary<string, object> items)
             {
                 foreach (var itemKey in items.Keys)
                 {
@@ -718,24 +725,23 @@ namespace Gerenciamento_de_Supermercado
                         try
                         {
                             listbuy_dataGrid.Rows.Add();
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[0].Value = itemData.ContainsKey("ID") ? itemData["ID"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[1].Value = itemData.ContainsKey("Nome") ? itemData["Nome"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[2].Value = itemData.ContainsKey("Categoria") ? itemData["Categoria"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[3].Value = itemData.ContainsKey("Setor") ? itemData["Setor"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[4].Value = itemData.ContainsKey("Quantidade") ? itemData["Quantidade"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[5].Value = itemData.ContainsKey("PrecoUni") ? itemData["PrecoUni"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[6].Value = itemData.ContainsKey("total") ? itemData["total"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[7].Value = itemData.ContainsKey("Desc") ? itemData["Desc"].ToString() : string.Empty;
+                            var row = listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1];
+                            row.Cells[0].Value = itemData.GetValueOrDefault("ID")?.ToString() ?? string.Empty;
+                            row.Cells[1].Value = itemData.GetValueOrDefault("Nome")?.ToString() ?? string.Empty;
+                            row.Cells[2].Value = itemData.GetValueOrDefault("Categoria")?.ToString() ?? string.Empty;
+                            row.Cells[3].Value = itemData.GetValueOrDefault("Setor")?.ToString() ?? string.Empty;
+                            row.Cells[4].Value = itemData.GetValueOrDefault("Quantidade")?.ToString() ?? string.Empty;
+                            row.Cells[5].Value = itemData.GetValueOrDefault("PrecoUni")?.ToString() ?? string.Empty;
+                            row.Cells[6].Value = itemData.GetValueOrDefault("total")?.ToString() ?? string.Empty;
+                            row.Cells[7].Value = itemData.GetValueOrDefault("Desc")?.ToString() ?? string.Empty;
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            continue;
+                            // Log error here
                         }
                     }
                 }
             }
-
-            returnListBuy.SelectedIndex = 5;
         }
 
         private void listbuy_button_close_Click(object sender, EventArgs e)
