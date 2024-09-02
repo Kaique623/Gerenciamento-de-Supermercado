@@ -84,6 +84,8 @@
             this.histyOne_button_refreseh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.histyTwo_tab = new System.Windows.Forms.TabPage();
+            this.EstoqueHistPanel = new System.Windows.Forms.Panel();
+            this.EstoqueHistoricoLabel = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.EstoqueInformativo = new System.Windows.Forms.Label();
             this.EstoqueComboBox = new System.Windows.Forms.ComboBox();
@@ -110,6 +112,8 @@
             this.AlertasLabel = new System.Windows.Forms.Label();
             this.AlertaPanel1 = new System.Windows.Forms.Panel();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.DiferentementeDoAndreEuDouNomeAVariaveis = new System.Windows.Forms.Label();
+            this.EstoqueAddSetorTextBox = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.EstoqueTypeComboBox = new System.Windows.Forms.ComboBox();
             this.EstoqueAddEstoqueTypeLabel = new System.Windows.Forms.Label();
@@ -133,8 +137,6 @@
             this.EstoqueAddIdCombobox = new System.Windows.Forms.ComboBox();
             this.EstoqueAddLabel = new System.Windows.Forms.Label();
             this.EstoqueAddIdLabel = new System.Windows.Forms.Label();
-            this.EstoqueAddSetorTextBox = new System.Windows.Forms.TextBox();
-            this.DiferentementeDoAndreEuDouNomeAVariaveis = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -148,6 +150,7 @@
             this.tabControl2.SuspendLayout();
             this.histyOne_tab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Histoty_dataGrid)).BeginInit();
+            this.histyTwo_tab.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EstoqueDataGrid)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -814,6 +817,8 @@
             // 
             // histyTwo_tab
             // 
+            this.histyTwo_tab.Controls.Add(this.EstoqueHistPanel);
+            this.histyTwo_tab.Controls.Add(this.EstoqueHistoricoLabel);
             this.histyTwo_tab.Location = new System.Drawing.Point(4, 25);
             this.histyTwo_tab.Name = "histyTwo_tab";
             this.histyTwo_tab.Padding = new System.Windows.Forms.Padding(3);
@@ -821,6 +826,24 @@
             this.histyTwo_tab.TabIndex = 1;
             this.histyTwo_tab.Text = "Historico de Estoque";
             this.histyTwo_tab.UseVisualStyleBackColor = true;
+            // 
+            // EstoqueHistPanel
+            // 
+            this.EstoqueHistPanel.Location = new System.Drawing.Point(0, 53);
+            this.EstoqueHistPanel.Name = "EstoqueHistPanel";
+            this.EstoqueHistPanel.Size = new System.Drawing.Size(1140, 611);
+            this.EstoqueHistPanel.TabIndex = 2;
+            this.EstoqueHistPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.EstoqueHistPanel_Paint);
+            // 
+            // EstoqueHistoricoLabel
+            // 
+            this.EstoqueHistoricoLabel.AutoSize = true;
+            this.EstoqueHistoricoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EstoqueHistoricoLabel.Location = new System.Drawing.Point(400, 3);
+            this.EstoqueHistoricoLabel.Name = "EstoqueHistoricoLabel";
+            this.EstoqueHistoricoLabel.Size = new System.Drawing.Size(304, 33);
+            this.EstoqueHistoricoLabel.TabIndex = 0;
+            this.EstoqueHistoricoLabel.Text = "Histórico Comparativo";
             // 
             // tabPage3
             // 
@@ -1095,6 +1118,24 @@
             this.tabPage5.Text = "Adicionar Estoque";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // DiferentementeDoAndreEuDouNomeAVariaveis
+            // 
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.AutoSize = true;
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Location = new System.Drawing.Point(269, 213);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Name = "DiferentementeDoAndreEuDouNomeAVariaveis";
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Size = new System.Drawing.Size(58, 22);
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.TabIndex = 24;
+            this.DiferentementeDoAndreEuDouNomeAVariaveis.Text = "Setor:";
+            // 
+            // EstoqueAddSetorTextBox
+            // 
+            this.EstoqueAddSetorTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.EstoqueAddSetorTextBox.Location = new System.Drawing.Point(410, 210);
+            this.EstoqueAddSetorTextBox.Name = "EstoqueAddSetorTextBox";
+            this.EstoqueAddSetorTextBox.Size = new System.Drawing.Size(235, 27);
+            this.EstoqueAddSetorTextBox.TabIndex = 23;
+            // 
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
@@ -1104,6 +1145,7 @@
             this.button7.TabIndex = 22;
             this.button7.Text = "Limpar Campos";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click_1);
             // 
             // EstoqueTypeComboBox
             // 
@@ -1295,6 +1337,7 @@
             this.EstoqueAddIdCombobox.Name = "EstoqueAddIdCombobox";
             this.EstoqueAddIdCombobox.Size = new System.Drawing.Size(235, 30);
             this.EstoqueAddIdCombobox.TabIndex = 2;
+            this.EstoqueAddIdCombobox.SelectedIndexChanged += new System.EventHandler(this.EstoqueAddIdCombobox_SelectedIndexChanged);
             // 
             // EstoqueAddLabel
             // 
@@ -1315,24 +1358,6 @@
             this.EstoqueAddIdLabel.Size = new System.Drawing.Size(32, 22);
             this.EstoqueAddIdLabel.TabIndex = 0;
             this.EstoqueAddIdLabel.Text = "ID:";
-            // 
-            // EstoqueAddSetorTextBox
-            // 
-            this.EstoqueAddSetorTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.EstoqueAddSetorTextBox.Location = new System.Drawing.Point(410, 210);
-            this.EstoqueAddSetorTextBox.Name = "EstoqueAddSetorTextBox";
-            this.EstoqueAddSetorTextBox.Size = new System.Drawing.Size(235, 27);
-            this.EstoqueAddSetorTextBox.TabIndex = 23;
-            // 
-            // DiferentementeDoAndreEuDouNomeAVariaveis
-            // 
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.AutoSize = true;
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Location = new System.Drawing.Point(269, 213);
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Name = "DiferentementeDoAndreEuDouNomeAVariaveis";
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Size = new System.Drawing.Size(58, 22);
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.TabIndex = 24;
-            this.DiferentementeDoAndreEuDouNomeAVariaveis.Text = "Setor:";
             // 
             // Form1
             // 
@@ -1367,6 +1392,8 @@
             this.histyOne_tab.ResumeLayout(false);
             this.histyOne_tab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Histoty_dataGrid)).EndInit();
+            this.histyTwo_tab.ResumeLayout(false);
+            this.histyTwo_tab.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EstoqueDataGrid)).EndInit();
@@ -1490,6 +1517,8 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label DiferentementeDoAndreEuDouNomeAVariaveis;
         private System.Windows.Forms.TextBox EstoqueAddSetorTextBox;
+        private System.Windows.Forms.Label EstoqueHistoricoLabel;
+        private System.Windows.Forms.Panel EstoqueHistPanel;
     }
 }
 
