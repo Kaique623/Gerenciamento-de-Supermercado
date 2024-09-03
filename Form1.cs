@@ -777,14 +777,18 @@ namespace Gerenciamento_de_Supermercado
 
         private void EstoqueAddSaveButton_Click(object sender, EventArgs e)
         {
-            try
+            if (EstoqueData.ContainsKey(EstoqueAddIdCombobox.Text))
             {
-                lastId = Convert.ToInt16(EstoqueComparativo.Keys.Last()) + 1;
+                try
+                {
+                    lastId = Convert.ToInt16(EstoqueComparativo.Keys.Last()) + 1;
+                }
+                catch
+                {
+                    lastId = 1;
+                }
             }
-            catch
-            {
-                lastId = 1;
-            }
+
 
             var estoqueOld = new Dictionary<string, string>();
 
@@ -808,21 +812,37 @@ namespace Gerenciamento_de_Supermercado
                 {"AlertaMin",  EstoqueAddMinTextBox.Text},
                 {"AlertaMax",  EstoqueAddMaxTextBox.Text},
             };
+            try
+            {
+                if (EstoqueData.ContainsKey(EstoqueAddIdCombobox.Text))
+                {
+                    EstoqueComparativo[lastId.ToString()] = new Dictionary<string, Dictionary<string, string>>();
+                    EstoqueComparativo[lastId.ToString()]["Antigo"] = estoqueOld;
+                    EstoqueComparativo[lastId.ToString()]["Novo"] = EstoqueData[EstoqueAddIdCombobox.Text];
 
-            EstoqueComparativo[lastId.ToString()] = new Dictionary<string, Dictionary<string, string>>();
-            EstoqueComparativo[lastId.ToString()]["Antigo"] = estoqueOld;
-            EstoqueComparativo[lastId.ToString()]["Novo"] = EstoqueData[EstoqueAddIdCombobox.Text];
+                    if (EstoqueData.ContainsKey(EstoqueAddIdCombobox.Text))
+                    {
+                        string json = JsonConvert.SerializeObject(EstoqueComparativo, Formatting.Indented);
+                        File.WriteAllText("estoqueHistorico.json", json);
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Erro ao Adicionar ao estoque Comparativo");
+            }
 
             if (currentEstoque == "EstoqueData")
                 EstoqueData = estoqueAux;
             else if (currentEstoque == "EstoqueDataPendente")
                 EstoqueDataPendente = estoqueAux;
 
-            string json = JsonConvert.SerializeObject(EstoqueComparativo, Formatting.Indented);
-            File.WriteAllText("estoqueHistorico.json", json);
+
+            JsonFileData = JsonConvert.SerializeObject(estoqueAux);
+            using (StreamWriter file = new StreamWriter($"{currentEstoque}.json"))
+                file.WriteLine(JsonFileData);
 
             reloadEstoque();
-            EstoqueSaveButtonFunc(sender, e);
             limparCampos();
             refreshEstoqueHist();
             
