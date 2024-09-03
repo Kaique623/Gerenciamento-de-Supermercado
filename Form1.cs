@@ -471,6 +471,7 @@ namespace Gerenciamento_de_Supermercado
         
         private void EstoqueAddButon(object sender, EventArgs e)
         {
+            returnListBuy.SelectedIndex = 4;
             tabControl1.SelectedIndex = 4;
             EstoqueAddIdCombobox.DataSource = new BindingSource(EstoqueData.Keys, null);
         }

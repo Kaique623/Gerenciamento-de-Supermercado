@@ -1874,5 +1874,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.Label listbuy_label_returnID;
+        private System.Windows.Forms.Label EstoqueHistoricoLabel;
+        private System.Windows.Forms.Panel EstoqueHistPanel;
     }
 }
