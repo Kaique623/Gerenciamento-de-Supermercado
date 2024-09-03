@@ -25,9 +25,14 @@ namespace Gerenciamento_de_Supermercado
 
         private Dictionary<string, Dictionary<string, object>> ComprasData = new Dictionary<string, Dictionary<string, object>>();
         Dictionary<string, System.Windows.Forms.Panel> cloneRowsPanel = new Dictionary<string, System.Windows.Forms.Panel>();
-        Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>(); 
+        Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>();
+
+        Dictionary<string, Dictionary<string, Dictionary<string, string>>> EstoqueComparativo = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
 
         List<string> Alertas = new List<string>();
+
+        Dictionary<string, Panel> estoqueRowsPanel = new Dictionary<string, Panel>(); 
+
         string currentEstoque = "EstoqueData";
 
         string JsonFileData = "";
@@ -35,6 +40,9 @@ namespace Gerenciamento_de_Supermercado
         int totalQuant = 0;
 
         int AlertaRowCounter = 0;
+        int HistRowCounter = 0;
+
+        int lastId;
 
         public Form1()
         {   
@@ -46,8 +54,6 @@ namespace Gerenciamento_de_Supermercado
 
         void createRow(string id, string color)
         {
-
-            
             cloneRowsPanel[id] = new Panel();
             AlertaPanel1.Controls.Add(cloneRowsPanel[id]);
 
@@ -91,6 +97,119 @@ namespace Gerenciamento_de_Supermercado
             }
 
         }
+
+        void estoqueHistCreateRow(string id)
+        {
+            Panel panel1 = new Panel();
+
+            Label TitleLabel = new Label();
+            EstoqueHistPanel.Controls.Add(TitleLabel);
+            TitleLabel.AutoSize = true;
+            TitleLabel.BackColor = System.Drawing.Color.Transparent;
+            TitleLabel.ImeMode = System.Windows.Forms.ImeMode.Off;
+            if (HistRowCounter == 0)
+                TitleLabel.Location = new System.Drawing.Point(0, 0);
+            else
+                TitleLabel.Location = new System.Drawing.Point(0, (150 * HistRowCounter));
+            TitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            TitleLabel.Size = new System.Drawing.Size(20, 20);
+            TitleLabel.Text = $"ID de Alteração: {id}";
+
+            estoqueRowsPanel[id] = new Panel(); //O Unico Motivo para esse painel estar em um dicionario é para conferir se ja existe uma fileira com esse id.
+            EstoqueHistPanel.Controls.Add(estoqueRowsPanel[id]);
+            estoqueRowsPanel[id].BorderStyle = BorderStyle.FixedSingle;
+            estoqueRowsPanel[id].Location = new System.Drawing.Point(3, (150 * HistRowCounter)+ 37);
+            estoqueRowsPanel[id].Name = "EstoqueHistPanel";
+            estoqueRowsPanel[id].Size = new System.Drawing.Size(1110, 106);
+            estoqueRowsPanel[id].Controls.Add(panel1);
+
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Location = new System.Drawing.Point(-1, 0 + (53));
+            panel1.Name = "Panel1";
+            panel1.Size = new System.Drawing.Size(1110, 53);
+
+            createHistLabel(panel1, "Novo", id);
+            createHistLabel(estoqueRowsPanel[id], "Antigo", id);
+            HistRowCounter++;
+        }
+        void refreshEstoqueHist()
+        {
+            EstoqueHistPanel.Controls.Clear();
+            estoqueRowsPanel = new Dictionary<string, Panel>();
+            HistRowCounter = 0;
+
+            List<string> invertedKeys = EstoqueComparativo.Keys.ToList();
+            invertedKeys.Reverse();
+
+            foreach (string key in invertedKeys)
+            {
+                if (!estoqueRowsPanel.ContainsKey(key))
+                    estoqueHistCreateRow(key);
+            }
+        }
+
+        void createHistLabel(Panel painel, string tempo, string id)
+        {
+            Label panel1Label = new Label();
+            painel.Controls.Add(panel1Label);
+            panel1Label.AutoSize = true;
+            panel1Label.BackColor = System.Drawing.Color.Transparent;
+            panel1Label.ImeMode = System.Windows.Forms.ImeMode.Off;
+            panel1Label.Location = new System.Drawing.Point(520, 0);
+            panel1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            panel1Label.Name = "panel1Label";
+            panel1Label.Size = new System.Drawing.Size(20, 20);
+            panel1Label.TabIndex = 8;
+            panel1Label.Text = tempo;
+
+            int collumnCounter = 0;
+            foreach (string value in new List<string> { "Id", "Nome", "Categoria", "Setor", "Preço", "Quantidade", "Alerta (Máximo)", "Alerta (Mínimo)" })
+            {
+                string text = value;
+                if (value == "Preço")
+                    text = "Preco";
+                else if (value == "Quantidade")
+                    text = "Quant";
+                else if (value == "Alerta (Máximo)")
+                    text = "AlertaMax";
+                else if (value == "Alerta (Mínimo)")
+                    text = "AlertaMin";
+
+                var tempLabel = new Label();
+                painel.Controls.Add(tempLabel);
+                tempLabel.AutoSize = true;
+                tempLabel.BackColor = System.Drawing.Color.Transparent;
+                tempLabel.ImeMode = System.Windows.Forms.ImeMode.Off;
+                tempLabel.Location = new System.Drawing.Point(20 + 130 * collumnCounter, 30);
+                tempLabel.Name = "tempLabel";
+                tempLabel.Size = new System.Drawing.Size(13, 13);
+                tempLabel.TabIndex = 8;
+
+                if (EstoqueComparativo[id]["Antigo"].ContainsKey(text) && EstoqueComparativo[id]["Novo"].ContainsKey(text))        
+                {
+                    if (EstoqueComparativo[id]["Antigo"][text] != EstoqueComparativo[id]["Novo"][text])
+                    {
+                        switch (tempo)
+                        {
+                            case "Novo":
+                                tempLabel.BackColor = Color.FromArgb(237, 237, 131);
+                                break;
+                            case "Antigo":
+                                tempLabel.BackColor = Color.FromArgb(255, 69, 0);
+                                break;
+                        }
+                    }                     
+                } 
+
+                if (value != "Id")
+                    tempLabel.Text = $"{value}: {EstoqueComparativo[id][tempo][text]}";
+                else
+                    tempLabel.Text = $"{text}: {id}";
+
+                collumnCounter++;
+            }
+        }
+
 
         private void AlertaPanel1_Paint(object sender, PaintEventArgs e)
         {
@@ -142,6 +261,9 @@ namespace Gerenciamento_de_Supermercado
             if (!File.Exists("registerBuys.json"))
                 File.Create("registerBuys.json").Dispose();
 
+            if (!File.Exists("estoqueHistorico.json"))
+                File.Create("estoqueHistorico.json").Dispose();
+
             try
             {
                 var text = File.ReadAllText("EstoqueData.json");
@@ -149,6 +271,9 @@ namespace Gerenciamento_de_Supermercado
 
                 text = File.ReadAllText("EstoqueDataPendente.json");
                 EstoqueDataPendente = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(text);
+
+                text = File.ReadAllText("estoqueHistorico.json");
+                EstoqueComparativo = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(text);
             }
             catch
             {
@@ -161,7 +286,9 @@ namespace Gerenciamento_de_Supermercado
             catch {
                 Console.WriteLine("Nada a carregar");
             }
+            reloadEstoque();
             refreshAlerta();
+            refreshEstoqueHist();
             updateTelaDeCompra();
         }
 
@@ -345,6 +472,8 @@ namespace Gerenciamento_de_Supermercado
         private void EstoqueAddButon(object sender, EventArgs e)
         {
             returnListBuy.SelectedIndex = 4;
+            tabControl1.SelectedIndex = 4;
+            EstoqueAddIdCombobox.DataSource = new BindingSource(EstoqueData.Keys, null);
         }
 
         private void compra_dataView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -646,6 +775,17 @@ namespace Gerenciamento_de_Supermercado
 
         private void EstoqueAddSaveButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                lastId = Convert.ToInt16(EstoqueComparativo.Keys.Last()) + 1;
+            }
+            catch
+            {
+                lastId = 1;
+            }
+
+            var estoqueOld = EstoqueData[EstoqueAddIdCombobox.Text];
+
             var estoqueAux = EstoqueData;
             if (currentEstoque == "EstoqueData")
                 estoqueAux = EstoqueData;
@@ -664,14 +804,62 @@ namespace Gerenciamento_de_Supermercado
                 {"AlertaMax",  EstoqueAddMaxTextBox.Text},
             };
 
+            EstoqueComparativo[lastId.ToString()] = new Dictionary<string, Dictionary<string, string>>();
+            EstoqueComparativo[lastId.ToString()]["Antigo"] = estoqueOld;
+            EstoqueComparativo[lastId.ToString()]["Novo"] = EstoqueData[EstoqueAddIdCombobox.Text];
+
             if (currentEstoque == "EstoqueData")
                 EstoqueData = estoqueAux;
             else if (currentEstoque == "EstoqueDataPendente")
                 EstoqueDataPendente = estoqueAux;
 
+            string json = JsonConvert.SerializeObject(EstoqueComparativo, Formatting.Indented);
+            File.WriteAllText("estoqueHistorico.json", json);
+
             reloadEstoque();
             EstoqueSaveButtonFunc(sender, e);
             limparCampos();
+            refreshEstoqueHist();
+            if ((sender as Button).Text == "Salvar e Sair")
+                Cancelar(sender, e);
+        }
+
+        private void EstoqueAddIdCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string text = (sender as ComboBox).Text;
+                AddItemTextBox.Text = EstoqueData[text]["Nome"];
+                EstoqueAddCategoriaTextBox.Text = EstoqueData[text]["Categoria"];
+                EstoqueAddSetorTextBox.Text = EstoqueData[text]["Setor"];
+                EstoqueAddQuantTextBox.Text = EstoqueData[text]["Quant"];
+                EstoqueAddPrecoTextBox.Text = EstoqueData[text]["Preco"];
+                EstoqueAddDescTextBox.Text = EstoqueData[text]["Desc"];
+                EstoqueAddMinTextBox.Text = EstoqueData[text]["AlertaMin"];
+                EstoqueAddMaxTextBox.Text = EstoqueData[text]["AlertaMax"];
+            }
+            catch
+            {
+                MessageBox.Show("Erro ao ler Data do Produto");
+            }
+        }
+
+        private void EstoqueHistPanel_Paint(object sender, PaintEventArgs e)
+        {
+            EstoqueHistPanel.AutoScroll = true;
+            EstoqueHistPanel.HorizontalScroll.Maximum = 0;
+        }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            AddItemTextBox.Text = "";
+            EstoqueAddCategoriaTextBox.Text = "";
+            EstoqueAddSetorTextBox.Text = "";
+            EstoqueAddQuantTextBox.Text = "";
+            EstoqueAddPrecoTextBox.Text = "";
+            EstoqueAddDescTextBox.Text = "";
+            EstoqueAddMinTextBox.Text = "";
+            EstoqueAddMaxTextBox.Text = "";
         }
     
         private void GenerateHistoryBuysScreen()
