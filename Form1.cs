@@ -23,7 +23,7 @@ namespace Gerenciamento_de_Supermercado
         Dictionary<string, Dictionary<string, string>> EstoqueData = new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, Dictionary<string, string>> EstoqueDataPendente = new Dictionary<string, Dictionary<string, string>>();
 
-        private Dictionary<string, Dictionary<string, object>> ComprasData = new Dictionary<string, Dictionary<string, object>>();
+        Dictionary<string, Dictionary<string, object>> ComprasData = new Dictionary<string, Dictionary<string, object>>();
         Dictionary<string, System.Windows.Forms.Panel> cloneRowsPanel = new Dictionary<string, System.Windows.Forms.Panel>();
         Dictionary<string, Dictionary<string, System.Windows.Forms.Label>> cloneRowsLabel = new Dictionary<string, Dictionary<string, Label>>();
 
@@ -118,7 +118,7 @@ namespace Gerenciamento_de_Supermercado
             estoqueRowsPanel[id] = new Panel(); //O Unico Motivo para esse painel estar em um dicionario é para conferir se ja existe uma fileira com esse id.
             EstoqueHistPanel.Controls.Add(estoqueRowsPanel[id]);
             estoqueRowsPanel[id].BorderStyle = BorderStyle.FixedSingle;
-            estoqueRowsPanel[id].Location = new System.Drawing.Point(3, (150 * HistRowCounter)+ 37);
+            estoqueRowsPanel[id].Location = new System.Drawing.Point(3, (150 * HistRowCounter) + 37);
             estoqueRowsPanel[id].Name = "EstoqueHistPanel";
             estoqueRowsPanel[id].Size = new System.Drawing.Size(1110, 106);
             estoqueRowsPanel[id].Controls.Add(panel1);
@@ -138,14 +138,18 @@ namespace Gerenciamento_de_Supermercado
             estoqueRowsPanel = new Dictionary<string, Panel>();
             HistRowCounter = 0;
 
-            List<string> invertedKeys = EstoqueComparativo.Keys.ToList();
-            invertedKeys.Reverse();
+            try 
+            { 
+                List<string> invertedKeys = EstoqueComparativo.Keys.ToList();
+                invertedKeys.Reverse();
 
-            foreach (string key in invertedKeys)
-            {
-                if (!estoqueRowsPanel.ContainsKey(key))
-                    estoqueHistCreateRow(key);
+                foreach (string key in invertedKeys)
+                {
+                    if (!estoqueRowsPanel.ContainsKey(key))
+                        estoqueHistCreateRow(key);
+                }
             }
+            catch { }
         }
 
         void createHistLabel(Panel painel, string tempo, string id)
@@ -185,7 +189,7 @@ namespace Gerenciamento_de_Supermercado
                 tempLabel.Size = new System.Drawing.Size(13, 13);
                 tempLabel.TabIndex = 8;
 
-                if (EstoqueComparativo[id]["Antigo"].ContainsKey(text) && EstoqueComparativo[id]["Novo"].ContainsKey(text))        
+                if (EstoqueComparativo[id]["Antigo"].ContainsKey(text) && EstoqueComparativo[id]["Novo"].ContainsKey(text))
                 {
                     if (EstoqueComparativo[id]["Antigo"][text] != EstoqueComparativo[id]["Novo"][text])
                     {
@@ -198,8 +202,8 @@ namespace Gerenciamento_de_Supermercado
                                 tempLabel.BackColor = Color.FromArgb(255, 69, 0);
                                 break;
                         }
-                    }                     
-                } 
+                    }
+                }
 
                 if (value != "Id")
                     tempLabel.Text = $"{value}: {EstoqueComparativo[id][tempo][text]}";
@@ -782,7 +786,10 @@ namespace Gerenciamento_de_Supermercado
                 lastId = 1;
             }
 
-            var estoqueOld = EstoqueData[EstoqueAddIdCombobox.Text];
+            var estoqueOld = new Dictionary<string, string>();
+
+            if (EstoqueData.ContainsKey(EstoqueAddIdCombobox.Text))
+                estoqueOld = EstoqueData[EstoqueAddIdCombobox.Text];
 
             var estoqueAux = EstoqueData;
             if (currentEstoque == "EstoqueData")
