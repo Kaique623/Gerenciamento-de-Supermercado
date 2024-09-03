@@ -576,8 +576,8 @@ namespace Gerenciamento_de_Supermercado
 
                     EstoqueData[temp_id]["Quant"] = (Convert.ToInt16(EstoqueData[temp_id]["Quant"]) - temp_quant).ToString();
                 }
-                compra_label_returnFinalPrice.Text = $"R$: {0:F2}";
                 RenerateBuyRegister();
+                compra_label_returnFinalPrice.Text = $"R$: {0:F2}";
                 compra_dataView.Rows.Clear();
                 reloadEstoque();
                 EstoqueSaveButtonFunc(sender, e);
@@ -890,30 +890,24 @@ namespace Gerenciamento_de_Supermercado
     
         private void GenerateHistoryBuysScreen()
         {
+            Histoty_dataGrid.Rows.Clear();
             List<string> keys = ComprasData.Keys.ToList();
             keys.Reverse();
-
             foreach (var item in keys)
             {
-                try 
-                { 
                     Histoty_dataGrid.Rows.Add();
                     Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[0].Value = Convert.ToString(item);
                     Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[1].Value = ComprasData[item]["Date"];
                     Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[2].Value = ComprasData[item]["Time"];
                     Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[3].Value = ComprasData[item]["Price"];
                     Histoty_dataGrid.Rows[Histoty_dataGrid.Rows.Count - 1].Cells[4].Value = ComprasData[item]["TotalItems"];
-                }
-                catch
-                {
-                    continue;
-                }
             }
         }
 
         private void Histoty_dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string id = Convert.ToString(e.RowIndex);
+            listbuy_dataGrid.Rows.Clear();
+            string id = (string)Histoty_dataGrid.Rows[e.RowIndex].Cells[0].Value;
 
             listbuy_label_returnID.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[0].Value);
             listbuy_label_returnDate.Text = Convert.ToString(Histoty_dataGrid.Rows[e.RowIndex].Cells[1].Value);
@@ -923,32 +917,31 @@ namespace Gerenciamento_de_Supermercado
             listbuy_label_returnProduts.Text = ComprasData[id]["ProductQuant"].ToString();
             listbuy_label_payment.Text = ComprasData[id]["PayForm"].ToString();
 
-            if (ComprasData.TryGetValue("Items", out var items))
+            var json = File.ReadAllText("registerBuys.json");
+            var aux = JsonConvert.DeserializeObject<Dictionary<string, CompraInfo>>(json);
+
+            // Obtenha o dicionário associado ao ID
+            if (aux.TryGetValue(id, out var compraInfo))
             {
-                foreach (var itemKey in items.Keys)
+                // Obtenha o dicionário de itens
+                if (compraInfo.Items != null)
                 {
-                    if (items[itemKey] is Dictionary<string, object> itemData)
+                    foreach (var item in compraInfo.Items)
                     {
-                        try
-                        {
-                            listbuy_dataGrid.Rows.Add();
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[0].Value = itemData.ContainsKey("ID") ? itemData["ID"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[1].Value = itemData.ContainsKey("Nome") ? itemData["Nome"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[2].Value = itemData.ContainsKey("Categoria") ? itemData["Categoria"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[3].Value = itemData.ContainsKey("Setor") ? itemData["Setor"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[4].Value = itemData.ContainsKey("Quantidade") ? itemData["Quantidade"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[5].Value = itemData.ContainsKey("PrecoUni") ? itemData["PrecoUni"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[6].Value = itemData.ContainsKey("total") ? itemData["total"].ToString() : string.Empty;
-                            listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[7].Value = itemData.ContainsKey("Desc") ? itemData["Desc"].ToString() : string.Empty;
-                        }
-                        catch
-                        {
-                            continue;
-                        }
+                        var itemData = item.Value;
+
+                        listbuy_dataGrid.Rows.Add();
+                        listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[0].Value = itemData.ID;
+                        listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[1].Value = itemData.Nome;
+                        listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[2].Value = itemData.Categoria;
+                        listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[3].Value = itemData.Setor;
+                        listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[4].Value = itemData.Quantidade;
+                        listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[5].Value = itemData.PrecoUni;
+                        listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[6].Value = itemData.total;
+                        listbuy_dataGrid.Rows[listbuy_dataGrid.Rows.Count - 1].Cells[7].Value = itemData.Desc;
                     }
                 }
             }
-
             returnListBuy.SelectedIndex = 5;
         }
 
@@ -956,5 +949,27 @@ namespace Gerenciamento_de_Supermercado
         {
             returnListBuy.SelectedIndex = 1;
         }
+    }
+    public class Item
+    {
+        public string ID { get; set; }
+        public string Nome { get; set; }
+        public string Categoria { get; set; }
+        public string Setor { get; set; }
+        public string Quantidade { get; set; }
+        public string PrecoUni { get; set; }
+        public string total { get; set; }
+        public string Desc { get; set; }
+    }
+
+    public class CompraInfo
+    {
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public string PayForm { get; set; }
+        public string Price { get; set; }
+        public string TotalItems { get; set; }
+        public string ProductQuant { get; set; }
+        public Dictionary<string, Item> Items { get; set; }
     }
 }
